@@ -55,7 +55,7 @@ if [ "${q,,}" = "y" ]; then
   fi
 fi
 
-# Sublime-Text 3
+# Sublime Text 3
 read -p "Install Sublime-Text 3 and add repositories (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
   echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
