@@ -1,5 +1,5 @@
 [ "$(id)" -ne 0 ] && echo "Administrative prvileges needed" && exit 1
-laptop="true"
+read -p "You are conriguring a laptop (Y/n)? " laptop
 
 ########################################################################
 #### PACKAGES ##########################################################
