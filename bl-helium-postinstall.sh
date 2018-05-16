@@ -44,12 +44,15 @@ if [ "${q,,}" = "y" ]; then
   apt-get update
   apt-get install linux-headers-$(uname -r) virtualbox-5.2
   # VirtualBox Extension Pack
-  mkdir /tmp/1
-  cd /tmp/1
-  wget https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack  
-  echo "Check last Extesion Pack: https://www.virtualbox.org/wiki/Downloads"
-  vboxmanage extpack install --replace *extpack
-  rm -rf /tmp/1
+  read -p "Install Extension Pack (Y/n)? " q
+  if [ "${q,,}" = "y" ]; then
+    mkdir /tmp/1
+    cd /tmp/1
+    wget https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack  
+    echo "Check last Extesion Pack: https://www.virtualbox.org/wiki/Downloads"
+    vboxmanage extpack install --replace *extpack
+    rm -rf /tmp/1
+  fi
 fi
 
 # Sublime-Text 3
