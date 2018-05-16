@@ -1,2 +1,2 @@
 # BunsenLabs-Helium-Postinstall
-My pesonal postinstall script for BunsenLabs Hellium
+My pesonal postinstall script for BunsenLabs Helium
