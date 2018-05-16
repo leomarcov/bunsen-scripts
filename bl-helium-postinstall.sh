@@ -1,3 +1,5 @@
+[ "$(id)" -ne 0 ] && echo "Administrative prvileges needed" && exit 1
+
 ########################################################################
 #### PACKAGES ##########################################################
 ########################################################################
@@ -9,6 +11,7 @@ apt-get install fonts-freefont-ttf
 apt-get install rofi
 
 # PlayOnLinux
+apt-get install winbind
 apt-get install playonlinux
 
 # ps_mem script
@@ -34,7 +37,6 @@ echo "Check last Extesion Pack: https://www.virtualbox.org/wiki/Downloads"
 vboxmanage extpack install --replace *extpack
 rm -rf /tmp/1
 
-
 # Sublime-Text 3
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -55,11 +57,14 @@ update-alternatives --set gnome-www-browser /usr/bin/google-chrome-stable
 ########################################################################
 #### CONFIG ############################################################
 ########################################################################
-### SERVICES
-sudo systemctl disable NetworkManager-wait-online.service
-sudo systemctl disable ModemManager.service
-sudo systemctl disable pppd-dns.service
+## DISABLE DISPLAY MANAGER
+systemctl set-default multi-user.target
 
+
+### SERVICES
+systemctl disable NetworkManager-wait-online.service
+systemctl disable ModemManager.service
+systemctl disable pppd-dns.service
 
 vi $HOME/.bashrc
 alias ls='ls --color=auto'
