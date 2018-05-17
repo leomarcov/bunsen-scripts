@@ -118,6 +118,8 @@ fi
 read -p "$(echo -e "\n\e[1m\e[4mDisable graphical display manager (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   systemctl set-default multi-user.target
+  sed -i "/#BL-POSTINSTALL/Id" /etc/profile
+  echo '[ $(tty) = "/dev/tty1" ] && startx   #BL-POSTINSTALL; exit' >> /etc/profile
 fi
 
 read -p "$(echo -e "\n\e[1m\e[4mEnable CTRL+ALT+BACKSPACE for kill X (Y/n)?\e[0m ")" q
