@@ -71,7 +71,7 @@ done
 ########################################################################
 # Mix packages
 if do_action "Install some useful packages"; then
-	apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
+	apt-get install -y vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
 	apt-get install -y haveged		# Avoid delay first login
 fi
 
