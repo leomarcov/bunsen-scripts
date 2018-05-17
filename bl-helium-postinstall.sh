@@ -171,6 +171,8 @@ if [ "${q,,}" = "y" ]; then
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
+
+exit 
 # Config shortcut in Openbox:
 vi $HOME/.config/openbox/rc.xml
   <keyboard>
