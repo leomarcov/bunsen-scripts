@@ -157,14 +157,14 @@ fi
 ########################################################################
 # tint2 config
 read -p "$(echo -e "\n\e[1m\e[4mAdd tin2 themes (Y/n)?\e[0m ")" q
-if [ "${q,,}" = "y" ]; then
+if [ "${q,,}" != "n" ]; then
   cp "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
   ls -d /home/* | xargs -I {} cp "$current_dir"/config/*.tint {}.config/tint2/
 fi
 
 # aliases
 read -p "$(echo -e "\n\e[1m\e[4mAdd some aliases (Y/n)?\e[0m ")" q
-if [ "${q,,}" = "y" ]; then
+if [ "${q,,}" != "n" ]; then
    cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
 fi
