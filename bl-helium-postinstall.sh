@@ -48,7 +48,7 @@ if [ "${q,,}" != "n" ]; then
   apt-get update
   apt-get install -y linux-headers-$(uname -r) "$vb_package"
   # VirtualBox Extension Pack
-  read -p "Install Extension Pack (Y/n)? " q
+  read -p "$(echo -e "\n\e[1m\e[4mInstall Extension Pack (Y/n)?\e[0m ")" q
   if [ "${q,,}" != "n" ]; then
     t=$(mktemp -d)
     wget -P "$t" "$ep_url"  
