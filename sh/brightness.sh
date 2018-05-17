@@ -15,7 +15,7 @@
 step=5										# Steps of inc/dec
 video_id="eDP-1"							# Video ID
 install_path="/usr/bin/brightness.sh"		# Installation dir
-default="0.7"
+default="0.6"
 
 #=== FUNCTION ==================================================================
 # NAME: help
@@ -62,34 +62,11 @@ function change_brightness() {
 	exit
 }
 
-#=== FUNCTION ==================================================================
-# NAME: install
-# DESCRIPTION: install the script
-#===============================================================================
-function install {
-	echo "Copying script to $install_path"
-	sudo cp "$(readlink -f $0)" "$install_path" 
-	sudo chmod +x "$install_path"
-	exit
-}
-
-
-#=== FUNCTION ==================================================================
-# NAME: update
-# DESCRIPTION: uninstall the script
-#===============================================================================
-function uninstall {
-	echo "Deleting $install_path"
-	sudo rm "$install_path"
-	exit 
-}
 
 [ "$1" = "-dec" ] || [ "$1" = "-inc" ] && change_brightness "$1"
 [ "$#" -eq 0 ] && exit 
-
 [ "$1" = "-def" ] && set_brightness "$default"
-[ "$1" = "-I" ] && install
-[ "$1" = "-U" ] && uninstall
+
 help
 
 
