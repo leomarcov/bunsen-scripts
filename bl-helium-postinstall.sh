@@ -6,16 +6,44 @@ vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
 current_dir="$(dirname "$(readlink -f "$0")")"
 
-n=1
 [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 read -p "Are you config a laptop (y/N)? " laptop
+
+
+#=== FUNCTION ==================================================================
+# NAME: help
+# DESCRIPTION: Show command help
+#===============================================================================
+function help() {
+	echo -e 'Checks apt updates and show it to user in tint2 taskbar
+Usage: '$(basename $0)' -[hla]
+   \e[1m-h\e[0m\tShow command help
+   \e[1m-l\e[0m\tStart interactive upgrade
+   \e[1m-a\e[0m\tOutput message for exector tint2'
+	exit 0
+}
+
+
+
+while getopts ":hla:" o
+do
+	case $o in
+		h) help ;;
+		l) list="true" ;;
+		a) actions=" $OPTARG" ;;
+	esac
+done
+
+
+
 ########################################################################
 #### PACKAGES ##########################################################
 ########################################################################
 apt-get update
 
+n=1
 # extra packages
-read -p "$(echo -e "\n\e[1m[$((n=n+1))] \e[4mInstall some useful packages (Y/n)?\e[0m ")" q
+read -p "$(echo -e "\n\e[1m[$n] \e[4mInstall some useful packages (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
   apt-get install -y haveged                        # Avoid delay first login
