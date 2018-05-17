@@ -2,6 +2,7 @@
 ########################################################################
 #### SCRIPT CONFIG #####################################################
 ########################################################################
+bunsen_ver="Helium"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
 current_dir="$(dirname "$(readlink -f "$0")")"
@@ -15,8 +16,8 @@ read -p "Are you config a laptop (y/N)? " laptop
 # DESCRIPTION: Show command help
 #===============================================================================
 function help() {
-	echo -e 'Checks apt updates and show it to user in tint2 taskbar
-Usage: '$(basename $0)' -[hla]
+	echo -e 'Apply installs and configs after Bunsen '"$bunsen_ver"'installation
+Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
    \e[1m-h\e[0m\tShow command help
    \e[1m-l\e[0m\tOnly list actions 
    \e[1m-a <actions>\e[0m\tOnly apply selected actions (e.g: 5,6,10-15)'
@@ -25,9 +26,8 @@ Usage: '$(basename $0)' -[hla]
 
 
 
-while getopts ":hla:" o
-do
-	case $o in
+while getopts ":hla:" o; do
+	case "$o" in
 		h) help ;;
 		l) list="true" ;;
 		a) actions=" $OPTARG" ;;
