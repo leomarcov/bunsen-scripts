@@ -28,7 +28,7 @@ fi
 read -p "Install rofi launcher (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
   apt-get install rofi
-  cat "$current_dir"/configs/rofi.conf >> /usr/share/bunsen/skel/.Xresources
+  cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.Xresources {}/
   xrdb -load /usr/share/bunsen/skel/.Xresources  # ?????????? other users
 fi
@@ -87,7 +87,8 @@ fi
 ########################################################################
 read -p "Copy some cool scripts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  cp "$current_dir"/sh/* /usr/bin/
+  chmod +x "$current_dir"/bin/*
+  cp "$current_dir"/bin/* /usr/bin/
   update-notification.sh -I      # Install update-notification
 fi
 
