@@ -99,7 +99,8 @@ fi
 
 read -p "Copy some cool icon packs (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  unzip "$current_dir"/files/icons.zip -d /usr/share/icons/
+  unzip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
+  unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 fi
 
 read -p "Copy some cool fonts (Y/n)? " q
