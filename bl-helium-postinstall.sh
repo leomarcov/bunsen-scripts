@@ -49,7 +49,7 @@ if [ "${q,,}" != "n" ]; then
   apt-get install linux-headers-$(uname -r) "$vb_package"
   # VirtualBox Extension Pack
   read -p "Install Extension Pack (Y/n)? " q
-  if [ "${q,,}" = "y" ]; then
+  if [ "${q,,}" != "n" ]; then
     t=$(mktemp -d)
     wget -P "$t" "$ep_url"  
     vboxmanage extpack install --replace "$t"/*extpack
