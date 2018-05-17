@@ -14,11 +14,12 @@ comment_auto="#BL-POSTINSTALL"
 # DESCRIPTION: Show command help
 #===============================================================================
 function help() {
-	echo -e 'Apply config actions after Bunsen '"$bunsen_ver"'installation
+	echo -e 'Apply config actions after Bunsen '"$bunsen_ver"' installation
 Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
-   \e[1m-h\e[0m\tShow command help
-   \e[1m-l\e[0m\tOnly list actions 
-   \e[1m-a <actions>\e[0m\tOnly apply selected actions (e.g: 5,6,10-15)'
+   \e[1m-l\e[0m\t\tOnly list actions 
+   \e[1m-a <actions>\e[0m\tOnly do selected actions (e.g: -a 5,6,10-15)
+   \e[1m-y\e[0m\t\tAuto-answer yes to all actions
+   \e[1m-h\e[0m\t\tShow this help'
 	exit 0
 }
 
@@ -35,7 +36,8 @@ function do_action() {
 	q="$1"
 	[ "$list" ] && echo -e "[$n] $q" && return 1
 
-	read -p "$(echo -e "\n\e[1m[$n] \e[4m$q\e[0m (Y/n)? ")" q
+	echo -en "\n\e[1m[$n] \e[4m$q\e[0m (Y/n)? "
+	[ "$yes" ] && q="y" || read q 
 	[ "${q,,}" != "n" ] && return 0
 	return 1
 }
@@ -46,10 +48,11 @@ function do_action() {
 [ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
 
 
-while getopts ":hla:" o; do
+while getopts ":hla:y" o; do
 	case "$o" in
-	h)	help ;;
-	l)	list="true" ;;
+	h)	help 		;;
+	l)	list="true"	;;
+	y)	yes="true"	;;
 	a)	for a in $(echo "$OPTARG" | tr "," " "); do
 			# Is a range
 			echo "$a" | grep -E "[0-9]"*-"[0-9]" &> /dev/null && actions="$actions $(eval echo {$(echo $a|sed "s/-/../")})"
