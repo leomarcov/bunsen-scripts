@@ -15,7 +15,7 @@ read -p "Are you config a laptop (Y/n)? " laptop
 ########################################################################
 apt-get update
 
-read -p "Install some useful packages (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mInstall some useful packages (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   apt-get install vim
   apt-get install vlc 
@@ -25,7 +25,7 @@ if [ "${q,,}" != "n" ]; then
 fi
 
 # rofi
-read -p "Install rofi launcher (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mInstall rofi launcher (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   apt-get install rofi
   cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
@@ -35,14 +35,14 @@ fi
 
 
 # PlayOnLinux
-read -p "Install PlayOnLinux (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mInstall PlayOnLinux (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   apt-get install winbind
   apt-get install playonlinux
 fi
 
 # VirtualBox
-read -p "Install VirtualBox and add repositories (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mInstall VirtualBox and add repositories (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
   wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
@@ -60,7 +60,7 @@ if [ "${q,,}" != "n" ]; then
 fi
 
 # Sublime Text 3
-read -p "Install Sublime-Text 3 and add repositories (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mInstall Sublime-Text 3 and add repositories (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
   wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -71,7 +71,7 @@ if [ "${q,,}" != "n" ]; then
 fi
 
 # Google Chrome
-read -p "Install Google Chrome and add repositories (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mInstall Google Chrome and add repositories (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
@@ -85,30 +85,30 @@ fi
 ########################################################################
 #### FILES #############################################################
 ########################################################################
-read -p "Copy some cool scripts (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mCopy some cool scripts (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   chmod +x "$current_dir"/bin/*
   cp "$current_dir"/bin/* /usr/bin/
   update-notification.sh -I      # Install update-notification
 fi
 
-read -p "Copy some cool wallpapers (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mCopy some cool wallpapers (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
 
-read -p "Copy some cool icon packs (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mCopy some cool icon packs (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   unzip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
   unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 fi
 
-read -p "Copy some cool fonts (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mCopy some cool fonts (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
 fi
 
-read -p "Copy some cool themes (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mCopy some cool themes (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
 fi
@@ -117,18 +117,18 @@ fi
 #### SYSTEM CONFIG #####################################################
 ########################################################################
 ## DISABLE DISPLAY MANAGER
-read -p "Disable graphical display manager (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mDisable graphical display manager (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   systemctl set-default multi-user.target
 fi
 
-read -p "Enable CTRL+ALT+BACKSPACE for kill X (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mEnable CTRL+ALT+BACKSPACE for kill X (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"' >> /etc/default/keyboard
 fi
 
 ### SERVICES
-read -p "Disable some stupid services (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mDisable some stupid services (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   systemctl disable NetworkManager-wait-online.service
   systemctl disable ModemManager.service
@@ -136,7 +136,7 @@ if [ "${q,,}" != "n" ]; then
 fi
 
 # GRUB CONIFG
-read -p "Skip Grub menu (only one OS)  (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mSkip Grub menu (only one OS)  (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
     sed -i "/\b$i=/Id" /etc/default/grub
@@ -144,7 +144,7 @@ if [ "${q,,}" != "n" ]; then
   cat "$current_dir"/config/grub_skip.conf >> /etc/default/grub
   update-grub
 fi
-read -p "Show messages during boot  (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mShow messages during boot  (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
     sed -i "/\b$i=/Id" /etc/default/grub
@@ -158,14 +158,14 @@ fi
 #### USER CONFIG #######################################################
 ########################################################################
 # tint2 config
-read -p "Add tin2 themes (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mAdd tin2 themes (Y/n)?\e[0m ")" q
 if [ "${q,,}" = "y" ]; then
   cp "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
   ls -d /home/* | xargs -I {} cp "$current_dir"/config/*.tint {}.config/tint2/
 fi
 
 # aliases
-read -p "Add some aliases (Y/n)? " q
+read -p "$(echo -e "\n\e[1m\e[4mAdd some aliases (Y/n)?\e[0m ")" q
 if [ "${q,,}" = "y" ]; then
    cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
