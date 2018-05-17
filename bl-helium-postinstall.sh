@@ -9,7 +9,7 @@ current_dir="$(dirname "$(readlink -f "$0")")"
 
 
 [ "$(id -u)" -ne 0 ] && echo "Administrative prvileges needed" && exit 1
-read -p "Are you config a laptop (Y/n)? " laptop
+read -p "Are you config a laptop (y/N)? " laptop
 ########################################################################
 #### PACKAGES ##########################################################
 ########################################################################
