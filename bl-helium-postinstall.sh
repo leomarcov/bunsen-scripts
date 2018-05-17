@@ -91,17 +91,17 @@ if [ "${q,,}" = "y" ]; then
   cp wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
 
-read -p "Come some cool icon packs (Y/n)? " q
+read -p "Copy some cool icon packs (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
 
 fi
 
-read -p "Come some cool icon fonts (Y/n)? " q
+read -p "Copy some cool icon fonts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
 
 fi
 
-read -p "Come some cool themes (Y/n)? " q
+read -p "Copy some cool themes (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
 
 fi
