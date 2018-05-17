@@ -1,5 +1,13 @@
+#!/bin/bash
+########################################################################
+#### CONFIG ##########################################################
+########################################################################
+vb_package="virtualbox-5.2"
+ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
+
+
 [ "$(id)" -ne 0 ] && echo "Administrative prvileges needed" && exit 1
-read -p "You are conriguring a laptop (Y/n)? " laptop
+read -p "Are you config a laptop (Y/n)? " laptop
 
 ########################################################################
 #### PACKAGES ##########################################################
@@ -27,12 +35,11 @@ fi
 # https://github.com/pixelb/ps_mem
 read -p "Install ps_mem.py (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  mkdir /tmp/1
-  cd /tmp/1
-  wget https://github.com/pixelb/ps_mem/archive/master.zip
-  unzip *
-  cp ps_mem-master/ps_mem.py /usr/local/sbin/psmem.py
-  rm -rf /tmp/1
+  t=$(mktemp -d)
+  wget -P "$t" https://github.com/pixelb/ps_mem/archive/master.zip
+  unzip "$t"/*.zip -d "$t"
+  cp "$t"/ps_mem-master/ps_mem.py /usr/local/sbin/psmem.py
+  rm -rf "$t"
 fi
 
 # VirtualBox
@@ -42,16 +49,14 @@ if [ "${q,,}" = "y" ]; then
   wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
   wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
   apt-get update
-  apt-get install linux-headers-$(uname -r) virtualbox-5.2
+  apt-get install linux-headers-$(uname -r) "$vb_package"
   # VirtualBox Extension Pack
   read -p "Install Extension Pack (Y/n)? " q
   if [ "${q,,}" = "y" ]; then
-    mkdir /tmp/1
-    cd /tmp/1
-    wget https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack  
-    echo "Check last Extesion Pack: https://www.virtualbox.org/wiki/Downloads"
-    vboxmanage extpack install --replace *extpack
-    rm -rf /tmp/1
+    t=$(mktemp -d)
+    wget -P "$t" "$ep_url"  
+    vboxmanage extpack install --replace "$t"/*extpack
+    rm -rf "$t"
   fi
 fi
 
@@ -81,7 +86,7 @@ fi
 ########################################################################
 #### FILES #############################################################
 ########################################################################
-
+cp wallpapers/* /usr/share/images/bunsen/wallpapers
 
 
 ########################################################################
@@ -131,6 +136,10 @@ fi
 ########################################################################
 #### USER CONFIG #######################################################
 ########################################################################
+# tint2 config
+cp configs/*.tint /usr/share/bunsen/skel/.config/tint2/
+ls -d /home/* | xargs -I {} cp configs/*.tint {}.config/tint2/
+
 vi $HOME/.bashrc
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
