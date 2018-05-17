@@ -136,35 +136,22 @@ if [ "${q,,}" = "y" ]; then
 fi
 
 # GRUB CONIFG
-read -p "Config Grub for bypass (Y/n)? " q
+read -p "Skip Grub menu (only one OS)  (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  sed -i "/\bGRUB_DEFAULT=/Id" /etc/default/grub
-  sed -i "/\bGRUB_TIMEOUT=/Id" /etc/default/grub
-  sed -i "/\bGRUB_HIDDEN_TIMEOUT=/Id" /etc/default/grub
-  sed -i "/\bGRUB_CMDLINE_LINUX_DEFAULT=/Id" /etc/default/grub
-  sed -i "/\bGRUB_CMDLINE_LINUX/Id" /etc/default/grub
-  sed -i "/\bGRUB_DISABLE_OS_PROBER=/Id" /etc/default/grub
-  sed -i "/\bGRUB_GFXMODE=/Id" /etc/default/grub
-  sed -i "/\bGRUB_GFXPAYLOAD_LINUX=/Id" /etc/default/grub
-  sed -i "/\bGRUB_BACKGROUND=/Id" /etc/default/grub
-  echo '
-  GRUB_DEFAULT=0
-  GRUB_TIMEOUT=0
-  GRUB_HIDDEN_TIMEOUT=0
-  GRUB_CMDLINE_LINUX_DEFAULT=""
-  GRUB_CMDLINE_LINUX=""
-  GRUB_DISABLE_OS_PROBER=true
-  GRUB_GFXMODE=auto
-  GRUB_GFXPAYLOAD_LINUX=keep
-  GRUB_BACKGROUND=""' >> /etc/default/grub
-
-  for i in $(cat "$current_dir"/config/grub.conf  | cut -f1 -d=);do
+  for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
     sed -i "/\b$i=/Id" /etc/default/grub
   done
-  cat "$current_dir"/config/grub.conf >> /etc/default/grub
+  cat "$current_dir"/config/grub_skip.conf >> /etc/default/grub
   update-grub
 fi
-
+read -p "Show messages during boot  (Y/n)? " q
+if [ "${q,,}" = "y" ]; then
+  for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
+    sed -i "/\b$i=/Id" /etc/default/grub
+  done
+  cat "$current_dir"/config/grub_text.conf >> /etc/default/grub
+  update-grub
+fi
 
 
 ########################################################################
