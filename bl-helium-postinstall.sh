@@ -15,13 +15,11 @@ read -p "Are you config a laptop (Y/n)? " laptop
 ########################################################################
 apt-get update
 
+# extra packages
 read -p "$(echo -e "\n\e[1m\e[4mInstall some useful packages (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  apt-get install vim
-  apt-get install vlc 
+  apt-get install vim vls ttf-mscorefonts-installer fonts-freefont-ttf
   apt-get install haveged                        # Avoid delay first login
-  apt-get install ttf-mscorefonts-installer
-  apt-get install fonts-freefont-ttf
 fi
 
 # rofi
