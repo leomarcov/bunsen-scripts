@@ -31,10 +31,10 @@ while getopts ":hla:" o; do
 	h)	help ;;
 	l)	list="true" ;;
 	a)	for a in $(echo "$OPTARG" | tr "," " "); do
-				# Is a range
-				echo "$a" | grep -E "[0-9]"*-"[0-9]" &> /dev/null && actions="$actions $(eval echo {$(echo $a|sed "s/-/../")})"
-				# Is a number 
-				[ "$a" -eq 0 ] &>/dev/null; [ $? -le 1 ] && actions="$actions $a"
+			# Is a range
+			echo "$a" | grep -E "[0-9]"*-"[0-9]" &> /dev/null && actions="$actions $(eval echo {$(echo $a|sed "s/-/../")})"
+			# Is a number 
+			[ "$a" -eq 0 ] &>/dev/null; [ $? -le 1 ] && actions="$actions $a"
 		done			
 		;;
 	esac
@@ -50,14 +50,14 @@ apt-get update
 	
 q="Install some useful packages"
 read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
-if [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
 	apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
-	apt-get install -y haveged                        # Avoid delay first login
+	apt-get install -y haveged		# Avoid delay first login
 fi
 
 q="Install rofi launcher"
 read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
 	apt-get install -y rofi
 	cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
 	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.Xresources {}/
@@ -67,56 +67,55 @@ fi
 
 # PlayOnLinux
 q="Install PlayOnLinux"
-read -p "$(echo -e "\n\e[1m\e[4mInstall PlayOnLinux (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  apt-get install -y winbind
-  apt-get install -y playonlinux
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	apt-get install -y winbind
+	apt-get install -y playonlinux
 fi
 
 # VirtualBox
 q="Install VirtualBox and add repositories"
-read -p "$(echo -e "\n\e[1m\e[4mInstall VirtualBox and add repositories (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
-  wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-  wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-  apt-get update
-  apt-get install -y linux-headers-$(uname -r) "$vb_package"
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
+	wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+	apt-get update
+	apt-get install -y linux-headers-$(uname -r) "$vb_package"
 fi
 
 # VirtualBox Extension Pack
 q="Install Extension Pack"
-read -p "$(echo -e "\n\e[1m\e[4mInstall Extension Pack (Y/n)?\e[0m ")" q
-  if [ "${q,,}" != "n" ]; then
-    t=$(mktemp -d)
-    wget -P "$t" "$ep_url"  
-    vboxmanage extpack install --replace "$t"/*extpack
-    rm -rf "$t"
-  fi
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	t=$(mktemp -d)
+	wget -P "$t" "$ep_url"  
+	vboxmanage extpack install --replace "$t"/*extpack
+	rm -rf "$t"
 fi
 
 # Sublime Text 3
 q="Install Sublime-Text 3 and add repositories"
-read -p "$(echo -e "\n\e[1m\e[4mInstall Sublime-Text 3 and add repositories (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-  wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-  apt-get update
-  apt-get install sublime-text
-  update-alternatives --install /usr/bin/bl-text-editor bl-text-editor /usr/bin/subl 90
-  update-alternatives --set bl-text-editor /usr/bin/subl
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+	apt-get update
+	apt-get install sublime-text
+	update-alternatives --install /usr/bin/bl-text-editor bl-text-editor /usr/bin/subl 90
+	update-alternatives --set bl-text-editor /usr/bin/subl
 fi
 
 # Google Chrome
 q="Install Google Chrome and add repositories"
-read -p "$(echo -e "\n\e[1m\e[4mInstall Google Chrome and add repositories (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-  apt-get update
-  apt-get install google-chrome-stable
-  update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
-  update-alternatives --set gnome-www-browser /usr/bin/google-chrome-stable
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+	apt-get update
+	apt-get install google-chrome-stable
+	update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
+	update-alternatives --set gnome-www-browser /usr/bin/google-chrome-stable
 fi
 
 
@@ -124,36 +123,36 @@ fi
 #### FILES #############################################################
 ########################################################################
 q="Copy some cool scripts"
-read -p "$(echo -e "\n\e[1m\e[4mCopy some cool scripts (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  chmod +x "$current_dir"/bin/*
-  cp -v "$current_dir"/bin/* /usr/bin/
-  update-notification.sh -I      # Install update-notification
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	chmod +x "$current_dir"/bin/*
+	cp -v "$current_dir"/bin/* /usr/bin/
+	update-notification.sh -I      # Install update-notification
 fi
 
 q="Copy some cool wallpapers"
-read -p "$(echo -e "\n\e[1m\e[4mCopy some cool wallpapers (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
 
 q="Copy some cool icon packs"
-read -p "$(echo -e "\n\e[1m\e[4mCopy some cool icon packs (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
-  unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
+	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 fi
 
 q="Copy some cool fonts"
-read -p "$(echo -e "\n\e[1m\e[4mCopy some cool fonts (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
 fi
 
 q="Copy some cool themes"
-read -p "$(echo -e "\n\e[1m\e[4mCopy some cool themes (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
 fi
 
 
@@ -162,48 +161,48 @@ fi
 ########################################################################
 ## DISABLE DISPLAY MANAGER
 q="Disable graphical display manager"
-read -p "$(echo -e "\n\e[1m\e[4mDisable graphical display manager (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  systemctl set-default multi-user.target
-  sed -i "/#BL-POSTINSTALL/Id" /etc/profile
-  echo '[ $(tty) = "/dev/tty1" ] && startx; exit   #BL-POSTINSTALL' >> /etc/profile
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	systemctl set-default multi-user.target
+	sed -i "/#BL-POSTINSTALL/Id" /etc/profile
+	echo '[ $(tty) = "/dev/tty1" ] && startx; exit   #BL-POSTINSTALL' >> /etc/profile
 fi
 
 q="Enable CTRL+ALT+BACKSPACE for kill X"
-read -p "$(echo -e "\n\e[1m\e[4mEnable CTRL+ALT+BACKSPACE for kill X (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  sed -i "/#BL-POSTINSTALL/Id" /etc/default/keyboard
-  echo 'XKBOPTIONS="terminate:ctrl_alt_bksp    #BL-POSTINSTALL"' >> /etc/default/keyboard
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	sed -i "/#BL-POSTINSTALL/Id" /etc/default/keyboard
+	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp    #BL-POSTINSTALL"' >> /etc/default/keyboard
 fi
 
 ### SERVICES
 q="Disable some stupid services"
-read -p "$(echo -e "\n\e[1m\e[4mDisable some stupid services (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  systemctl disable NetworkManager-wait-online.service
-  systemctl disable ModemManager.service
-  systemctl disable pppd-dns.service
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	systemctl disable NetworkManager-wait-online.service
+	systemctl disable ModemManager.service
+	systemctl disable pppd-dns.service
 fi
 
 # GRUB CONIFG
 q="Skip Grub menu and enter Bunsen directly"
-read -p "$(echo -e "\n\e[1m\e[4mSkip Grub menu and enter Bunsen directly  (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
-    sed -i "/\b$i=/Id" /etc/default/grub
-  done
-  cat "$current_dir"/config/grub_skip.conf >> /etc/default/grub
-  update-grub
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
+		sed -i "/\b$i=/Id" /etc/default/grub
+	done
+	cat "$current_dir"/config/grub_skip.conf >> /etc/default/grub
+	update-grub
 fi
 
 q="Show messages during boot"
-read -p "$(echo -e "\n\e[1m\e[4mShow messages during boot  (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
-    sed -i "/\b$i=/Id" /etc/default/grub
-  done
-  cat "$current_dir"/config/grub_text.conf >> /etc/default/grub
-  update-grub
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
+		sed -i "/\b$i=/Id" /etc/default/grub
+	done
+	cat "$current_dir"/config/grub_text.conf >> /etc/default/grub
+	update-grub
 fi
 
 
@@ -212,27 +211,27 @@ fi
 ########################################################################
 # bl-exit theme
 q="Configure bl-exit classic theme"
-read -p "$(echo -e "\n\e[1m\e[4mConfigure bl-exit classic theme (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
-  sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
+	sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
 
 # tint2 config
 q="Add tin2 themes"
-read -p "$(echo -e "\n\e[1m\e[4mAdd tin2 themes (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  cp -v"$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
-  ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/*.tint {}.config/tint2/
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	cp -v"$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
+	ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/*.tint {}.config/tint2/
 fi
 
 # aliases
 q="Add some aliases"
-read -p "$(echo -e "\n\e[1m\e[4mAdd some aliases (Y/n)?\e[0m ")" q
-if [ "${q,,}" != "n" ]; then
-  sed -i "/#BL-POSTINSTALL/Id" /usr/share/bunsen/skel/.bash_aliases
-  cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
-  ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}/
+read -p "$(echo -e "\n\e[1m[$n] \e[4m$q$([ ! "$list" ] && echo " (Y/n)?")\e[0m ")" q
+if [ ! "$actions" ] || echo "$actions" | grep -w "$n" &>/dev/null && [ ! "$list" ] && [ "${q,,}" != "n" ]; then
+	sed -i "/#BL-POSTINSTALL/Id" /usr/share/bunsen/skel/.bash_aliases
+	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
+	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
 
