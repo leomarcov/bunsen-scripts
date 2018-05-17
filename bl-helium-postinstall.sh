@@ -88,17 +88,17 @@ fi
 
 read -p "Copy some cool icon packs (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-
+  unzip files/icons.zip -d /usr/share/icons/
 fi
 
 read -p "Copy some cool fonts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-
+  unzip files/fonts.zip -d /usr/share/fonts/
 fi
 
 read -p "Copy some cool themes (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-
+  unzip files/themes.zip -d /usr/share/themes/
 fi
 
 ########################################################################
@@ -119,7 +119,7 @@ if [ "${q,,}" = "y" ]; then
 fi
 
 # GRUB CONIFG
-read -p "Config Grub bypass (Y/n)? " q
+read -p "Config Grub for bypass (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
   sed -i "/\bGRUB_DEFAULT=/Id" /etc/default/grub
   sed -i "/\bGRUB_TIMEOUT=/Id" /etc/default/grub
@@ -149,8 +149,11 @@ fi
 #### USER CONFIG #######################################################
 ########################################################################
 # tint2 config
-cp configs/*.tint /usr/share/bunsen/skel/.config/tint2/
-ls -d /home/* | xargs -I {} cp configs/*.tint {}.config/tint2/
+read -p "Add tin2 themes (Y/n)? " q
+if [ "${q,,}" = "y" ]; then
+  cp configs/*.tint /usr/share/bunsen/skel/.config/tint2/
+  ls -d /home/* | xargs -I {} cp configs/*.tint {}.config/tint2/
+fi
 
 # aliases
 read -p "Add some aliases (Y/n)? " q
