@@ -161,8 +161,8 @@ fi
 # bl-exit theme
 read -p "$(echo -e "\n\e[1m\e[4mConfigure bl-exit classic theme (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-	sed  "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc
-  sed  "s/^rcfile *= *.*/rcfile = none" /etc/bl-exit/bl-exitrc
+  sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
+  sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
 
 # tint2 config
