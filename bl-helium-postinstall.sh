@@ -18,7 +18,7 @@ apt-get update
 # extra packages
 read -p "$(echo -e "\n\e[1m\e[4mInstall some useful packages (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf
+  apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
   apt-get install -y haveged                        # Avoid delay first login
 fi
 
@@ -158,6 +158,13 @@ fi
 ########################################################################
 #### USER CONFIG #######################################################
 ########################################################################
+# bl-exit theme
+read -p "$(echo -e "\n\e[1m\e[4mConfigure bl-exit classic theme (Y/n)?\e[0m ")" q
+if [ "${q,,}" != "n" ]; then
+	sed  "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc
+  sed  "s/^rcfile *= *.*/rcfile = none" /etc/bl-exit/bl-exitrc
+fi
+
 # tint2 config
 read -p "$(echo -e "\n\e[1m\e[4mAdd tin2 themes (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
