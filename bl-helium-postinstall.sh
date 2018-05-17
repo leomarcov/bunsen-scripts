@@ -4,7 +4,7 @@
 ########################################################################
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
-
+current_dir="$(readlink -f $0)"
 
 [ "$(id)" -ne 0 ] && echo "Administrative prvileges needed" && exit 1
 read -p "Are you config a laptop (Y/n)? " laptop
@@ -77,28 +77,28 @@ fi
 ########################################################################
 read -p "Copy some cool scripts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  cp sh/* /usr/bin/
+  cp "$current_dir"/sh/* /usr/bin/
   update-notification.sh -I      # Install update-notification
 fi
 
 read -p "Copy some cool wallpapers (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  cp wallpapers/* /usr/share/images/bunsen/wallpapers
+  cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
 
 read -p "Copy some cool icon packs (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  unzip files/icons.zip -d /usr/share/icons/
+  unzip "$current_dir"/files/icons.zip -d /usr/share/icons/
 fi
 
 read -p "Copy some cool fonts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  unzip files/fonts.zip -d /usr/share/fonts/
+  unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
 fi
 
 read -p "Copy some cool themes (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  unzip files/themes.zip -d /usr/share/themes/
+  unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
 fi
 
 ########################################################################
@@ -151,20 +151,14 @@ fi
 # tint2 config
 read -p "Add tin2 themes (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  cp configs/*.tint /usr/share/bunsen/skel/.config/tint2/
-  ls -d /home/* | xargs -I {} cp configs/*.tint {}.config/tint2/
+  cp "$current_dir"/configs/*.tint /usr/share/bunsen/skel/.config/tint2/
+  ls -d /home/* | xargs -I {} cp "$current_dir"/configs/*.tint {}.config/tint2/
 fi
 
 # aliases
 read -p "Add some aliases (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  aliases='alias ls="ls --color=auto"
-alias ll="ls -l --color=auto"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias rgrep="rgrep --color=auto"
-alias grep="grep --color=auto"' 
-  echo "$aliases" >> /usr/share/bunsen/skel/.bash_aliases
+   cat "$current_dir"/configs/aliases >> /usr/share/bunsen/skel/.bash_aliases
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
