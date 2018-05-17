@@ -6,8 +6,7 @@ bunsen_ver="Helium"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
 current_dir="$(dirname "$(readlink -f "$0")")"
-[ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
-
+comment_auto="#BL-POSTINSTALL"
 
 
 #=== FUNCTION ==================================================================
@@ -29,14 +28,14 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
 # DESCRIPTION: Show question for do an action and determine if do or not
 # RETURN: 0 if should be do de action, 1 in other case
 #===============================================================================
-n=1
+n=0
 function do_action() {
 	n=$((n+1))
-	[ "$actions" ] && echo "$actions" | grep -w "$n" &> /dev/null || return 1
+	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
 	q="$1"
-	echo -en "\n\e[1m[$n] \e[4m$q\e[0m$([ ! "$list" ] && echo " (Y/n)?") "
-	[ "$list" ] && return 1
-	read -p q
+	[ "$list" ] && echo -e "[$n] $q" && return 1
+
+	read -p "$(echo -e "\n\e[1m[$n] \e[4m$q\e[0m (Y/n)? ")" q
 	[ "${q,,}" != "n" ] && return 0
 	return 1
 }
@@ -44,6 +43,8 @@ function do_action() {
 
 
 [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+[ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
+
 
 while getopts ":hla:" o; do
 	case "$o" in
@@ -65,16 +66,14 @@ done
 ########################################################################
 #### PACKAGES ##########################################################
 ########################################################################
-apt-get update
-
 # Mix packages
-if do_action "Install some useful packages"
+if do_action "Install some useful packages"; then
 	apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
 	apt-get install -y haveged		# Avoid delay first login
 fi
 
 # Rofi laucher
-if do_action "Install rofi launcher"
+if do_action "Install rofi launcher"; then
 	apt-get install -y rofi
 	cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
 	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.Xresources {}/
@@ -82,13 +81,13 @@ if do_action "Install rofi launcher"
 fi
 
 # PlayOnLinux
-if do_action "Install PlayOnLinux"
+if do_action "Install PlayOnLinux"; then
 	apt-get install -y winbind
 	apt-get install -y playonlinux
 fi
 
 # VirtualBox
-if do_action "Install VirtualBox and add repositories"
+if do_action "Install VirtualBox and add repositories"; then
 	echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
 	wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
@@ -97,7 +96,7 @@ if do_action "Install VirtualBox and add repositories"
 fi
 
 # VirtualBox Extension Pack
-if do_action "Install Extension Pack"
+if do_action "Install Extension Pack"; then
 	t=$(mktemp -d)
 	wget -P "$t" "$ep_url"  
 	vboxmanage extpack install --replace "$t"/*extpack
@@ -105,7 +104,7 @@ if do_action "Install Extension Pack"
 fi
 
 # Sublime Text 3
-if do_action "Install Sublime-Text 3 and add repositories"
+if do_action "Install Sublime-Text 3 and add repositories"; then
 	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 	apt-get update
@@ -115,7 +114,7 @@ if do_action "Install Sublime-Text 3 and add repositories"
 fi
 
 # Google Chrome
-if do_action "Install Google Chrome and add repositories"
+if do_action "Install Google Chrome and add repositories"; then
 	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 	apt-get update
@@ -129,30 +128,30 @@ fi
 #### FILES #############################################################
 ########################################################################
 # Scripts
-if do_action "Copy some cool scripts"
+if do_action "Copy some cool scripts"; then
 	chmod +x "$current_dir"/bin/*
 	cp -v "$current_dir"/bin/* /usr/bin/
 	update-notification.sh -I      # Install update-notification
 fi
 
 # Wallpapers
-if do_action "Copy some cool wallpapers"
+if do_action "Copy some cool wallpapers"; then
 	cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
 
 # Icons
-if do_action "Copy some cool icon packs"
+if do_action "Copy some cool icon packs"; then
 	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 fi
 
 # Fonts
-if do_action "Copy some cool fonts"
+if do_action "Copy some cool fonts"; then
 	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
 fi
 
 # Themes
-if do_action "Copy some cool themes"
+if do_action "Copy some cool themes"; then
 	unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
 fi
 
@@ -161,27 +160,27 @@ fi
 #### SYSTEM CONFIG #####################################################
 ########################################################################
 ## Disable DM
-if do_action "Disable graphical display manager"
+if do_action "Disable graphical display manager"; then
 	systemctl set-default multi-user.target
-	sed -i "/#BL-POSTINSTALL/Id" /etc/profile
-	echo '[ $(tty) = "/dev/tty1" ] && startx; exit   #BL-POSTINSTALL' >> /etc/profile
+	sed -i "/#$comment_auto/Id" /etc/profile
+	echo "[ $(tty) = \"/dev/tty1\" ] && startx; exit   $comment_auto" >> /etc/profile
 fi
 
 # Kill X
-if do_action "Enable CTRL+ALT+BACKSPACE for kill X"
-	sed -i "/#BL-POSTINSTALL/Id" /etc/default/keyboard
-	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp    #BL-POSTINSTALL"' >> /etc/default/keyboard
+if do_action "Enable CTRL+ALT+BACKSPACE for kill X"; then
+	sed -i "/$comment_auto/Id" /etc/default/keyboard
+	echo "XKBOPTIONS=\"terminate:ctrl_alt_bksp    $comment_auto\"" >> /etc/default/keyboard
 fi
 
 # Disable services
-if do_action "Disable some stupid services"
+if do_action "Disable some stupid services"; then
 	systemctl disable NetworkManager-wait-online.service
 	systemctl disable ModemManager.service
 	systemctl disable pppd-dns.service
 fi
 
 # Skip Grub menu
-if do_action "Skip Grub menu and enter Bunsen directly"
+if do_action "Skip Grub menu and enter Bunsen directly"; then
 	for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
@@ -190,7 +189,7 @@ if do_action "Skip Grub menu and enter Bunsen directly"
 fi
 
 # Show boot msg
-if do_action "Show messages during boot"
+if do_action "Show messages during boot"; then
 	for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
@@ -203,20 +202,20 @@ fi
 #### USER CONFIG #######################################################
 ########################################################################
 # bl-exit theme
-if do_action "Configure bl-exit classic theme"
+if do_action "Configure bl-exit classic theme"; then
 	sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
 	sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
 
 # tint2 config
-if do_action "Add tin2 themes"
+if do_action "Add tin2 themes"; then
 	cp -v"$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
 	ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/*.tint {}.config/tint2/
 fi
 
 # aliases
-if do_action "Add some aliases"
-	sed -i "/#BL-POSTINSTALL/Id" /usr/share/bunsen/skel/.bash_aliases
+if do_action "Add some aliases"; then
+	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
 	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
 	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}/
 fi
@@ -245,5 +244,4 @@ brightness.sh -def &           # Set default brightness
 xmodmap $HOME/.Xmodmap &
 xbindkeys &
 syndaemon -i 1 -d &           # Disable touchpad when using keyboard
-
 
