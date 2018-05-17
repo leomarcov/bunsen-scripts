@@ -86,7 +86,7 @@ fi
 ########################################################################
 #### FILES #############################################################
 ########################################################################
-read -p "Come some cool wallpapers (Y/n)? " q
+read -p "Copy some cool wallpapers (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
   cp wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
