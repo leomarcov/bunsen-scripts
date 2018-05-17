@@ -111,6 +111,11 @@ if [ "${q,,}" = "y" ]; then
   systemctl set-default multi-user.target
 fi
 
+read -p "Enable CTRL+ALT+BACKSPACE for kill X (Y/n)? " q
+if [ "${q,,}" = "y" ]; then
+  echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"' >> /etc/default/keyboard
+fi
+
 ### SERVICES
 read -p "Disable some stupid services (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
