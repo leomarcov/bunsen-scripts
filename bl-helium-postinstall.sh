@@ -97,7 +97,7 @@ fi
 
 read -p "$(echo -e "\n\e[1m\e[4mCopy some cool icon packs (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  unzip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
+  zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
   unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 fi
 
