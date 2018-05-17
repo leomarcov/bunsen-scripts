@@ -4,7 +4,7 @@
 ########################################################################
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
-current_dir="$(readlink -f $0)"
+current_dir="$(dirname "$(readlink -f "$0")")"
 
 
 
@@ -22,8 +22,17 @@ if [ "${q,,}" = "y" ]; then
   apt-get install haveged                        # Avoid delay first login
   apt-get install ttf-mscorefonts-installer
   apt-get install fonts-freefont-ttf
-  apt-get install rofi
 fi
+
+# rofi
+read -p "Install rofi launcher (Y/n)? " q
+if [ "${q,,}" = "y" ]; then
+  apt-get install rofi
+  cat "$current_dir"/configs/rofi.conf >> /usr/share/bunsen/skel/.Xresources
+  ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.Xresources {}/
+  xrdb -load /usr/share/bunsen/skel/.Xresources  # ?????????? other users
+fi
+
 
 # PlayOnLinux
 read -p "Install PlayOnLinux (Y/n)? " q
@@ -167,24 +176,6 @@ if [ "${q,,}" = "y" ]; then
    cat "$current_dir"/configs/aliases >> /usr/share/bunsen/skel/.bash_aliases
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
 fi
-
-echo 'rofi.color-enabled: true
-rofi.color-window: argb:cc273238, argb:cc273238, argb:cc273238
-rofi.color-normal: argb:00273238, argb:ccc1c1c1, argb:00273238, argb:cc394249, argb:ccffffff
-rofi.color-active: argb:cc273238, argb:cc80cbc4, argb:cc273238, argb:cc394249, argb:cc80cbc4
-rofi.color-urgent: argb:cc273238, argb:ccff1844, argb:cc273238, argb:cc394249, argb:ccff1844
-rofi.separator-style: solid
-rofi.font:              Monospace 12
-!rofi.padding:           50
-!rofi.line-margin:       5
-!rofi.lines:             10
-!rofi.width:             720
-!rofi.disable-history:   true
-!rofi.modi:              keys,drun,window,run
-!rofi.sidebar-mode:      true
-rofi.fullscreen:        false
-!apply changes: xrdb -load ~/.Xresources'
-xrdb -load $HOME/.Xresources
 
 # Config shortcut in Openbox:
 vi $HOME/.config/openbox/rc.xml
