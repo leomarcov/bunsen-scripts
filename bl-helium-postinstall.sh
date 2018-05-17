@@ -18,14 +18,14 @@ apt-get update
 # extra packages
 read -p "$(echo -e "\n\e[1m\e[4mInstall some useful packages (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  apt-get install vim vls ttf-mscorefonts-installer fonts-freefont-ttf
-  apt-get install haveged                        # Avoid delay first login
+  apt-get install -y vim vls ttf-mscorefonts-installer fonts-freefont-ttf
+  apt-get install -y haveged                        # Avoid delay first login
 fi
 
 # rofi
 read -p "$(echo -e "\n\e[1m\e[4mInstall rofi launcher (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  apt-get install rofi
+  apt-get install -y rofi
   cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.Xresources {}/
   xrdb -load /usr/share/bunsen/skel/.Xresources  # ?????????? other users
@@ -35,8 +35,8 @@ fi
 # PlayOnLinux
 read -p "$(echo -e "\n\e[1m\e[4mInstall PlayOnLinux (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  apt-get install winbind
-  apt-get install playonlinux
+  apt-get install -y winbind
+  apt-get install -y playonlinux
 fi
 
 # VirtualBox
@@ -46,7 +46,7 @@ if [ "${q,,}" != "n" ]; then
   wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
   wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
   apt-get update
-  apt-get install linux-headers-$(uname -r) "$vb_package"
+  apt-get install -y linux-headers-$(uname -r) "$vb_package"
   # VirtualBox Extension Pack
   read -p "Install Extension Pack (Y/n)? " q
   if [ "${q,,}" != "n" ]; then
