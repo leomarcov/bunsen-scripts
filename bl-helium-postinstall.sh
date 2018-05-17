@@ -44,6 +44,7 @@ function do_action() {
 
 
 [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+
 while getopts ":hla:" o; do
 	case "$o" in
 	h)	help ;;
