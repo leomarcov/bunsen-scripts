@@ -27,7 +27,7 @@ read -p "$(echo -e "\n\e[1m\e[4mInstall rofi launcher (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   apt-get install -y rofi
   cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
-  ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.Xresources {}/
+  ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.Xresources {}/
   xrdb -load /usr/share/bunsen/skel/.Xresources  
 fi
 
@@ -86,7 +86,7 @@ fi
 read -p "$(echo -e "\n\e[1m\e[4mCopy some cool scripts (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   chmod +x "$current_dir"/bin/*
-  cp "$current_dir"/bin/* /usr/bin/
+  cp -v "$current_dir"/bin/* /usr/bin/
   update-notification.sh -I      # Install update-notification
 fi
 
@@ -161,8 +161,8 @@ fi
 # tint2 config
 read -p "$(echo -e "\n\e[1m\e[4mAdd tin2 themes (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  cp "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
-  ls -d /home/* | xargs -I {} cp "$current_dir"/config/*.tint {}.config/tint2/
+  cp -v"$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
+  ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/*.tint {}.config/tint2/
 fi
 
 # aliases
@@ -170,7 +170,7 @@ read -p "$(echo -e "\n\e[1m\e[4mAdd some aliases (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   sed -i "/#BL-POSTINSTALL/Id" /usr/share/bunsen/skel/.bash_aliases
   cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
-  ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
+  ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
 
