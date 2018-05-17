@@ -15,7 +15,7 @@
 step=5									# Steps of inc/dec
 video_id="eDP-1"						# Video ID
 install_path="/usr/bin/brightness.sh"	# Installation dir
-gamma="0.8:0.8:0.8"
+gamma="0.7:0.7:0.7"
 default="0.6"
 
 #=== FUNCTION ==================================================================
