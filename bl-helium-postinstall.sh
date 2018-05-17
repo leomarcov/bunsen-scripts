@@ -119,12 +119,13 @@ read -p "$(echo -e "\n\e[1m\e[4mDisable graphical display manager (Y/n)?\e[0m ")
 if [ "${q,,}" != "n" ]; then
   systemctl set-default multi-user.target
   sed -i "/#BL-POSTINSTALL/Id" /etc/profile
-  echo '[ $(tty) = "/dev/tty1" ] && startx   #BL-POSTINSTALL; exit' >> /etc/profile
+  echo '[ $(tty) = "/dev/tty1" ] && startx; exit   #BL-POSTINSTALL' >> /etc/profile
 fi
 
 read -p "$(echo -e "\n\e[1m\e[4mEnable CTRL+ALT+BACKSPACE for kill X (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-  echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"' >> /etc/default/keyboard
+  sed -i "/#BL-POSTINSTALL/Id" /etc/default/keyboard
+  echo 'XKBOPTIONS="terminate:ctrl_alt_bksp    #BL-POSTINSTALL"' >> /etc/default/keyboard
 fi
 
 ### SERVICES
@@ -167,7 +168,8 @@ fi
 # aliases
 read -p "$(echo -e "\n\e[1m\e[4mAdd some aliases (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
-   cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
+  sed -i "/#BL-POSTINSTALL/Id" /usr/share/bunsen/skel/.bash_aliases
+  cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
