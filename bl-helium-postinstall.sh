@@ -1,6 +1,6 @@
 #!/bin/bash
 ########################################################################
-#### CONFIG ##########################################################
+#### SCRIPT CONFIG #####################################################
 ########################################################################
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
