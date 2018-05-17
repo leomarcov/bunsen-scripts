@@ -31,17 +31,6 @@ if [ "${q,,}" = "y" ]; then
   apt-get install playonlinux
 fi
 
-# ps_mem script
-# https://github.com/pixelb/ps_mem
-read -p "Install ps_mem.py (Y/n)? " q
-if [ "${q,,}" = "y" ]; then
-  t=$(mktemp -d)
-  wget -P "$t" https://github.com/pixelb/ps_mem/archive/master.zip
-  unzip "$t"/*.zip -d "$t"
-  cp "$t"/ps_mem-master/ps_mem.py /usr/local/sbin/psmem.py
-  rm -rf "$t"
-fi
-
 # VirtualBox
 read -p "Install VirtualBox and add repositories (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
@@ -86,6 +75,11 @@ fi
 ########################################################################
 #### FILES #############################################################
 ########################################################################
+read -p "Copy some cool scripts (Y/n)? " q
+if [ "${q,,}" = "y" ]; then
+  cp sh/* /usr/bin/
+fi
+
 read -p "Copy some cool wallpapers (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
   cp wallpapers/* /usr/share/images/bunsen/wallpapers
