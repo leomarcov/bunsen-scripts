@@ -12,9 +12,10 @@
 #===================================================================================
 
 # CONFIG
-step=5										# Steps of inc/dec
-video_id="eDP-1"							# Video ID
-install_path="/usr/bin/brightness.sh"		# Installation dir
+step=5									# Steps of inc/dec
+video_id="eDP-1"						# Video ID
+install_path="/usr/bin/brightness.sh"	# Installation dir
+gamma="0.8:0.8:0.8"
 default="0.6"
 
 #=== FUNCTION ==================================================================
@@ -35,7 +36,7 @@ Usage: '$(basename $0)' -inc|-dec|-h|-I|-U
 }
 
 function set_brightness() {
-	xrandr --output "$video_id" --brightness "$1"
+	xrandr --output "$video_id" --brightness "$1" --gamma "$2"
 	exit
 }
 
@@ -57,15 +58,14 @@ function change_brightness() {
 		b="0.${b}"
 	fi
 
-	xrandr --output "$video_id" --brightness "$b"
-
+	set_brightness "$b" "$gamma"
 	exit
 }
 
 
 [ "$1" = "-dec" ] || [ "$1" = "-inc" ] && change_brightness "$1"
 [ "$#" -eq 0 ] && exit 
-[ "$1" = "-def" ] && set_brightness "$default"
+[ "$1" = "-def" ] && set_brightness "$default" "$gamma"
 
 help
 
