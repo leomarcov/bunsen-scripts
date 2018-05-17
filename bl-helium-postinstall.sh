@@ -155,6 +155,11 @@ if [ "${q,,}" = "y" ]; then
   GRUB_GFXMODE=auto
   GRUB_GFXPAYLOAD_LINUX=keep
   GRUB_BACKGROUND=""' >> /etc/default/grub
+
+  for i in $(cat "$current_dir"/config/grub.conf  | cut -f1 -d=);do
+    sed -i "/\b$i=/Id" /etc/default/grub
+  done
+  cat "$current_dir"/config/grub.conf >> /etc/default/grub
   update-grub
 fi
 
@@ -166,14 +171,14 @@ fi
 # tint2 config
 read -p "Add tin2 themes (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-  cp "$current_dir"/configs/*.tint /usr/share/bunsen/skel/.config/tint2/
-  ls -d /home/* | xargs -I {} cp "$current_dir"/configs/*.tint {}.config/tint2/
+  cp "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
+  ls -d /home/* | xargs -I {} cp "$current_dir"/config/*.tint {}.config/tint2/
 fi
 
 # aliases
 read -p "Add some aliases (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
-   cat "$current_dir"/configs/aliases >> /usr/share/bunsen/skel/.bash_aliases
+   cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
