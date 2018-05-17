@@ -137,7 +137,7 @@ if [ "${q,,}" != "n" ]; then
 fi
 
 # GRUB CONIFG
-read -p "$(echo -e "\n\e[1m\e[4mSkip Grub menu (only one OS)  (Y/n)?\e[0m ")" q
+read -p "$(echo -e "\n\e[1m\e[4mSkip Grub menu and enter Bunsen directly  (Y/n)?\e[0m ")" q
 if [ "${q,,}" != "n" ]; then
   for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
     sed -i "/\b$i=/Id" /etc/default/grub
