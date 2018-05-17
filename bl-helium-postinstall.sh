@@ -18,8 +18,8 @@ function help() {
 	echo -e 'Checks apt updates and show it to user in tint2 taskbar
 Usage: '$(basename $0)' -[hla]
    \e[1m-h\e[0m\tShow command help
-   \e[1m-l\e[0m\tStart interactive upgrade
-   \e[1m-a\e[0m\tOutput message for exector tint2'
+   \e[1m-l\e[0m\tOnly list actions 
+   \e[1m-a <actions>\e[0m\tOnly apply selected actions (e.g: 5,6,10-15)'
 	exit 0
 }
 
