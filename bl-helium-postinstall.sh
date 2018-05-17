@@ -28,7 +28,7 @@ if [ "${q,,}" != "n" ]; then
   apt-get install -y rofi
   cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
   ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.Xresources {}/
-  xrdb -load /usr/share/bunsen/skel/.Xresources  # ?????????? other users
+  xrdb -load /usr/share/bunsen/skel/.Xresources  
 fi
 
 
