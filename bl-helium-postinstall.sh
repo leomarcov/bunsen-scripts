@@ -78,6 +78,7 @@ fi
 read -p "Copy some cool scripts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
   cp sh/* /usr/bin/
+  update-notification.sh -I      # Install update-notification
 fi
 
 read -p "Copy some cool wallpapers (Y/n)? " q
