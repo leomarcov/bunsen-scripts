@@ -96,7 +96,7 @@ if [ "${q,,}" = "y" ]; then
 
 fi
 
-read -p "Copy some cool icon fonts (Y/n)? " q
+read -p "Copy some cool fonts (Y/n)? " q
 if [ "${q,,}" = "y" ]; then
 
 fi
