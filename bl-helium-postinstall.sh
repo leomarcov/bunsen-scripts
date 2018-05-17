@@ -140,12 +140,18 @@ fi
 cp configs/*.tint /usr/share/bunsen/skel/.config/tint2/
 ls -d /home/* | xargs -I {} cp configs/*.tint {}.config/tint2/
 
-vi $HOME/.bashrc
-alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias grep='grep --color=auto'
+# aliases
+read -p "Add some aliases (Y/n)? " q
+if [ "${q,,}" = "y" ]; then
+  aliases='alias ls="ls --color=auto"
+  alias ll="ls -l --color=auto"
+  alias egrep="egrep --color=auto"
+  alias fgrep="fgrep --color=auto"
+  alias rgrep="rgrep --color=auto"
+  alias grep="grep --color=auto"' 
+  echo "$aliases" >> /usr/share/bunsen/skel/.bash_aliases
+  ls -d /home/* | xargs -I {} cp /usr/share/bunsen/skel/.bash_aliases {}/
+fi
 
 echo 'rofi.color-enabled: true
 rofi.color-window: argb:cc273238, argb:cc273238, argb:cc273238
