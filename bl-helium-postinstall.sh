@@ -26,7 +26,7 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
 
 #=== FUNCTION ==================================================================
 # NAME: do_action
-# DESCRIPTION: Show question for do an action and determine if do or not
+# DESCRIPTION: Show question to do an action and determine if do or not
 # RETURN: 0 if should be do de action, 1 in other case
 #===============================================================================
 n=0
