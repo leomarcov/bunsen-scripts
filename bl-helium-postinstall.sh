@@ -128,25 +128,30 @@ fi
 ########################################################################
 #### FILES #############################################################
 ########################################################################
+# Scripts
 if do_action "Copy some cool scripts"
 	chmod +x "$current_dir"/bin/*
 	cp -v "$current_dir"/bin/* /usr/bin/
 	update-notification.sh -I      # Install update-notification
 fi
 
+# Wallpapers
 if do_action "Copy some cool wallpapers"
 	cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers
 fi
 
+# Icons
 if do_action "Copy some cool icon packs"
 	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 fi
 
+# Fonts
 if do_action "Copy some cool fonts"
 	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
 fi
 
+# Themes
 if do_action "Copy some cool themes"
 	unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
 fi
@@ -155,26 +160,27 @@ fi
 ########################################################################
 #### SYSTEM CONFIG #####################################################
 ########################################################################
-## DISABLE DISPLAY MANAGER
+## Disable DM
 if do_action "Disable graphical display manager"
 	systemctl set-default multi-user.target
 	sed -i "/#BL-POSTINSTALL/Id" /etc/profile
 	echo '[ $(tty) = "/dev/tty1" ] && startx; exit   #BL-POSTINSTALL' >> /etc/profile
 fi
 
+# Kill X
 if do_action "Enable CTRL+ALT+BACKSPACE for kill X"
 	sed -i "/#BL-POSTINSTALL/Id" /etc/default/keyboard
 	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp    #BL-POSTINSTALL"' >> /etc/default/keyboard
 fi
 
-### SERVICES
+# Disable services
 if do_action "Disable some stupid services"
 	systemctl disable NetworkManager-wait-online.service
 	systemctl disable ModemManager.service
 	systemctl disable pppd-dns.service
 fi
 
-# GRUB CONIFG
+# Skip Grub menu
 if do_action "Skip Grub menu and enter Bunsen directly"
 	for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
@@ -183,6 +189,7 @@ if do_action "Skip Grub menu and enter Bunsen directly"
 	update-grub
 fi
 
+# Show boot msg
 if do_action "Show messages during boot"
 	for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
