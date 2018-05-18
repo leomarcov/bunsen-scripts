@@ -53,6 +53,8 @@ border_color =
 # Panel
 #autohide = 1
 #strut_policy = minimun
+#autohide = 0
+#strut_policy = follow_size
 autohide = 0
 strut_policy = follow_size
 
