@@ -187,7 +187,7 @@ fi
 # Kill X
 if do_action "Enable CTRL+ALT+BACKSPACE for kill X"; then
 	sed -i "/$comment_auto/Id" /etc/default/keyboard
-	echo "XKBOPTIONS=\"terminate:ctrl_alt_bksp    $comment_auto\"" >> /etc/default/keyboard
+	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"    '"$comment_auto" >> /etc/default/keyboard
 fi
 
 # Disable services
