@@ -1,7 +1,5 @@
 #!/bin/bash
-########################################################################
-#### SCRIPT CONFIG #####################################################
-######################################################################## 
+#=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
@@ -27,7 +25,7 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
 #=== FUNCTION ==================================================================
 # NAME: do_action
 # DESCRIPTION: Show question to do an action and determine if do or not
-# RETURN: 0 if should be do de action, 1 in other case
+# EXIT CODE: 0 if should be do de action, 1 in other case
 #===============================================================================
 n=0
 function do_action() {
@@ -43,11 +41,16 @@ function do_action() {
 }
 
 
-
-[ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+#=== CHECKS ===================================================================
+[ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+if [ ! "$list"] && cat /etc/*release | grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
+	echo "Seems you are not running BunsenLabs $bunser_ver"
+	echo "Some actions may fail. Cross your fingers and press enter..."
+	read
+fi
 [ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
 
-
+#=== PARAMS ====================================================================
 while getopts ":hla:y" o; do
 	case "$o" in
 	h)	help 		;;
@@ -66,9 +69,7 @@ done
 
 
 
-########################################################################
-#### PACKAGES ##########################################################
-########################################################################
+#=== PACKAGE ACTIONS ====================================================================
 # Mix packages
 if do_action "Install some useful packages"; then
 	apt-get install -y vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
@@ -127,9 +128,7 @@ if do_action "Install Google Chrome and add repositories"; then
 fi
 
 
-########################################################################
-#### FILES #############################################################
-########################################################################
+#=== FILE ACTIONS ====================================================================
 # Scripts
 if do_action "Copy some cool scripts"; then
 	chmod +x "$current_dir"/bin/*
@@ -159,9 +158,7 @@ if do_action "Copy some cool themes"; then
 fi
 
 
-########################################################################
-#### SYSTEM CONFIG #####################################################
-########################################################################
+#=== SYSTEM CONFIG ACTIONS ====================================================================
 ## Disable DM
 if do_action "Disable graphical display manager"; then
 	systemctl set-default multi-user.target
@@ -201,9 +198,7 @@ if do_action "Show messages during boot"; then
 fi
 
 
-########################################################################
-#### USER CONFIG #######################################################
-########################################################################
+#=== USER ACTIONS ====================================================================
 # bl-exit theme
 if do_action "Configure bl-exit classic theme"; then
 	sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
