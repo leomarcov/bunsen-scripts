@@ -247,12 +247,4 @@ if [ "$laptop" ] && do_action "Set default brightness when start openbox (edit v
 	done
 fi
 
-# ob-autostart
-if do_action "Customize openbox autostart"; then
-	echo nada
-	#brightness.sh -def &           # Set default brightness
-	#xmodmap $HOME/.Xmodmap &
-	#xbindkeys &
-
-fi
 
