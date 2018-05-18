@@ -1,10 +1,9 @@
 #!/bin/bash
 #=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
+comment_auto="#BL-POSTINSTALL"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
-current_dir="$(dirname "$(readlink -f "$0")")"
-comment_auto="#BL-POSTINSTALL"
 
 
 #=== FUNCTION ==================================================================
@@ -49,6 +48,7 @@ if [ ! "$list"] && ! cat /etc/*release | grep "CODENAME" | grep -i "$bunsen_ver"
 	read
 fi
 [ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
+current_dir="$(dirname "$(readlink -f "$0")")"
 
 #=== PARAMS ====================================================================
 while getopts ":hla:y" o; do
@@ -79,12 +79,12 @@ fi
 # Rofi laucher
 if do_action "Install rofi launcher"; then
 	apt-get install -y rofi
-	[ ! -d "/usr/share/bunsen/.skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/.skel/.config/rofi/"
-	echo '#include "/usr/share/rofi/themes/android_notification.theme"' "/usr/share/bunsen/.skel/.config/rofi/config"
+	[ ! -d "/usr/share/bunsen/skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/skel/.config/rofi/"
+	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "/usr/share/bunsen/skel/.config/rofi/config"
 	
 	for u in /home/*; do
 		[ ! -d "$u/.config/rofi/" ] && mkdir -p "$u/.config/rofi/"
-		echo '#include "/usr/share/rofi/themes/android_notification.theme"' "$u/.config/rofi/config"
+		echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$u/.config/rofi/config"
 	done
 fi
 
@@ -126,11 +126,8 @@ if do_action "Install Google Chrome and add repositories"; then
 	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 	apt-get update
-	apt-get install google-chrome-stable
-	update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
-	update-alternatives --set gnome-www-browser /usr/bin/google-chrome-stable
+	apt-get install -y google-chrome-stable
 fi
-
 
 #=== FILE ACTIONS ====================================================================
 # Scripts
