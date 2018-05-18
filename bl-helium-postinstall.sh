@@ -48,6 +48,7 @@ if [ ! "$list"] && ! cat /etc/*release | grep "CODENAME" | grep -i "$bunsen_ver"
 	read
 fi
 [ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
+dmesg | grep -i hypervisor && virtualmachine="true"
 current_dir="$(dirname "$(readlink -f "$0")")"
 
 #=== PARAMS ====================================================================
@@ -214,9 +215,13 @@ fi
 if do_action "Add tin2 themes"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc2 ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc2
 	cp -v "$current_dir"/config/tint2rc_leo /usr/share/bunsen/skel/.config/tint2/tint2rc
+	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
+		sed  -i "s/^autohide *= *.*/autohide = 1/" /usr/share/bunsen/skel/.config/tint2/tint2rc 
+		sed  -i "s/^strut_policy *= *.*/strut_policy = minimun/" /usr/share/bunsen/skel/.config/tint2/tint2rc 
+	fi
 	for u in /home/*; do
 		[ ! -f "$u/.config/tint2/tint2rc2" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc2"
-		cp -v "$current_dir"/config/tint2rc_leo "$u/.config/tint2/tint2rc"
+		cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc "$u/.config/tint2/tint2rc"
 	done
 fi
 
