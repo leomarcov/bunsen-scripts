@@ -106,7 +106,7 @@ fi
 # VirtualBox Extension Pack
 if do_action "Install Extension Pack"; then
 	t=$(mktemp -d)
-	wget -P "$t" "$ep_url"  
+	wget -P "$t" "$ep_url"  X
 	vboxmanage extpack install --replace "$t"/*extpack
 	rm -rf "$t"
 fi
@@ -142,8 +142,10 @@ fi
 
 # Wallpapers
 if do_action "Copy some cool wallpapers"; then
-	[ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ] && mkdir /usr/share/images/bunsen/wallpapers/anothers/
-	cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
+	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
+		mkdir /usr/share/images/bunsen/wallpapers/anothers/
+		cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
+	fi
 fi
 
 # Icons
@@ -213,10 +215,10 @@ fi
 # tint2 config
 if do_action "Add tin2 themes"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc2 ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc2
-	cp -v "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
+	cp -v "$current_dir"/config/tint2rc_leo /usr/share/bunsen/skel/.config/tint2/tint2rc
 	for u in /home/*; do
 		[ ! -f "$u/.config/tint2/tint2rc2" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc2"
-		cp -v "$current_dir"/config/*.tint "$u.config/tint2/"
+		cp -v "$current_dir"/config/tint2rc_leo "$u.config/tint2/tint2rc"
 	done
 fi
 
@@ -227,28 +229,18 @@ if do_action "Add some aliases"; then
 	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}/
 fi
 
+# ob-rc
+if do_action "Customize openbox shortcuts and mouse bindings"; then
+	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
+	ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/rc.xml {}/.config/openbox/
+fi
 
-exit 
-# Config shortcut in Openbox:
-vi $HOME/.config/openbox/rc.xml
-  <keyboard>
-    ...
-    <keybind key="C-Tab">
-      <action name="Execute">
-        <command>rofi -show drun</command>
-      </action> 
-    </keybind>
-    <keybind key="A-Tab">
-      <action name="Execute">
-        <command>rofi -show window</command>
-      </action> 
-    </keybind>    
-    ...
+# ob-autostart
+if do_action "Customize openbox autostart"; then
+	echo nada
+	#brightness.sh -def &           # Set default brightness
+	#xmodmap $HOME/.Xmodmap &
+	#xbindkeys &
 
-# OPENBOX AUTOSTART
-vi $HOME/.config/openbox/autostart
-brightness.sh -def &           # Set default brightness
-xmodmap $HOME/.Xmodmap &
-xbindkeys &
-syndaemon -i 1 -d &           # Disable touchpad when using keyboard
+fi
 
