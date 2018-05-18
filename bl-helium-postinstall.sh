@@ -208,8 +208,12 @@ fi
 
 # tint2 config
 if do_action "Add tin2 themes"; then
-	cp -v"$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
-	ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/*.tint {}.config/tint2/
+	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc2 ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc2
+	cp -v "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
+	for i in /home/*; do
+		[ ! -f "$i/.config/tint2/tint2rc2" ] && cp -v "$i/.config/tint2/tint2rc" "$i/.config/tint2/tint2rc2"
+		cp -v "$current_dir"/config/*.tint "$i.config/tint2/"
+	done
 fi
 
 # aliases
