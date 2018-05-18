@@ -256,6 +256,7 @@ if [ "$laptop" ] && do_action "Set default brightness when start openbox (edit v
 	done
 fi
 
+# reboot
 if [ ! "$list" ] && [ ! "$actions" ] && do_action "Reboot" ; then 
 	reboot
 fi
