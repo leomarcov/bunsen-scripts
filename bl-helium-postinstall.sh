@@ -213,13 +213,13 @@ fi
 
 # tint2 config
 if do_action "Add tin2 themes"; then
-	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc2 ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc2
+	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
 	cp -v "$current_dir"/config/tint2rc_leo /usr/share/bunsen/skel/.config/tint2/tint2rc
 	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
 		sed -i '/LAPTOP/s/^#//g' /usr/share/bunsen/skel/.config/tint2/tint2rc	# uncomment LAPTOP lines
 	fi
 	for u in /home/*; do
-		[ ! -f "$u/.config/tint2/tint2rc2" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc2"
+		[ ! -f "$u/.config/tint2/tint2rc_bunsen" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc_bunsen"
 		cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc "$u/.config/tint2/tint2rc"
 	done
 fi
