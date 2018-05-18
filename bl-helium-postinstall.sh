@@ -42,7 +42,7 @@ function do_action() {
 
 #=== CHECKS ===================================================================
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
-if [ ! "$list"] && ! cat /etc/*release | grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
+if [ ! "$list"] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
 	echo "Seems you are not running BunsenLabs $bunser_ver"
 	echo "Some actions may fail. Cross your fingers and press enter..."
 	read
@@ -87,7 +87,7 @@ if do_action "Install rofi launcher"; then
 	for u in /home/*; do
 		[ ! -d "$u/.config/rofi/" ] && mkdir -p "$u/.config/rofi/"
 		echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$u/.config/rofi/config"
-		sed -i '/^[[:blank:]]*gmrun[[:blank:]]*$/s/gmrun/rofi -show run/' "$u/.config/openbox/menu.xml
+		sed -i '/^[[:blank:]]*gmrun[[:blank:]]*$/s/gmrun/rofi -show run/' "$u/.config/openbox/menu.xml"
 	done
 fi
 
