@@ -219,6 +219,9 @@ if do_action "Add tin2 themes"; then
 		sed  -i "s/^autohide *= *.*/autohide = 1/" /usr/share/bunsen/skel/.config/tint2/tint2rc 
 		sed  -i "s/^strut_policy *= *.*/strut_policy = minimun/" /usr/share/bunsen/skel/.config/tint2/tint2rc 
 	fi
+	if [ "$laptop" ]; then
+		sed  -i "s/^panel_items *= *.*/panel_items = LTEBSC/" /usr/share/bunsen/skel/.config/tint2/tint2rc 
+	fi
 	for u in /home/*; do
 		[ ! -f "$u/.config/tint2/tint2rc2" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc2"
 		cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc "$u/.config/tint2/tint2rc"
