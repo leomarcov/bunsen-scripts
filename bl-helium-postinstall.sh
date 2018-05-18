@@ -79,9 +79,13 @@ fi
 # Rofi laucher
 if do_action "Install rofi launcher"; then
 	apt-get install -y rofi
-	cat "$current_dir"/config/rofi.conf >> /usr/share/bunsen/skel/.Xresources
-	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.Xresources {}/
-	xrdb -load /usr/share/bunsen/skel/.Xresources  
+	[ ! -d "/usr/share/bunsen/.skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/.skel/.config/rofi/"
+	echo '#include "/usr/share/rofi/themes/android_notification.theme"' "/usr/share/bunsen/.skel/.config/rofi/config"
+	
+	for u in /home/*; do
+		[ ! -d "$u/.config/rofi/" ] && mkdir -p "$u/.config/rofi/"
+		echo '#include "/usr/share/rofi/themes/android_notification.theme"' "$u/.config/rofi/config"
+	done
 fi
 
 # PlayOnLinux
@@ -210,9 +214,9 @@ fi
 if do_action "Add tin2 themes"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc2 ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc2
 	cp -v "$current_dir"/config/*.tint /usr/share/bunsen/skel/.config/tint2/
-	for i in /home/*; do
-		[ ! -f "$i/.config/tint2/tint2rc2" ] && cp -v "$i/.config/tint2/tint2rc" "$i/.config/tint2/tint2rc2"
-		cp -v "$current_dir"/config/*.tint "$i.config/tint2/"
+	for u in /home/*; do
+		[ ! -f "$u/.config/tint2/tint2rc2" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc2"
+		cp -v "$current_dir"/config/*.tint "$u.config/tint2/"
 	done
 fi
 
