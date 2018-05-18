@@ -197,12 +197,7 @@
       <action name="Execute">					<!-- #BL-POSTINSTALL-rofi -->
         <command>rofi -show drun</command>		<!-- #BL-POSTINSTALL-rofi -->
       </action>									<!-- #BL-POSTINSTALL-rofi -->
-    </keybind>									<!-- #BL-POSTINSTALL-rofi -->
-    <keybind key="A-Tab">						<!-- #BL-POSTINSTALL-rofi -->
-      <action name="Execute">					<!-- #BL-POSTINSTALL-rofi -->
-        <command>rofi -show window</command>	<!-- #BL-POSTINSTALL-rofi -->
-      </action>									<!-- #BL-POSTINSTALL-rofi -->
-    </keybind>									<!-- #BL-POSTINSTALL-rofi -->
+    </keybind>									<!-- #BL-POSTINSTALL-rofi -->									<!-- #BL-POSTINSTALL-rofi -->
 
     <keybind key="C-KP_0">						<!-- #BL-POSTINSTALL-autosnap -->
       <action name="ToggleAlwaysOnTop"/>		<!-- #BL-POSTINSTALL-autosnap -->
