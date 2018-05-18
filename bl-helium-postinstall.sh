@@ -81,11 +81,13 @@ fi
 if do_action "Install rofi launcher"; then
 	apt-get install -y rofi
 	[ ! -d "/usr/share/bunsen/skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/skel/.config/rofi/"
-	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "/usr/share/bunsen/skel/.config/rofi/config"
-	
+	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "/usr/share/bunsen/skel/.config/rofi/config"	
+	sed -i '/^[[:blank:]]*gmrun[[:blank:]]*$/s/gmrun/rofi -show run/' /usr/share/bunsen/skel/.config/openbox/menu.xml
+
 	for u in /home/*; do
 		[ ! -d "$u/.config/rofi/" ] && mkdir -p "$u/.config/rofi/"
 		echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$u/.config/rofi/config"
+		sed -i '/^[[:blank:]]*gmrun[[:blank:]]*$/s/gmrun/rofi -show run/' "$u/.config/openbox/menu.xml
 	done
 fi
 
@@ -228,13 +230,21 @@ fi
 if do_action "Add some aliases"; then
 	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
 	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
-	ls -d /home/* | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}/
+	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
 fi
 
 # ob-rc
 if do_action "Customize openbox shortcuts and mouse bindings"; then
 	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
-	ls -d /home/* | xargs -I {} cp -v "$current_dir"/config/rc.xml {}/.config/openbox/
+	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/config/rc.xml {}
+fi
+
+# default brightness
+if [ "$laptop" ] && do_action "Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)"; then
+	echo "brightness.sh -def &" >> /usr/share/bunsen/skel/.config/openbox/autostart
+	for f in /home/*/.config/openbox/autostart; do
+		echo "brightness.sh -def &" >> "$f"
+	done
 fi
 
 # ob-autostart
