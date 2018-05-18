@@ -1,6 +1,7 @@
 #!/bin/bash
 #=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
+icontheme_default="Numix-Light"
 comment_auto="#BL-POSTINSTALL"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
@@ -160,8 +161,8 @@ if do_action "Copy some cool icon packs"; then
 	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 	
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name=Numix/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
-	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name=Numix/' {}
+	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
+	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' {}
 fi
 
 # Fonts
