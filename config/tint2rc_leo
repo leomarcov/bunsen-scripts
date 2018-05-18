@@ -51,18 +51,16 @@ border_color =
 
 #-------------------------------------
 # Panel
-#autohide = 1
-#strut_policy = minimun
-#autohide = 0
-#strut_policy = follow_size
 autohide = 0
 strut_policy = follow_size
+#autohide = 1					# LAPTOP-HIDE
+#strut_policy = minimun			# LAPTOP-HIDE
 
 panel_monitor = 1
 panel_position = bottom center horizontal
 panel_size = 100% 32
 panel_items = LTESC
-#panel_items = LTEBSC
+#panel_items = LTEBSC			# LAPTOP
 panel_margin = 0 0
 panel_padding = 0 0 0
 panel_dock = 0
