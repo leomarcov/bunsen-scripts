@@ -104,6 +104,8 @@ if do_action "Install VirtualBox and add repositories"; then
 	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 	apt-get update
 	apt-get install -y linux-headers-$(uname -r) "$vb_package"
+	
+	#echo '<item label="VirtualBox"><action name="Execute"><command>virtualbox</command></action></item>'
 fi
 
 # VirtualBox Extension Pack
