@@ -80,10 +80,10 @@ fi
 # Rofi laucher
 if do_action "Install rofi launcher"; then
 	apt-get install -y rofi
+	# Set default theme (android_notification) and set rofi as Run program default por skel and current users:
 	[ ! -d "/usr/share/bunsen/skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/skel/.config/rofi/"
 	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "/usr/share/bunsen/skel/.config/rofi/config"	
 	sed -i '/^[[:blank:]]*gmrun[[:blank:]]*$/s/gmrun/rofi -show run/' /usr/share/bunsen/skel/.config/openbox/menu.xml
-
 	for u in /home/*; do
 		[ ! -d "$u/.config/rofi/" ] && mkdir -p "$u/.config/rofi/"
 		echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$u/.config/rofi/config"
@@ -105,6 +105,7 @@ if do_action "Install VirtualBox and add repositories"; then
 	apt-get update
 	apt-get install -y linux-headers-$(uname -r) "$vb_package"
 	
+	# Add VirtualBox in OpenBox menu:
 	#echo '<item label="VirtualBox"><action name="Execute"><command>virtualbox</command></action></item>'
 fi
 
