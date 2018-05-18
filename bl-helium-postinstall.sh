@@ -152,6 +152,9 @@ fi
 if do_action "Copy some cool icon packs"; then
 	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
+	
+	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name=Numix/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
+	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name=Numix/' {}
 fi
 
 # Fonts
