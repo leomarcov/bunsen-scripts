@@ -168,7 +168,7 @@ fi
 if do_action "Disable graphical display manager"; then
 	systemctl set-default multi-user.target
 	sed -i "/#$comment_auto/Id" /etc/profile
-	echo "[ $(tty) = \"/dev/tty1\" ] && startx && exit   $comment_auto" >> /etc/profile
+	echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_auto" >> /etc/profile
 fi
 
 # Kill X
