@@ -1,6 +1,10 @@
+#---------------------------------------------
+# TINT2 CONFIG FILE
+#---------------------------------------------
+# Autor: Leonardo Marco
+
+
 # Backgrounds
-
-
 # ID 1 - transparent
 rounded = 0
 border_width = 0
