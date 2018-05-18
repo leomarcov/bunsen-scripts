@@ -134,14 +134,14 @@ fi
 if do_action "Copy some cool scripts"; then
 	chmod +x "$current_dir"/bin/*
 	cp -v "$current_dir"/bin/* /usr/bin/
-	update-notification.sh -I      # Install update-notification
+	update-notification.sh -I  &>/dev/null    # Install update-notification
 fi
 
 # Wallpapers
 if do_action "Copy some cool wallpapers"; then
 	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
 		mkdir /usr/share/images/bunsen/wallpapers/anothers/
-		cp "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
+		cp -v "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
 	fi
 fi
 
@@ -153,7 +153,8 @@ fi
 
 # Fonts
 if do_action "Copy some cool fonts"; then
-	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/
+	[ ! -d /usr/share/fonts/extra ] && mkdir /usr/share/fonts/extra/
+	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/extra/
 fi
 
 # Themes
@@ -167,7 +168,7 @@ fi
 if do_action "Disable graphical display manager"; then
 	systemctl set-default multi-user.target
 	sed -i "/#$comment_auto/Id" /etc/profile
-	echo "[ $(tty) = \"/dev/tty1\" ] && startx; exit   $comment_auto" >> /etc/profile
+	echo "[ $(tty) = \"/dev/tty1\" ] && startx && exit   $comment_auto" >> /etc/profile
 fi
 
 # Kill X
@@ -215,7 +216,7 @@ if do_action "Add tin2 themes"; then
 	cp -v "$current_dir"/config/tint2rc_leo /usr/share/bunsen/skel/.config/tint2/tint2rc
 	for u in /home/*; do
 		[ ! -f "$u/.config/tint2/tint2rc2" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc2"
-		cp -v "$current_dir"/config/tint2rc_leo "$u.config/tint2/tint2rc"
+		cp -v "$current_dir"/config/tint2rc_leo "$u/.config/tint2/tint2rc"
 	done
 fi
 
