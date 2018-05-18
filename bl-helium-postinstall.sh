@@ -139,10 +139,14 @@ fi
 if do_action "Copy some cool scripts"; then
 	chmod +x "$current_dir"/bin/*
 	cp -v "$current_dir"/bin/* /usr/bin/
+fi
+
+# update-notification
+if do_action "Install script for notify weekly for updates"; then
 	update-notification.sh -I  &>/dev/null    # Install update-notification
 fi
 
-# Wallpapers
+# wallpapers
 if do_action "Copy some cool wallpapers"; then
 	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
 		mkdir /usr/share/images/bunsen/wallpapers/anothers/
