@@ -48,7 +48,7 @@ if [ ! "$list"] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$
 	read
 fi
 [ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
-dmesg | grep -i hypervisor && virtualmachine="true"
+dmesg | grep -i hypervisor &>/dev/null && virtualmachine="true"
 current_dir="$(dirname "$(readlink -f "$0")")"
 
 #=== PARAMS ====================================================================
