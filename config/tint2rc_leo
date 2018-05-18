@@ -53,8 +53,8 @@ border_color =
 # Panel
 autohide = 0
 strut_policy = follow_size
-#autohide = 1					# LAPTOP-HIDE
-#strut_policy = minimun			# LAPTOP-HIDE
+#autohide = 1					# LAPTOP
+#strut_policy = minimun			# LAPTOP
 
 panel_monitor = 1
 panel_position = bottom center horizontal
