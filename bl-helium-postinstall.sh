@@ -107,7 +107,7 @@ fi
 if do_action "Install Extension Pack"; then
 	t=$(mktemp -d)
 	wget -P "$t" "$ep_url"  X
-	vboxmanage extpack install --replace "$t"/*extpack
+	yes | vboxmanage extpack install --replace "$t"/*extpack 
 	rm -rf "$t"
 fi
 
