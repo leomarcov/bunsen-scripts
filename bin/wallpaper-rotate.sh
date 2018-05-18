@@ -1,4 +1,13 @@
 #!/bin/bash
+#!/bin/bash
+#===================================================================================
+# AUTOSNAP
+# FILE: wallpaper-rotate.sh
+# DESCRIPTION: rotate wallpeper daily
+# AUTHOR: Leonardo Marco
+# VERSION: 1.0
+#===================================================================================
+
 #Rota el enlace /usr/share/backgrounds/default a otro fichero de fondo de pantalla
 
 d=~/Pictures/wallpapers/
