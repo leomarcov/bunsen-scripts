@@ -1,7 +1,11 @@
 #!/bin/bash
 #=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
-icontheme_default="Numix"
+icons_default="Numix"
+tint2_default="leo.tint"
+gtk_default=""
+openbox_default="GoHomeV2-leo"
+wallpaper_default="/usr/share/images/bunsen/wallpapers/anothers/bl-colorful-aptenody.png"
 comment_auto="#BL-POSTINSTALL"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
@@ -149,11 +153,13 @@ if do_action "Install script for notify weekly for updates"; then
 fi
 
 # wallpapers
-if do_action "Copy some cool wallpapers"; then
+if do_action "Copy some cool wallpapers and set default wallpaper"; then
 	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
 		mkdir /usr/share/images/bunsen/wallpapers/anothers/
 		cp -v "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
 	fi
+	sed -i 's/^file *= *.*/file='"$wallpaper_default"'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
+	ls /home/*/.config/nitrogen/bg-saved.cfg | xargs -I {} sed -i 's/^file *= *.*/file='"$wallpaper_default"'/' {}
 fi
 
 # Icons
@@ -161,10 +167,10 @@ if do_action "Copy some cool icon packs"; then
 	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 	
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icontheme_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
-	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' {}
-	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icontheme_default"'"/' {}	
+	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icons_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
+	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icons_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
+	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icons_default"'/' {}
+	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icons_default"'"/' {}	
 fi
 
 # Fonts
@@ -174,8 +180,9 @@ if do_action "Copy some cool fonts"; then
 fi
 
 # Themes
-if do_action "Copy some cool themes"; then
+if do_action "Copy some cool themes and set default GTK and Openbox themes"; then
 	unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
+	
 fi
 
 
