@@ -165,7 +165,6 @@ fi
 if do_action "Copy some cool icon packs"; then
 	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
-	
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icons_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icons_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
 	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icons_default"'/' {}
@@ -178,14 +177,21 @@ if do_action "Copy some cool fonts"; then
 	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/extra/
 fi
 
-# Themes
-if do_action "Copy Openbox themes and configuration"; then
+# Openbox themes
+if do_action "Copy Openbox themes and set default theme and configuration"; then
 	unzip "$current_dir"/files/openbox_themes.zip -d /usr/share/themes/
-	
 	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
 	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/config/rc.xml {}	
 fi
 
+# GTK themes
+if do_action "Copy GTP themes set default theme"; then
+	unzip "$current_dir"/files/gtk_themes.zip -d /usr/share/themes/
+	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
+	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
+	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' {}
+	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' {}		
+fi
 
 #=== SYSTEM CONFIG ACTIONS ====================================================================
 ## Disable DM
