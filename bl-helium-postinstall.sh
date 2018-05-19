@@ -2,7 +2,6 @@
 #=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
 icons_default="Numix"
-tint2_default="leo.tint"
 gtk_default=""
 openbox_default="GoHomeV2-leo"
 wallpaper_default="/usr/share/images/bunsen/wallpapers/anothers/bl-colorful-aptenody.png"
@@ -180,8 +179,8 @@ if do_action "Copy some cool fonts"; then
 fi
 
 # Themes
-if do_action "Copy some cool themes and set default GTK and Openbox themes"; then
-	unzip "$current_dir"/files/themes.zip -d /usr/share/themes/
+if do_action "Copy Openbox themes and configuration"; then
+	unzip "$current_dir"/files/openbox_themes.zip -d /usr/share/themes/
 	
 fi
 
@@ -236,13 +235,13 @@ fi
 # tint2 config
 if do_action "Add tin2 themes"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
-	cp -v "$current_dir"/config/tint2rc_leo /usr/share/bunsen/skel/.config/tint2/tint2rc
+	cp -v "$current_dir"/config/*tint* /usr/share/bunsen/skel/.config/tint2/
 	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
 		sed -i '/LAPTOP/s/^#//g' /usr/share/bunsen/skel/.config/tint2/tint2rc	# uncomment LAPTOP lines
 	fi
 	for u in /home/*; do
 		[ ! -f "$u/.config/tint2/tint2rc_bunsen" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc_bunsen"
-		cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc "$u/.config/tint2/tint2rc"
+		cp -v "$current_dir"/config/*tint* "$u/.config/tint2/"
 	done
 fi
 
