@@ -182,6 +182,8 @@ fi
 if do_action "Copy Openbox themes and configuration"; then
 	unzip "$current_dir"/files/openbox_themes.zip -d /usr/share/themes/
 	
+	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
+	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/config/rc.xml {}	
 fi
 
 
@@ -252,11 +254,6 @@ if do_action "Add some aliases"; then
 	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
 fi
 
-# ob-rc
-if do_action "Customize openbox shortcuts and mouse bindings"; then
-	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
-	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/config/rc.xml {}
-fi
 
 # default brightness
 if [ "$laptop" ] && do_action "Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)"; then
