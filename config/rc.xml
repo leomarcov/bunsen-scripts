@@ -46,8 +46,8 @@
   </placement>
 
   <theme>
-    <name>Beam</name>
-    <titleLayout>NDSLIMC</titleLayout>
+    <name>GoHomeV2-leo</name>
+    <titleLayout>DSLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -166,8 +166,8 @@
        cases. -->
   <margins>
     <top>0</top>
-    <bottom>0</bottom>
-    <left>0</left>
+    <bottom>1</bottom>
+    <left>1</left>
     <right>0</right>
   </margins>
 
