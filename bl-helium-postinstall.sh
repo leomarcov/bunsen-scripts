@@ -162,7 +162,7 @@ if do_action "Copy some cool icon packs"; then
 	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
 	
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' /usr/share/bunsen/skel/.gtkrc-2.0
+	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icontheme_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
 	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' {}
 	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icontheme_default"'/' {}	
 fi
