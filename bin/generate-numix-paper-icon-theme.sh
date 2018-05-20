@@ -1,9 +1,9 @@
 #!/bin/bash
 
+# CHECKS
 for p in numix-icon-theme paper-icon-theme bunsen-paper-icon-theme; do
 	dpkg -l | egrep "ii *$p" &> /dev/null || { echo "Package $p needed"; exit; } 
 done 
-
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 
 # GENERATE /usr/share/icons/numix-paper dirs
@@ -23,6 +23,8 @@ read -p "GENERATE PAPER LINKS"
 for f in $(ls ../Paper/*/apps/* ../Paper/*/panel/*); do
 	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
+find . -name "terminator.*" -exec rm {} \;
+find . -name "terminal.* -exec cp "$i" $(echo $i | sed 's/terminal/terminator/g') \;
 
 echo
 read -p "GENERATE PAPER-BUNSEN LINKS" 
