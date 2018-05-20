@@ -39,6 +39,7 @@ done
 
 echo -e "\n\nGENERATING PAPER-BUNSEN LINKS..." 
 for f in $(find ../Paper-Bunsen -mindepth 2 -type f); do
+	echo $f | grep xfpm-ac-adapter.png &> /dev/null && continue
 	ln -svf "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
 
