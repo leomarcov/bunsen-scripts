@@ -34,7 +34,7 @@ for f in $(ls ../Paper/*/apps/* ../Paper/*/panel/*); do
 done
 # Change terminator icon for terminal 
 for f in $(find . -name "terminator.*"); do
-	ln -svf "$(echo "$f"  | sed 's/terminator/terminal/g')" "$f" 
+	ln -svf "$(basename $(echo "$f"  | sed 's/terminator/terminal/g'))" "$f" 
 done
 
 echo -e "\n\nGENERATING PAPER-BUNSEN LINKS..." 
