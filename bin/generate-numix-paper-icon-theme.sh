@@ -21,15 +21,17 @@ done
 echo
 read -p "GENERATE PAPER LINKS"
 for f in $(ls ../Paper/*/apps/* ../Paper/*/panel/*); do
-	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
+	ln -svf "../../$f" $(echo "$f" | sed 's/..\/Paper\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
-find . -name "terminator.*" -exec rm {} \;
-find . -name "terminal.*" -exec cp "$i" $(echo $i | sed 's/terminal/terminator/g') \;
+# Change terminator icon for terminal 
+for f in $(find . -name "terminator.*"); do
+	echo ln -svf "$f" $(echo "$f"  | sed 's/terminator/terminal/g')
+done
 
 echo
 read -p "GENERATE PAPER-BUNSEN LINKS" 
 for f in $(find ../Paper-Bunsen -type f); do
-	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
+	ln -svf "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
 
 echo
@@ -42,7 +44,7 @@ for link in $(find ../Numix/ -type l); do
 	linked_path=$(dirname $link)/$(echo $linked_name | sed 's/default/'$default_color'/g')
 	[ ! -f "$linked_path" ] && continue
 
-	ln -vs "../../$linked_path" $(echo "$link" | sed 's/..\/Numix\///g')
+	ln -vsf "../../$linked_path" $(echo "$link" | sed 's/..\/Numix\///g')
 done
 
 
