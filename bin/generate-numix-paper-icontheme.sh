@@ -14,11 +14,11 @@ for p in numix-icon-theme paper-icon-theme bunsen-paper-icon-theme; do
 done 
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 
+
 echo -e "\nGENERATING /usr/share/icons/numix-paper dirs"
 [ ! -d /usr/share/icons/Numix-Paper/ ] && mkdir -v /usr/share/icons/Numix-Paper/
 cd /usr/share/icons/Numix-Paper/
 find . ! -name "$(basename $0)" -exec rm -rf {} \; 2> /dev/null
-
 cp /usr/share/icons/Numix/index.theme /usr/share/icons/Numix-Paper/
 sed -i "s/^Name *= *.*/Name=Numix-Paper/" /usr/share/icons/Numix-Paper/index.theme
 sed -i "s/^Inherits *= *.*/Inherits=Numix/" /usr/share/icons/Numix-Paper/index.theme
