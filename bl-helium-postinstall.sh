@@ -157,8 +157,8 @@ if do_action "Copy some cool wallpapers and set default wallpaper"; then
 		mkdir -p /usr/share/images/bunsen/wallpapers/anothers/
 		cp -v "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
 	fi
-	sed -i 's/^file *= *.*/file='"$wallpaper_default"'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
-	ls /home/*/.config/nitrogen/bg-saved.cfg | xargs -I {} sed -i 's/^file *= *.*/file='"$wallpaper_default"'/' {}
+	sed -i 's/^file *= *.*/file='$(echo "$wallpaper_default" | sed 's/\//\\\//g' )'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
+	ls /home/*/.config/nitrogen/bg-saved.cfg | xargs -I {} sed -i 's/^file *= *.*/file='$(echo "$wallpaper_default" | sed 's/\//\\\//g' )'/' {}
 fi
 
 # Icons
