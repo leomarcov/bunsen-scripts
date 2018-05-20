@@ -1,5 +1,14 @@
 #!/bin/bash
 
+dpkg -l numix-icon-theme &> /dev/null || sudo apt-get install numix-icon-theme
+dpkg -l paper-icon-theme &> /dev/null || sudo apt-get install paper-icon-theme
+dpkg -l bunsen-paper-icon-theme &> /dev/null || sudo apt-get install bunsen-paper-icon-theme
+
+
+
+[ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+mkdir /usr/share/icons/Numix-Bunsen
+
 
 read -p "GENERATE PAPER-BUNSEN LINKS" 
 for f in $(find ../Paper-Bunsen -type f); do
