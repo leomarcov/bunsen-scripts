@@ -20,7 +20,7 @@ done
 
 echo
 read -p "GENERATE PAPER LINKS"
-for f in $(ls ../Paper/*/apps/*); do
+for f in $(ls ../Paper/*/apps/* ../Paper/*/panel/*); do
 	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
 
