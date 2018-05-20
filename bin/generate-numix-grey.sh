@@ -1,14 +1,24 @@
 #!/bin/bash
 
 for p in numix-icon-theme paper-icon-theme bunsen-paper-icon-theme; do
-	dpkg -l "$p" &> /dev/null || { echo "Package $p needed"; exit; } 
+	dpkg -l | egrep "ii *$p" &> /dev/null || { echo "Package $p needed"; exit; } 
 done 
 
 
 
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
-mkdir /usr/share/icons/Numix-Bunsen
+mkdir /usr/share/icons/Numix-Bunsen/
+cd /usr/share/icons/Numix-Bunsen/
+cp /usr/share/icons/Numix/index.theme /usr/share/icons/Numix-Bunsen/
+sed -i "s/^Name *= *.*/Name=Numix-Bunsen/" /usr/share/icons/Numix-Bunsen/index.theme
+sed -i "s/^Inherits *= *.*/Inherits=Numix/" /usr/share/icons/Numix-Bunsen/index.theme
+sed -i "s/^Comment *= *.*/Comment=Theme mix Numix-Paper for BunsenLabs/" /usr/share/icons/Numix-Bunsen/index.theme
 
+# GENERATE DIRS
+for d in $(find ../Numix/ -type d); do
+	[ "$d" == "../Numix" ] && continue
+	mkdir -v $(echo $d | sed 's/..\/Numix\///g' ) 
+done
 
 read -p "GENERATE PAPER-BUNSEN LINKS" 
 for f in $(find ../Paper-Bunsen -type f); do
