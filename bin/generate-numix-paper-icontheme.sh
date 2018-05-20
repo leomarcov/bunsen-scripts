@@ -42,7 +42,7 @@ for f in $(find ../Paper-Bunsen -mindepth 2 -type f); do
 	ln -svf "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
 
-echo -e "\n\nGENERATING NUMIX LINKS.."
+echo -e "\n\nGENERATING NUMIX LINKS..."
 default_color="grey"
 for link in $(find ../Numix/ -mindepth 2 -type l); do 
 	linked_name=$(basename $(readlink -f "$link"))
