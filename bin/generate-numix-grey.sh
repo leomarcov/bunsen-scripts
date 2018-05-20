@@ -20,13 +20,17 @@ for d in $(find ../Numix/ -type d); do
 	mkdir -v $(echo $d | sed 's/..\/Numix\///g' ) 
 done
 
-read -p "GENERATE PAPER-BUNSEN LINKS" 
+read -p "GENERATE ALL LINKS FROM PAPER-BUNSEN" 
 for f in $(find ../Paper-Bunsen -type f); do
 	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
 
+read -p "GENERATE PANEL LINKS FROM PAPER" 
+for f in $(ls ../Paper/*/panel/*); do
+	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
+done
 
-read -p "GENERATE PAPER LINKS"
+read -p "GENERATE APP LINKS FROM PAPER"
 for f in $(ls ../Paper/*/apps/*); do
 	ln -sv "../../$f" $(echo "$f" | sed 's/..\/Paper\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
