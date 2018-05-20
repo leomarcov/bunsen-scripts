@@ -1,6 +1,6 @@
 #!/bin/bash
 #===================================================================================
-# FILE: generate-numix-paper-icontheme.sh.sh
+# FILE: generate-numix-paper-icon-theme.sh.sh
 # DESCRIPTION: Generates new icon theme based on Numix (grey icons) and Paper
 # REQUIREMENTS: numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
 # AUTHOR: Leonardo Marco
