@@ -1,8 +1,8 @@
 #!/bin/bash
 
-dpkg -l numix-icon-theme &> /dev/null || sudo apt-get install numix-icon-theme
-dpkg -l paper-icon-theme &> /dev/null || sudo apt-get install paper-icon-theme
-dpkg -l bunsen-paper-icon-theme &> /dev/null || sudo apt-get install bunsen-paper-icon-theme
+for p in numix-icon-theme paper-icon-theme bunsen-paper-icon-theme; do
+	dpkg -l "$p" &> /dev/null || { echo "Package $p needed"; exit; } 
+done 
 
 
 
