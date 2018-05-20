@@ -154,7 +154,7 @@ fi
 # wallpapers
 if do_action "Copy some cool wallpapers and set default wallpaper"; then
 	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
-		mkdir /usr/share/images/bunsen/wallpapers/anothers/
+		mkdir -p /usr/share/images/bunsen/wallpapers/anothers/
 		cp -v "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
 	fi
 	sed -i 's/^file *= *.*/file='"$wallpaper_default"'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
