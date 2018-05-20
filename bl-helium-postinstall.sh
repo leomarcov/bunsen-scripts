@@ -162,13 +162,9 @@ if do_action "Copy some cool wallpapers and set default wallpaper"; then
 fi
 
 # Icons
-if do_action "Copy some cool icon packs"; then
-	zip -FF "$current_dir"/files/icons.zip --out "$current_dir"/files/icons-full.zip
-	unzip "$current_dir"/files/icons-full.zip -d /usr/share/icons/
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icons_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icons_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
-	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icons_default"'/' {}
-	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icons_default"'"/' {}	
+if do_action "Create icon pack based on Numix and Paper"; then
+	apt-get install numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
+	bash "$current_dir"/bin/generate-numix-paper-icon-theme.sh	
 fi
 
 # Fonts
