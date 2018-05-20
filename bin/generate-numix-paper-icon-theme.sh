@@ -30,14 +30,14 @@ done
 
 echo
 read -p "GENERATE PAPER-BUNSEN LINKS" 
-for f in $(find ../Paper-Bunsen -type f); do
+for f in $(find ../Paper-Bunsen -mindepth 2 -type f); do
 	ln -svf "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
 
 echo
 read -p "GENERATE NUMIX LINKS"
 default_color="grey"
-for link in $(find ../Numix/ -type l); do 
+for link in $(find ../Numix/ -mindepth 2 -type l); do 
 	linked_name=$(basename $(readlink -f "$link"))
 
 	echo "$linked_name" | grep "default" &> /dev/null|| continue
