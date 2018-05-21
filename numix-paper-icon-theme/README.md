@@ -2,10 +2,10 @@
 Icon theme based on Numix and Papaer themes. 
 Theme are generated completely using symbolic links to Numix and Paper folders.
 The theme contains:
-  * Theme based on Numix
-  * Folder icons: grey icons from Numix
+  * Folder icons: grey icons from Numix (instead of yellow)
   * Panel icons: panel icons from Paper
   * Apps icons: apps icons from Paper
+  * Rest of icons from Numix
   
 # Install
 Unzip numix-paper-icon-theme.zip in /usr/share/icons/ or ~./icons/
