@@ -1,5 +1,5 @@
 # Numix-Paper icon theme
-Icon theme based on Numix and Paper themes.\\ 
+Icon theme based on Numix and Paper themes.__
 Theme are generated completely using symbolic links to Numix and Paper folders.
 
 The theme contains:
