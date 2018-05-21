@@ -140,7 +140,7 @@ fi
 
 #=== FILE ACTIONS ====================================================================
 # Scripts
-if do_action "Copy some cool scripts"; then
+if do_action "INSTALL:  some cool scripts"; then
 	chmod +x "$current_dir"/bin/*
 	cp -v "$current_dir"/bin/* /usr/bin/
 fi
@@ -154,7 +154,7 @@ fi
 
 
 # wallpapers
-if do_action "Copy some cool wallpapers and set default wallpaper"; then
+if do_action "INSTALL AND SET: some cool wallpapers and set default wallpaper"; then
 	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
 		mkdir -p /usr/share/images/bunsen/wallpapers/anothers/
 		cp -v "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
