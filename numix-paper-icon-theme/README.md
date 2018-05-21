@@ -9,7 +9,7 @@ The theme contains:
   * Rest come from Numix theme.
   
 # Install
-Install packages:numix-theme, paper-theme and optionally bunsen-paper-theme.  
+Numix and Paper themes should be installed in /usr/share/icons/Numix and /usr/share/icons/Paper.    
 Unzip numix-paper-icon-theme.zip in /usr/share/icons/.   
 generate-numix-paper-icon-theme.sh can be called for regenerate links
 
