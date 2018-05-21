@@ -204,14 +204,14 @@ if do_action "Install Terminator theme"; then
 fi
 #=== SYSTEM CONFIG ACTIONS ====================================================================
 ## Disable DM
-if do_action "Disable graphical display manager"; then
+if do_action "Config disable graphical display manager"; then
 	systemctl set-default multi-user.target
 	sed -i "/#$comment_auto/Id" /etc/profile
 	echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_auto" >> /etc/profile
 fi
 
 # Kill X
-if do_action "Enable CTRL+ALT+BACKSPACE for kill X"; then
+if do_action "Config enable CTRL+ALT+BACKSPACE for kill X"; then
 	sed -i "/XKBOPTIONS/Id" /etc/default/keyboard
 	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"'>> /etc/default/keyboard
 fi
@@ -224,7 +224,7 @@ if do_action "Disable some stupid services"; then
 fi
 
 # Skip Grub menu
-if do_action "Skip Grub menu and enter Bunsen directly"; then
+if do_action "Config GRUB for skip menu and enter Bunsen directly"; then
 	for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
@@ -233,7 +233,7 @@ if do_action "Skip Grub menu and enter Bunsen directly"; then
 fi
 
 # Show boot msg
-if do_action "Show messages during boot"; then
+if do_action "Config GRUB for show messages during boot"; then
 	for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
@@ -244,7 +244,7 @@ fi
 
 #=== USER CONFIG ====================================================================
 # bl-exit theme
-if do_action "Set bl-exit classic theme"; then
+if do_action "Config bl-exit classic theme"; then
 	sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
 	sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
@@ -269,14 +269,14 @@ if do_action "Install and set tin2 theme"; then
 fi
 
 # aliases
-if do_action "Set some useful aliases"; then
+if do_action "Config some useful aliases"; then
 	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
 	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
 	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
 fi
 
 # prompt
-if do_action "Set new bash prompt"; then
+if do_action "Config new bash prompt"; then
 	cat "$current_dir"/config/bashrc >> /etc/skel/.bashrc
 	for f in $(ls /home/*/.bashrc); do
 		cat "$current_dir"/config/bashrc >> "$f"
