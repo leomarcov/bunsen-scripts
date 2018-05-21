@@ -161,7 +161,7 @@ launcher_tooltip = 1
 #-------------------------------------
 # Clock
 time1_format = %H:%M
-time1_font = Droid Sans Bold 11
+time1_font = Droid Sans 10
 #time2_format =  %d/%m/%Y
 #time2_font = Droid Sans  6
 
