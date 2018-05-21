@@ -11,3 +11,4 @@ The theme contains:
 Unzip numix-paper-icon-theme.zip in /usr/share/icons/ or ~./icons/
 generate-numix-paper-icon-theme.sh can be called for regenerate links
 
+![numix-paper-icon-theme](https://user-images.githubusercontent.com/32820131/40285519-5136b340-5c9d-11e8-9a0c-bed53042cdde.png)
