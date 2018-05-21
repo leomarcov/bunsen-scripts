@@ -2,14 +2,14 @@
 #===================================================================================
 # FILE: generate-numix-paper-icon-theme.sh.sh
 # DESCRIPTION: Generates new icon theme based on Numix (grey icons) and Paper
-# REQUIREMENTS: numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
+# REQUIREMENTS: numix-icon-theme paper-icon-theme
 # AUTHOR: Leonardo Marco
 # VERSION: 1.0
 # CREATED: 21.05.2018
 #===================================================================================
 
 # CHECKS
-for p in numix-icon-theme paper-icon-theme bunsen-paper-icon-theme; do
+for p in numix-icon-theme paper-icon-theme; do
 	dpkg -l | egrep "ii *$p" &> /dev/null || { echo "Package $p needed"; exit; } 
 done 
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
@@ -37,11 +37,13 @@ for f in $(find . -name "terminator.*"); do
 	ln -svf "$(basename $(echo "$f"  | sed 's/terminator/terminal/g'))" "$f" 
 done
 
+if [ -d /usr/share/icons/Paper-Bunsen/ ]; then
 echo -e "\n\nGENERATING PAPER-BUNSEN LINKS..." 
 for f in $(find ../Paper-Bunsen -mindepth 2 -type f); do
 	echo $f | grep xfpm-ac-adapter.png &> /dev/null && continue
 	ln -svf "../../$f" $(echo "$f" | sed 's/..\/Paper-Bunsen\///g' | sed 's/^[0-9]\+x//g') 2> /dev/null
 done
+fi
 
 echo -e "\n\nGENERATING NUMIX LINKS..."
 default_color="grey"
