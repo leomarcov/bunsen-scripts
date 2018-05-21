@@ -247,9 +247,9 @@ if do_action "Set bl-exit classic theme"; then
 fi
 
 # Icons
-if do_action "Set white color to default conky"; then
-	sed  -i 's/^ *default_color *= *.*,/default_color='\''ffffff'\'',/' /usr/share/bunsen/skel/.conkyrc
-	ls /home/*/.conkyrc | xargs -I {} sed -i 's/^ *default_color *= *.*,/default_color='\''ffffff'\'',/' {}	
+if do_action "Modifiy conky default"; then
+	cp -v "$current_dir"/config/conkyrc  /usr/share/bunsen/skel/.conkyrc
+	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/config/.conkyrc {}
 fi
 
 # tint2 config
