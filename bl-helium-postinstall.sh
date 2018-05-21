@@ -194,6 +194,11 @@ if do_action "Install Arc GTK theme"; then
 	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' {}		
 fi
 
+# Terminator theme
+if do_action "Install Terminator theme"; then
+	cp -v "$current_dir"/config/terminator.config  /usr/share/bunsen/skel/.config/terminator/config
+	ls /home/*/.config/terminator/config | xargs -I {} cp -v "$current_dir"/config/terminator.config {}
+fi
 #=== SYSTEM CONFIG ACTIONS ====================================================================
 ## Disable DM
 if do_action "Disable graphical display manager"; then
