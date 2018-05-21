@@ -232,7 +232,7 @@ if do_action "CONFIG: disable graphical display manager"; then
 fi
 
 # Kill X
-if do_action "CONFIG: enable CTRL+ALT+BACKSPACE for kill X"; then
+if do_action "CONFIG: enable CTRL+ALT+BACKSPACE for kill X server"; then
 	sed -i "/XKBOPTIONS/Id" /etc/default/keyboard
 	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"'>> /etc/default/keyboard
 fi
