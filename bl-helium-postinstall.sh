@@ -190,7 +190,7 @@ fi
 if do_action "Install Arc GTK theme"; then
 	gtk_default="Arc"
 	apt-get -y install arc-theme
-	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' \;   # Change blue (#5294e2) acent color for grey
+	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   # Change blue (#5294e2) acent color for grey
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
 	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' {}
