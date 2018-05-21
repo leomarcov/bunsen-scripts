@@ -108,7 +108,9 @@ if do_action "Install VirtualBox and add repositories"; then
 	apt-get install -y linux-headers-$(uname -r) "$vb_package"
 	
 	# Add VirtualBox in OpenBox menu:
-	#echo '<item label="VirtualBox"><action name="Execute"><command>virtualbox</command></action></item>'
+	sed -i '0,/<separator\/>/s//<separator\/> <item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item>/'   /usr/share/bunsen/skel/.config/openbox/menu.xml
+	ls /home/*/.config/openbox/menu.xml | xargs -I {} sed -i '0,/<separator\/>/s//<separator\/> <item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item>/' {}
+
 fi
 
 # VirtualBox Extension Pack
@@ -186,7 +188,7 @@ fi
 if do_action "Install Arc GTK theme"; then
 	gtk_default="Arc"
 	apt-get install arc-theme
-	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#/g' \;   # Change blue (#5294e2) acent color for grey
+	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' \;   # Change blue (#5294e2) acent color for grey
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
 	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' {}
