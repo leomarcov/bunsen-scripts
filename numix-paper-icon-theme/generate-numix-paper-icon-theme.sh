@@ -9,19 +9,19 @@
 #===================================================================================
 
 # CHECKS
-read -p "Install directory (/usr/share/icons/Numix-Paper/): " install_dir
+read -p "Install directory (/usr/share/icons/): " install_dir
 [ ! "$install_dir" ] && install_dir="/usr/share/icons/Numix-Paper"
-eval install_dir="$install_dir/"
+eval install_dir="$install_dir/Numix-Paper/"
 
 numix_dir="$(dirname "$install_dir")/Numix"
 paper_dir="$(dirname "$install_dir")/Paper"
-paper-bunsen_dir="$(dirname "$install_dir")/Paper-Bunsen"
+paperbunsen_dir="$(dirname "$install_dir")/Paper-Bunsen"
 
-if [ ! -d "numix_dir" ]; then
+if [ ! -d "$numix_dir" ]; then
 	echo "Numix icon theme sould be installed in $numix_dir, but not found"
 	exit 1
 fi
-if [ ! -d "paper_dir" ]; then
+if [ ! -d "$paper_dir" ]; then
 	echo "Paper icon theme sould be installed in $paper_dir, but not found"
 	read -p "Continue using only Numix icons? (Y/n) " q
 	[ "${q,,}" = "n" ] && exit 0
@@ -30,7 +30,8 @@ fi
 
 echo -e "\nGENERATING $install_dir dirs"
 [ ! -d "$install_dir" ] && mkdir -v "$install_dir"
-[ ! -d /"$install_dir" ] && echo "Can't create $install_dir directory" && exit 1
+[ ! -w /"$install_dir" ] && echo "Can't create $install_dir directory" && exit 1
+cp "$(readlink -f "$0")" "$install_dir"
 
 cd "$install_dir"
 find . ! -name "$(basename $0)" -exec rm -rf {} \; 2> /dev/null  # Delete all unless this script
@@ -54,7 +55,7 @@ if [ -d "$paper_dir" ]; then
 	done
 fi
 
-if [ -d "$paper-bunsen_dir" ]; then
+if [ -d "$paperbunsen_dir" ]; then
 	echo -e "\n\nGENERATING PAPER-BUNSEN LINKS..." 
 	for f in $(find ../Paper-Bunsen -mindepth 2 -type f); do
 		echo $f | grep xfpm-ac-adapter.png &> /dev/null && continue
@@ -72,6 +73,3 @@ for link in $(find ../Numix/ -mindepth 2 -type l); do
 
 	ln -vsf "../../$linked_path" $(echo "$link" | sed 's/..\/Numix\///g')
 done
-
-
-
