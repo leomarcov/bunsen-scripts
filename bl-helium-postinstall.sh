@@ -140,7 +140,7 @@ fi
 
 #=== FILE ACTIONS ====================================================================
 # Scripts
-if do_action "INSTALL:  some cool scripts"; then
+if do_action "INSTALL: some cool scripts"; then
 	chmod +x "$current_dir"/bin/*
 	cp -v "$current_dir"/bin/* /usr/bin/
 fi
