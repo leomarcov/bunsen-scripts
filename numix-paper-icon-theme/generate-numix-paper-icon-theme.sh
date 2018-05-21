@@ -28,19 +28,19 @@ if [ ! -d "paper_dir" ]; then
 fi
 
 
-echo -e "\nGENERATING /usr/share/icons/numix-paper dirs"
+echo -e "\nGENERATING $install_dir dirs"
 [ ! -d "$install_dir" ] && mkdir -v "$install_dir"
-[ ! -d /"$install_dir" ] && echo "Cant create $install_dir directory" && exit 1
+[ ! -d /"$install_dir" ] && echo "Can't create $install_dir directory" && exit 1
 
 cd "$install_dir"
-find . ! -name "$(basename $0)" -exec rm -rf {} \; 2> /dev/null
+find . ! -name "$(basename $0)" -exec rm -rf {} \; 2> /dev/null  # Delete all unless this script
 cp "$numix_dir/index.theme" "$install_dir"
 sed -i "s/^Name *= *.*/Name=Numix-Paper/" "$install_dir/index.theme"
 sed -i "s/^Inherits *= *.*/Inherits=Numix/" "$install_dir/index.theme"
 sed -i "s/^Comment *= *.*/Comment=Theme mix Numix-Paper for BunsenLabs/" "$install_dir/index.theme"
 for d in $(find ../Numix/ -type d); do
 	[ "$d" == "../Numix" ] && continue
-	mkdir -v $(echo $d | sed 's/..\/Numix\///g' ) 
+	mkdir -v $(echo "$d" | sed 's/..\/Numix\///g' ) 
 done
 
 if [ -d "$paper_dir" ]; then
