@@ -74,13 +74,13 @@ done
 
 #=== PACKAGE ACTIONS ====================================================================
 # Mix packages
-if do_action "Install some useful packages"; then
+if do_action "INSTALL: some useful packages"; then
 	apt-get install -y vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
 	apt-get install -y haveged		# Avoid delay first login in Helium
 fi
 
 # Rofi laucher
-if do_action "Install rofi launcher"; then
+if do_action "INSTALL AND CONFIG: rofi launcher"; then
 	apt-get install -y rofi
 	# Set default theme (android_notification) and set rofi as Run program default por skel and current users:
 	[ ! -d "/usr/share/bunsen/skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/skel/.config/rofi/"
@@ -94,13 +94,13 @@ if do_action "Install rofi launcher"; then
 fi
 
 # PlayOnLinux
-if do_action "Install PlayOnLinux"; then
+if do_action "INSTALL: PlayOnLinux"; then
 	apt-get install -y winbind
 	apt-get install -y playonlinux
 fi
 
 # VirtualBox
-if do_action "Install VirtualBox and add repositories"; then
+if do_action "INSTALL AND ADD REPOSITORIES: VirtualBox"; then
 	echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
 	wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
@@ -113,7 +113,7 @@ if do_action "Install VirtualBox and add repositories"; then
 fi
 
 # VirtualBox Extension Pack
-if do_action "Install Extension Pack"; then
+if do_action "INSTALL: Extension Pack"; then
 	t=$(mktemp -d)
 	wget -P "$t" "$ep_url"  X
 	yes | vboxmanage extpack install --replace "$t"/*extpack 
@@ -121,7 +121,7 @@ if do_action "Install Extension Pack"; then
 fi
 
 # Sublime Text 3
-if do_action "Install Sublime-Text 3 and add repositories"; then
+if do_action "INSTALL AND ADD REPOSITORIES: Sublime-Text 3"; then
 	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 	apt-get update
@@ -131,7 +131,7 @@ if do_action "Install Sublime-Text 3 and add repositories"; then
 fi
 
 # Google Chrome
-if do_action "Install Google Chrome and add repositories"; then
+if do_action "INSTALL AND ADD REPOSITORIES: Google Chrome"; then
 	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 	apt-get update
@@ -146,7 +146,7 @@ if do_action "Copy some cool scripts"; then
 fi
 
 # update-notification
-if do_action "Install script update-notification.sh for notify weekly for updates"; then
+if do_action "INSTALL: script update-notification.sh for notify weekly for updates"; then
 	cp -v "$current_dir"/bin/update-notification.sh /usr/bin/
 	update-notification.sh -I  &>/dev/null    # Install update-notification
 fi
@@ -164,7 +164,7 @@ if do_action "Copy some cool wallpapers and set default wallpaper"; then
 fi
 
 # Icons
-if do_action "Install Numix-Paper icon theme"; then
+if do_action "INSTALL AND SET: Numix-Paper icon theme"; then
 	icon_default="Numix-Paper"
 	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='$icon_default'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
@@ -174,20 +174,20 @@ if do_action "Install Numix-Paper icon theme"; then
 fi
 
 # Fonts
-if do_action "Copy some cool fonts"; then
+if do_action "INSTALL AND SET: some cool fonts"; then
 	[ ! -d /usr/share/fonts/extra ] && mkdir /usr/share/fonts/extra/
 	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/extra/
 fi
 
 # Openbox themes
-if do_action "Copy Openbox themes and set default theme and configuration"; then
+if do_action "INSTALL AND SET: Openbox themeS"; then
 	unzip "$current_dir"/files/openbox_themes.zip -d /usr/share/themes/
 	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
 	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/config/rc.xml {}	
 fi
 
 # GTK themes
-if do_action "Install Arc GTK theme"; then
+if do_action "INSTALL AND SET: Arc GTK theme"; then
 	gtk_default="Arc"
 	apt-get -y install arc-theme
 	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   # Change blue (#5294e2) acent color for grey
@@ -198,33 +198,33 @@ if do_action "Install Arc GTK theme"; then
 fi
 
 # Terminator theme
-if do_action "Install Terminator theme"; then
+if do_action "INSTALL AND SET: Terminator theme"; then
 	cp -v "$current_dir"/config/terminator.config  /usr/share/bunsen/skel/.config/terminator/config
 	ls /home/*/.config/terminator/config | xargs -I {} cp -v "$current_dir"/config/terminator.config {}
 fi
 #=== SYSTEM CONFIG ACTIONS ====================================================================
 ## Disable DM
-if do_action "Config disable graphical display manager"; then
+if do_action "CONFIG: disable graphical display manager"; then
 	systemctl set-default multi-user.target
 	sed -i "/#$comment_auto/Id" /etc/profile
 	echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_auto" >> /etc/profile
 fi
 
 # Kill X
-if do_action "Config enable CTRL+ALT+BACKSPACE for kill X"; then
+if do_action "CONFIG: enable CTRL+ALT+BACKSPACE for kill X"; then
 	sed -i "/XKBOPTIONS/Id" /etc/default/keyboard
 	echo 'XKBOPTIONS="terminate:ctrl_alt_bksp"'>> /etc/default/keyboard
 fi
 
 # Disable services
-if do_action "Disable some stupid services"; then
+if do_action "CONFIG: disable some stupid services"; then
 	systemctl disable NetworkManager-wait-online.service
 	systemctl disable ModemManager.service
 	systemctl disable pppd-dns.service
 fi
 
 # Skip Grub menu
-if do_action "Config GRUB for skip menu and enter Bunsen directly"; then
+if do_action "CONFIG: skip GRUB menu and enter Bunsen directly"; then
 	for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
@@ -233,7 +233,7 @@ if do_action "Config GRUB for skip menu and enter Bunsen directly"; then
 fi
 
 # Show boot msg
-if do_action "Config GRUB for show messages during boot"; then
+if do_action "CONIFG: show messages during boot"; then
 	for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
@@ -244,19 +244,19 @@ fi
 
 #=== USER CONFIG ====================================================================
 # bl-exit theme
-if do_action "Config bl-exit classic theme"; then
+if do_action "CONFIG: bl-exit classic theme"; then
 	sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
 	sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
 
 # Icons
-if do_action "Modifiy conky default"; then
+if do_action "INSTALL AND SET: new conky default"; then
 	cp -v "$current_dir"/config/conkyrc  /usr/share/bunsen/skel/.conkyrc
 	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/config/.conkyrc {}
 fi
 
 # tint2 config
-if do_action "Install and set tin2 theme"; then
+if do_action "INSTALL AND SET: tin2 theme"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
 	cp -v "$current_dir"/config/*tint* /usr/share/bunsen/skel/.config/tint2/
 	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
@@ -269,14 +269,14 @@ if do_action "Install and set tin2 theme"; then
 fi
 
 # aliases
-if do_action "Config some useful aliases"; then
+if do_action "CONFIG: some useful aliases"; then
 	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
 	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
 	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
 fi
 
 # prompt
-if do_action "Config new bash prompt"; then
+if do_action "CONFIG: new bash prompt"; then
 	cat "$current_dir"/config/bashrc >> /etc/skel/.bashrc
 	for f in $(ls /home/*/.bashrc); do
 		cat "$current_dir"/config/bashrc >> "$f"
