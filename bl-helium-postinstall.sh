@@ -275,6 +275,13 @@ if do_action "Set some useful aliases"; then
 	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
 fi
 
+# prompt
+if do_action "Set new bash prompt"; then
+	cat "$current_dir"/config/bashrc >> /etc/skel/.bashrc
+	for f in $(ls /home/*/.bashrc); do
+		cat "$current_dir"/config/bashrc >> "$f"
+	done
+fi
 
 # default brightness
 if [ "$laptop" ] && do_action "Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)"; then
