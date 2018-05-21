@@ -9,9 +9,12 @@
 #===================================================================================
 
 # CHECKS
-for p in numix-icon-theme paper-icon-theme; do
-	dpkg -l | egrep "ii *$p" &> /dev/null || { echo "Package $p needed"; exit; } 
-done 
+for t in Numix Paper; do
+if [ ! -d /usr/share/icons/$t ]; then
+	echo "$t icon theme not fund in /usr/share/icons/$t"
+	exit 1
+fi
+done
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 
 
