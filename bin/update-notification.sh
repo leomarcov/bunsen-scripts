@@ -66,7 +66,7 @@ function interactive_upgrade() {
 # DESCRIPTION: shot text for display in systray
 #===============================================================================
 function tint2_executor_msg {
-	[ -r "$updates_file" ] && echo "↻"$(wc "$updates_file" -l | cut -f 1 -d " ")
+	[ -r "$updates_file" ] && echo $(wc "$updates_file" -l | cut -f 1 -d " ")" UPDATES //"
 	exit 0
 }
 
