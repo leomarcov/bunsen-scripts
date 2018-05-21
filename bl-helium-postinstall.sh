@@ -99,6 +99,24 @@ if do_action "INSTALL: PlayOnLinux"; then
 	apt-get install -y playonlinux
 fi
 
+# Sublime Text 3
+if do_action "INSTALL AND ADD REPOSITORIES: Sublime-Text 3"; then
+	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+	apt-get update
+	apt-get install sublime-text
+	update-alternatives --install /usr/bin/bl-text-editor bl-text-editor /usr/bin/subl 90
+	update-alternatives --set bl-text-editor /usr/bin/subl
+fi
+
+# Google Chrome
+if do_action "INSTALL AND ADD REPOSITORIES: Google Chrome"; then
+	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+	apt-get update
+	apt-get install -y google-chrome-stable
+fi
+
 # VirtualBox
 if do_action "INSTALL AND ADD REPOSITORIES: VirtualBox"; then
 	echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
@@ -118,24 +136,6 @@ if do_action "INSTALL: Extension Pack"; then
 	wget -P "$t" "$ep_url"  X
 	yes | vboxmanage extpack install --replace "$t"/*extpack 
 	rm -rf "$t"
-fi
-
-# Sublime Text 3
-if do_action "INSTALL AND ADD REPOSITORIES: Sublime-Text 3"; then
-	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-	apt-get update
-	apt-get install sublime-text
-	update-alternatives --install /usr/bin/bl-text-editor bl-text-editor /usr/bin/subl 90
-	update-alternatives --set bl-text-editor /usr/bin/subl
-fi
-
-# Google Chrome
-if do_action "INSTALL AND ADD REPOSITORIES: Google Chrome"; then
-	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-	apt-get update
-	apt-get install -y google-chrome-stable
 fi
 
 #=== FILE ACTIONS ====================================================================
@@ -202,6 +202,27 @@ if do_action "INSTALL AND SET: Terminator theme"; then
 	cp -v "$current_dir"/config/terminator.config  /usr/share/bunsen/skel/.config/terminator/config
 	ls /home/*/.config/terminator/config | xargs -I {} cp -v "$current_dir"/config/terminator.config {}
 fi
+
+# conky
+if do_action "INSTALL AND SET: new conky default"; then
+	cp -v "$current_dir"/config/conkyrc  /usr/share/bunsen/skel/.conkyrc
+	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/config/.conkyrc {}
+fi
+
+# tint2 config
+if do_action "INSTALL AND SET: tin2 theme"; then
+	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
+	cp -v "$current_dir"/config/*tint* /usr/share/bunsen/skel/.config/tint2/
+	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
+		sed -i '/LAPTOP/s/^#//g' /usr/share/bunsen/skel/.config/tint2/tint2rc	# uncomment LAPTOP lines
+	fi
+	for u in /home/*; do
+		[ ! -f "$u/.config/tint2/tint2rc_bunsen" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc_bunsen"
+		cp -v "$current_dir"/config/*tint* "$u/.config/tint2/"
+	done
+fi
+
+
 #=== SYSTEM CONFIG ACTIONS ====================================================================
 ## Disable DM
 if do_action "CONFIG: disable graphical display manager"; then
@@ -249,24 +270,6 @@ if do_action "CONFIG: bl-exit classic theme"; then
 	sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
 
-# Icons
-if do_action "INSTALL AND SET: new conky default"; then
-	cp -v "$current_dir"/config/conkyrc  /usr/share/bunsen/skel/.conkyrc
-	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/config/.conkyrc {}
-fi
-
-# tint2 config
-if do_action "INSTALL AND SET: tin2 theme"; then
-	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
-	cp -v "$current_dir"/config/*tint* /usr/share/bunsen/skel/.config/tint2/
-	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
-		sed -i '/LAPTOP/s/^#//g' /usr/share/bunsen/skel/.config/tint2/tint2rc	# uncomment LAPTOP lines
-	fi
-	for u in /home/*; do
-		[ ! -f "$u/.config/tint2/tint2rc_bunsen" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc_bunsen"
-		cp -v "$current_dir"/config/*tint* "$u/.config/tint2/"
-	done
-fi
 
 # aliases
 if do_action "CONFIG: some useful aliases"; then
