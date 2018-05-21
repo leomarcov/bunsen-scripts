@@ -231,15 +231,21 @@ if do_action "Show messages during boot"; then
 fi
 
 
-#=== USER ACTIONS ====================================================================
+#=== USER CONFIG ====================================================================
 # bl-exit theme
-if do_action "Configure bl-exit classic theme"; then
+if do_action "Set bl-exit classic theme"; then
 	sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
 	sed  -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
 fi
 
+# Icons
+if do_action "Set white color to default conky"; then
+	sed  -i 's/^ *default_color *= *.*,/default_color='\''ffffff'\'',/' /usr/share/bunsen/skel/.conkyrc
+	ls /home/*/.conkyrc | xargs -I {} sed -i 's/^ *default_color *= *.*,/default_color='\''ffffff'\'',/' {}	
+fi
+
 # tint2 config
-if do_action "Add tin2 themes"; then
+if do_action "Install and set tin2 theme"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
 	cp -v "$current_dir"/config/*tint* /usr/share/bunsen/skel/.config/tint2/
 	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
@@ -252,7 +258,7 @@ if do_action "Add tin2 themes"; then
 fi
 
 # aliases
-if do_action "Add some aliases"; then
+if do_action "Set some useful aliases"; then
 	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
 	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
 	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
