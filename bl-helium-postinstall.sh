@@ -1,7 +1,6 @@
 #!/bin/bash
 #=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
-icons_default="Numix"
 gtk_default=""
 openbox_default="GoHomeV2-leo"
 wallpaper_default="/usr/share/images/bunsen/wallpapers/anothers/bl-colorful-aptenody.png"
@@ -162,9 +161,12 @@ if do_action "Copy some cool wallpapers and set default wallpaper"; then
 fi
 
 # Icons
-if do_action "Create icon pack based on Numix and Paper"; then
-	apt-get install numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
-	bash "$current_dir"/bin/generate-numix-paper-icon-theme.sh	
+if do_action "Install Numix-Paper icon theme"; then
+	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
+	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name=Numix-Paper/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
+ 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="Numix-Paper"/' /usr/share/bunsen/skel/.gtkrc-2.0
+ 	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name=Numix-Paper/' {}
+	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="Numix-Paper"/' {}	
 fi
 
 # Fonts
