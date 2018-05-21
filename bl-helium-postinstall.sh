@@ -110,7 +110,6 @@ if do_action "Install VirtualBox and add repositories"; then
 	# Add VirtualBox in OpenBox menu:
 	sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/'   /usr/share/bunsen/skel/.config/openbox/menu.xml
 	ls /home/*/.config/openbox/menu.xml | xargs -I {} sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/' {}
-
 fi
 
 # VirtualBox Extension Pack
@@ -187,7 +186,7 @@ fi
 # GTK themes
 if do_action "Install Arc GTK theme"; then
 	gtk_default="Arc"
-	apt-get install arc-theme
+	apt-get -y install arc-theme
 	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' \;   # Change blue (#5294e2) acent color for grey
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
