@@ -108,8 +108,8 @@ if do_action "Install VirtualBox and add repositories"; then
 	apt-get install -y linux-headers-$(uname -r) "$vb_package"
 	
 	# Add VirtualBox in OpenBox menu:
-	sed -i '0,/<separator\/>/s//<separator\/> <item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item>/'   /usr/share/bunsen/skel/.config/openbox/menu.xml
-	ls /home/*/.config/openbox/menu.xml | xargs -I {} sed -i '0,/<separator\/>/s//<separator\/> <item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item>/' {}
+	sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/'   /usr/share/bunsen/skel/.config/openbox/menu.xml
+	ls /home/*/.config/openbox/menu.xml | xargs -I {} sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/' {}
 
 fi
 
