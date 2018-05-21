@@ -1,5 +1,5 @@
 # Numix-Paper icon theme
-Icon theme based on Numix and Papaer themes. 
+Icon theme based on Numix and Paper themes. 
 Theme are generated completely using symbolic links to Numix and Paper folders.
 The theme contains:
   * Folder icons: grey icons from Numix (instead of yellow)
