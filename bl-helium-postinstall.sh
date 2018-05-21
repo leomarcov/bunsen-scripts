@@ -146,9 +146,12 @@ if do_action "Copy some cool scripts"; then
 fi
 
 # update-notification
-if do_action "Install script for notify weekly for updates"; then
+if do_action "Install script update-notification.sh for notify weekly for updates"; then
+	cp -v "$current_dir"/bin/update-notification.sh /usr/bin/
 	update-notification.sh -I  &>/dev/null    # Install update-notification
 fi
+
+
 
 # wallpapers
 if do_action "Copy some cool wallpapers and set default wallpaper"; then
