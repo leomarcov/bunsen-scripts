@@ -9,8 +9,8 @@ The theme contains:
   * Rest come from Numix theme.
   
 # Install
-Numix and Paper themes should be installed in /usr/share/icons/Numix and /usr/share/icons/Paper.    
-Unzip numix-paper-icon-theme.zip in /usr/share/icons/.   
-generate-numix-paper-icon-theme.sh can be called for regenerate links
+Numix and Paper themes should be installed in `/usr/share/icons/Numix` and `/usr/share/icons/Paper`.    
+Unzip `numix-paper-icon-theme.zip` in `/usr/share/icons/`.   
+`generate-numix-paper-icon-theme.sh` can be called for regenerate links
 
 ![numix-paper-icon-theme](https://user-images.githubusercontent.com/32820131/40285580-32b6e22c-5c9e-11e8-8567-01f56d1c12db.png)
