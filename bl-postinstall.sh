@@ -255,7 +255,7 @@ fi
 
 # Show boot msg
 if do_action "CONIFG: show messages during boot"; then
-	for i in $(cat "$current_dir"/config/grub_text.conf  | cut -f1 -d=);do
+	for i in $(cat "$current_dir"/config/grub_textboot.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
 	cat "$current_dir"/config/grub_text.conf >> /etc/default/grub
