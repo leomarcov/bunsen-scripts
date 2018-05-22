@@ -60,7 +60,7 @@ It should work in **1 or 2 monitors** (in horizontal).
 
 
 ## Numix-Paper icon theme
-**`numix-paper-icon-theme.zip`**: icon theme based on Numix and Paper themes.  
+[**`numix-paper-icon-theme.zip`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/numix-paper-icon-theme): icon theme based on Numix and Paper themes.  
 The theme has been generated completely using symbolic links to Numix and Paper folders.
 
 The theme contains:
