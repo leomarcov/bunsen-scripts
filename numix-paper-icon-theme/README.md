@@ -8,7 +8,7 @@ The theme contains:
   * Apps icons: apps icons from Paper.
   * Rest come from Numix theme.
   
-# Install
+## Install
 Unzip `numix-paper-icon-theme.zip` in `/usr/share/icons/` or `~/.icons`.  
 Numix and Paper themes should be installed in `../Numix` and `../Paper`.   
 `generate-numix-paper-icon-theme.sh` can be called for regenerate links, but not is necessary.
