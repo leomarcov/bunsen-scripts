@@ -178,7 +178,7 @@ fi
 if do_action "INSTALL AND CONFIG AS DEFAULT: Numix-Paper icon theme"; then
 	apt-get install -y numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
 	icon_default="Numix-Paper"
-	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
+	unzip  -o "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
 	
 	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/.gtkrc-2.0 ; do
 		sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icon_default"'"/' "$f"		
@@ -191,12 +191,12 @@ fi
 # Fonts
 if do_action "INSTALL: some cool fonts"; then
 	[ ! -d /usr/share/fonts/extra ] && mkdir /usr/share/fonts/extra/
-	unzip "$current_dir"/postinstall-files/fonts.zip -d /usr/share/fonts/extra/
+	unzip -o "$current_dir"/postinstall-files/fonts.zip -d /usr/share/fonts/extra/
 fi
 
 # Openbox themes
 if do_action "INSTALL AND SET AS DEFAULT: Openbox theme"; then
-	unzip "$current_dir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
+	unzip -o "$current_dir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
 	for d in  /usr/share/bunsen/skel/.config/openbox/  /home/*/.config/openbox/ ; do
 		cp -v "$current_dir/postinstall-files/rc.xml" "$d"
 	done
