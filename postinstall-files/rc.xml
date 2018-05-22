@@ -669,10 +669,10 @@
         <action name="ToggleMaximize"/>
       </mousebind>
 
-      <mousebind button="Middle" action="Press">
-        <action name="Lower"/>
-        <action name="FocusToBottom"/>
-        <action name="Unfocus"/>
+      <mousebind button="Middle" action="Click">
+        <action name="Execute">
+          <command>autosnap.sh</command>
+        </action>  
       </mousebind>
 
 	<!-- #BL-POSTINSTALL-mouse-wheel-title    	
