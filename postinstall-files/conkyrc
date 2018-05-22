@@ -156,7 +156,7 @@ default_color='ffffff', -- Beam green
 --temperature_unit = 'Fahrenheit',
 
 -- Update interval in seconds
-    update_interval = 1,
+    update_interval = 5,
 
 --  End Miscellaneous Section
 };
