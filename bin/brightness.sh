@@ -68,5 +68,5 @@ function change_brightness() {
 [ "$1" = "-def" ] && set_brightness "$default" "$gamma"
 
 help
-
+ 
 
