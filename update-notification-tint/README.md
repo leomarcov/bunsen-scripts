@@ -8,7 +8,7 @@ Script that checks periodically APT pending updates and show a notification in t
 ```bash
 sudo update-notification -I 
 ```
-  * Edit your tint2 config for add a new executor:
+  * Edit your tint2 config and add a new executor:
 ```
 panel_itmes = LTEBSC    # Add E in your config
 
