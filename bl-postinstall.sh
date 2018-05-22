@@ -294,7 +294,7 @@ if do_action "CONIFG: show messages during boot"; then
 	for i in $(cat "$current_dir"/postinstall-files/grub_textboot.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
-	cat "$current_dir"/postinstall-files/grub_text.conf >> /etc/default/grub
+	cat "$current_dir"/postinstall-files/grub_textboot.conf >> /etc/default/grub
 	update-grub
 fi
 
