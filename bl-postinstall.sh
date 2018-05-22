@@ -82,14 +82,12 @@ fi
 # Rofi laucher
 if do_action "INSTALL AND CONFIG AS DEFAULT: rofi launcher"; then
 	apt-get install -y rofi
-	# Set default theme (android_notification) and set rofi as Run program default por skel and current users:
-	[ ! -d "/usr/share/bunsen/skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/skel/.config/rofi/"
-	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "/usr/share/bunsen/skel/.config/rofi/config"	
-	sed -i 's/gmrun/rofi -show run/' /usr/share/bunsen/skel/.config/openbox/rc.xml
-	for u in /home/*; do
-		[ ! -d "$u/.config/rofi/" ] && mkdir -p "$u/.config/rofi/"
-		echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$u/.config/rofi/config"
-		sed -i 's/gmrun/rofi -show run/' "$u/.config/openbox/rc.xml"
+	
+	# Set default theme (android_notification) and set rofi as Run program default por skel and current users:	
+	for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
+		[ ! -d "$d/rofi/" ] && mkdir -p "$d/rofi/"
+		echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$d/rofi/config"
+		sed -i 's/gmrun/rofi -show run/' "$d/openbox/rc.xml"
 	done
 fi
 
@@ -170,8 +168,10 @@ if do_action "INSTALL AND CONFIG AS DEFAULT: Aptenodytes Forsteri Wallpaper by N
 		mkdir -p /usr/share/images/bunsen/wallpapers/anothers/
 		cp -v "$current_dir"/postinstall-files/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
 	fi
-	sed -i 's/^file *= *.*/file='$(echo "/usr/share/images/bunsen/wallpapers/anothers/$wallpaper_default" | sed 's/\//\\\//g' )'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
-	ls /home/*/.config/nitrogen/bg-saved.cfg | xargs -I {} sed -i 's/^file *= *.*/file='$(echo "/usr/share/images/bunsen/wallpapers/anothers/$wallpaper_default" | sed 's/\//\\\//g' )'/' {}
+	
+	for f in  /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg  /home/*/.config/nitrogen/bg-saved.cfg; do
+		sed -i 's/^file *= *.*/file='$(echo "/usr/share/images/bunsen/wallpapers/anothers/$wallpaper_default" | sed 's/\//\\\//g' )'/' "$f"
+	done
 fi
 
 # Icons
@@ -179,10 +179,13 @@ if do_action "INSTALL AND CONFIG AS DEFAULT: Numix-Paper icon theme"; then
 	apt-get install -y numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
 	icon_default="Numix-Paper"
 	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
-	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='$icon_default'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
- 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'$icon_default'"/' /usr/share/bunsen/skel/.gtkrc-2.0
- 	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='$icon_default'/' {}
-	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'$icon_default'"/' {}	
+	
+	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/gtkrc-2.0 ; do
+		sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icon_default"'"/' "$f"		
+	done
+	for f in  /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini  /home/*/.config/gtk-3.0/settings.ini ; do
+		sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='"$icon_default"'/' "$f"
+	done
 fi
 
 # Fonts
@@ -194,8 +197,9 @@ fi
 # Openbox themes
 if do_action "INSTALL AND SET AS DEFAULT: Openbox theme"; then
 	unzip "$current_dir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
-	cp -v "$current_dir"/postinstall-files/rc.xml /usr/share/bunsen/skel/.config/openbox/
-	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/postinstall-files/rc.xml {}	
+	for d in  /usr/share/bunsen/skel/.config/openbox/  /home/*/.config/openbox/ ; do
+		cp -v "$current_dir/postinstall-files/rc.xml" "$d"
+	done
 fi
 
 # GTK themes
@@ -203,34 +207,35 @@ if do_action "INSTALL AND CONFIG AS DEFAULT: Arc GTK theme"; then
 	gtk_default="Arc"
 	apt-get -y install arc-theme
 	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   # Change blue (#5294e2) acent color for grey
-	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
-	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' /usr/share/bunsen/skel/.gtkrc-2.0
-	ls /home/*/.config/gtk-3.0/settings.ini | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' {}
-	ls /home/*/.gtkrc-2.0 | xargs -I {} sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' {}		
+	
+	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/gtkrc-2.0 ; do
+		sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' "$f"		
+	done
+	for f in  /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini  /home/*/.config/gtk-3.0/settings.ini ; do
+		sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name='"$gtk_default"'/' "$f"
+	done		
 fi
 
 # Terminator theme
 if do_action "INSTALL AND CONFIG AS DEFAULT: Terminator theme"; then
-	cp -v "$current_dir"/postinstall-files/terminator.config  /usr/share/bunsen/skel/.config/terminator/config
-	ls /home/*/.config/terminator/config | xargs -I {} cp -v "$current_dir"/postinstall-files/terminator.config {}
+	for f in  /usr/share/bunsen/skel/.config/terminator/config  /home/*/.config/terminator/config; do
+		cp -v "$current_dir"/postinstall-files/terminator.config "$f"
+	done
 fi
 
 # conky
 if do_action "INSTALL AND CONFIG AS DEFAULT: new conky default"; then
-	cp -v "$current_dir"/postinstall-files/.conkyrc  /usr/share/bunsen/skel/
-	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/postinstall-files/.conkyrc {}
+	for f in  /usr/share/bunsen/skel/.conkyrc  /home/*/.conkyrc ; do
+		cp -v "$current_dir"/postinstall-files/.conkyrc "$f"
+	done
 fi
 
 # tint2 config
 if do_action "INSTALL AND CONFIG AS DEFAULT: tin2 theme"; then
-	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
-	cp -v "$current_dir"/postinstall-files/*tint* /usr/share/bunsen/skel/.config/tint2/
-	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
-		sed -i '/LAPTOP/s/^#//g' /usr/share/bunsen/skel/.config/tint2/tint2rc	# uncomment LAPTOP lines
-	fi
-	for u in /home/*; do
-		[ ! -f "$u/.config/tint2/tint2rc_bunsen" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc_bunsen"
-		cp -v "$current_dir"/postinstall-files/*tint* "$u/.config/tint2/"
+	for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
+		[ ! -f "$d/tint2rc_bunsen" ] && cp -v "$d/tint2rc" "$d/tint2rc_bunsen"
+		cp -v "$current_dir"/postinstall-files/*tint* "$d"
+		[ "$laptop" ] && [ ! "$virtualmachine" ] &&  sed -i '/LAPTOP/s/^#//g' "$d/tint2rc"	# uncomment LAPTOP lines
 	done
 fi
 
@@ -304,23 +309,24 @@ fi
 
 # aliases
 if do_action "CONFIG: some useful aliases"; then
-	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
-	cat "$current_dir"/postinstall-files/aliases >> /usr/share/bunsen/skel/.bash_aliases
-	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
+	for d in /home/*  /usr/share/bunsen/skel/  /root; do
+		sed -i "/$comment_auto/Id" "$d/.bash_aliases" 2> /dev/null
+		cat "$current_dir/postinstall-files/.bash_aliases" >> "$d/.bash_aliases"
+	done
 fi
 
 # prompt
 if do_action "CONFIG: new bash prompt"; then
-	cat "$current_dir"/postinstall-files/bashrc >> /etc/skel/.bashrc
-	for f in $(ls /home/*/.bashrc); do
-		cat "$current_dir"/postinstall-files/bashrc >> "$f"
+	for d in /home/*  /etc/skel  /root; do
+		sed -i "/$comment_auto/Id" "$d/.bashrc" 2> /dev/null
+		cat "$current_dir"/postinstall-files/.bashrc >> "$d/.bashrc"
 	done
 fi
 
 # default brightness
 if [ "$laptop" ] && do_action "Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)"; then
-	echo "brightness.sh -def &" >> /usr/share/bunsen/skel/.config/openbox/autostart
-	for f in /home/*/.config/openbox/autostart; do
+	for f in  /usr/share/bunsen/skel/.config/openbox/autostart  /home/*/.config/openbox/autostart; do
+		sed -i "/brightness.sh -def/Id" "$d/.bashrc" 2> /dev/null
 		echo "brightness.sh -def &" >> "$f"
 	done
 fi
