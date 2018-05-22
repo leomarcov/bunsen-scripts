@@ -139,12 +139,6 @@ if do_action "INSTALL: Extension Pack"; then
 fi
 
 #=== FILE ACTIONS ====================================================================
-# Scripts
-if do_action "INSTALL: some cool scripts"; then
-	chmod +x "$current_dir"/bin/*
-	cp -v "$current_dir"/bin/* /usr/bin/
-fi
-
 # update-notification
 if do_action "INSTALL: script update-notification.sh for notify weekly for updates in tint bar"; then
 	bash "$current_dir"/update-notification-tint/update-notification.sh -I 
@@ -195,7 +189,7 @@ if do_action "INSTALL: some cool fonts"; then
 fi
 
 # Openbox themes
-if do_action "INSTALL AND SET: Openbox themeS"; then
+if do_action "INSTALL AND SET AS DEFAULT: Openbox theme"; then
 	unzip "$current_dir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
 	cp -v "$current_dir"/postinstall-files/rc.xml /usr/share/bunsen/skel/.config/openbox/
 	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/postinstall-files/rc.xml {}	
@@ -221,7 +215,7 @@ fi
 # conky
 if do_action "INSTALL AND CONFIG AS DEFAULT: new conky default"; then
 	cp -v "$current_dir"/postinstall-files/conkyrc  /usr/share/bunsen/skel/.conkyrc
-	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/postinstall-files/.conkyrc {}
+	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/postinstall-files/conkyrc {}
 fi
 
 # tint2 config
