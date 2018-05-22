@@ -180,7 +180,7 @@ if do_action "INSTALL AND CONFIG AS DEFAULT: Numix-Paper icon theme"; then
 	icon_default="Numix-Paper"
 	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
 	
-	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/gtkrc-2.0 ; do
+	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/.gtkrc-2.0 ; do
 		sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icon_default"'"/' "$f"		
 	done
 	for f in  /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini  /home/*/.config/gtk-3.0/settings.ini ; do
@@ -208,7 +208,7 @@ if do_action "INSTALL AND CONFIG AS DEFAULT: Arc GTK theme"; then
 	apt-get -y install arc-theme
 	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   # Change blue (#5294e2) acent color for grey
 	
-	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/gtkrc-2.0 ; do
+	for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/.gtkrc-2.0 ; do
 		sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' "$f"		
 	done
 	for f in  /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini  /home/*/.config/gtk-3.0/settings.ini ; do
