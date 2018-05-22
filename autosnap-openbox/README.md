@@ -11,7 +11,7 @@ It should work in **1 or 2 monitors** (in horizontal).
   cp autosnap.sh /usr/bin/
   chmod +x /usr/bin/autosnap.sh
   ```
-  * Edit Openbox config file `rc.xml` and config mouse center click to exec  `command autosnap.sh`:
+  * Edit Openbox config file `rc.xml` and config mouse center click (or what you want) to exec  command command `autosnap.sh`:
 ```xml
     <context name="Titlebar">
     ...
