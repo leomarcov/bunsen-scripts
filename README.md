@@ -51,9 +51,10 @@ It should work in **1 or 2 monitors** (in horizontal).
 
 ![peek-12-10-2017-20-43](https://user-images.githubusercontent.com/32820131/40352231-9d64c1fa-5dae-11e8-8137-890cadf2c293.gif)
 
-  
+   
+   
 # Update Notification for tint 
-**`updagte-notification.sh`**: script that checks periodically APT pending updates and show a notification in tint2 bar using executor plugin (since tint2 0.12.4).  
+[**`updagte-notification.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/update-notification-tint): script that checks periodically APT pending updates and show a notification in tint2 bar using executor plugin (since tint2 0.12.4).  
 
 ![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
 
