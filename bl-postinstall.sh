@@ -232,7 +232,7 @@ if do_action "INSTALL AND CONFIG AS DEFAULT: new conky default"; then
 fi
 
 # tint2 config
-if do_action "INSTALL AND CONFIG AS DEFAULT: tin2 theme"; then
+if do_action "INSTALL AND CONFIG AS DEFAULT: tint2 theme"; then
 	for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
 		[ ! -f "$d/tint2rc_bunsen" ] && cp -v "$d/tint2rc" "$d/tint2rc_bunsen"
 		cp -v "$current_dir"/postinstall-files/*tint* "$d"
