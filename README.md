@@ -53,11 +53,23 @@ It should work in **1 or 2 monitors** (in horizontal).
 
    
    
-# Update Notification for tint 
+## Update Notification for tint 
 [**`updagte-notification.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/update-notification-tint): script that checks periodically APT pending updates and show a notification in tint2 bar using executor plugin (since tint2 0.12.4).  
 
 ![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
 
+
+## Numix-Paper icon theme
+**`numix-paper-icon-theme.zip`**: icon theme based on Numix and Paper themes.  
+The theme has been generated completely using symbolic links to Numix and Paper folders.
+
+The theme contains:
+  * Folder icons: grey icons from Numix (instead of yellow).
+  * Panel icons: panel icons from Paper.
+  * Apps icons: apps icons from Paper.
+  * Rest come from Numix theme.
+  
+![numix-paper-icon-theme](https://user-images.githubusercontent.com/32820131/40285580-32b6e22c-5c9e-11e8-8567-01f56d1c12db.png)
 
 
 
