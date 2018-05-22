@@ -176,7 +176,7 @@ fi
 
 # Icons
 if do_action "INSTALL AND CONFIG AS DEFAULT: Numix-Paper icon theme"; then
-	apt-get install numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
+	apt-get install -y numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
 	icon_default="Numix-Paper"
 	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='$icon_default'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
