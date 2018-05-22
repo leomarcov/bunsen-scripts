@@ -13,7 +13,7 @@ ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_E
 # DESCRIPTION: Show command help
 #===============================================================================
 function help() {
-	echo -e 'Apply config actions after Bunsen '"$bunsen_ver"' installation
+	echo -e 'Install configs and themes after BunsenLabs '"$bunsen_ver"' installation
 Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
    \e[1m-l\e[0m\t\tOnly list actions 
    \e[1m-a <actions>\e[0m\tOnly do selected actions (e.g: -a 5,6,10-15)
