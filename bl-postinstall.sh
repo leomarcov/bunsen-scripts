@@ -75,7 +75,7 @@ current_dir="$(dirname "$(readlink -f "$0")")"
 #=== PACKAGE ACTIONS ====================================================================
 # Mix packages
 if do_action "INSTALL: some useful packages"; then
-	apt-get install -y vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback
+	apt-get install -y vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback rar
 	apt-get install -y haveged		# Avoid delay first login in Helium
 fi
 
