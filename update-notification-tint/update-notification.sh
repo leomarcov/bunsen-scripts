@@ -92,10 +92,10 @@ execp_lclick_command = x-terminal-emulator -b -e '"$(basename $install_file)"' -
 execp_tooltip = Pending updates...
 execp_interval = 0
 execp_background_id = 4
-execp_font = Droid Sans 9
+execp_font = Droid Sans 10
 execp_font_color = #FFFFFF 100
 execp_centered = 1
-execp_padding = 10 0 0
+execp_padding = 8 0 0
 '
 	exit 
 }
