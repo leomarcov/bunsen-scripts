@@ -29,9 +29,7 @@ Usage: '$(basename $0)' -inc|-dec|-h|-I|-U
    \e[1m-def\e[0m\tSet default brightness ('"$default"')
    \e[1m-inc\e[0m\tIncrease the brightness
    \e[1m-dec\e[0m\tDecrease the brightness
-   \e[1m-I\e[0m\tInstall the script
-   \e[1m-U\e[0m\tUninstall the script
-	'
+'
 	exit 0
 }
 
