@@ -11,3 +11,15 @@ It should work in **1 or 2 monitors** (in horizontal).
   cp autosnap.sh /usr/bin/
   chmod +x /usr/bin/autosnap.sh
   ```
+  * Edit Openbox config file `rc.xml` and config mouse duble click to exec  `command autosnap.sh`:
+```xml
+    <context name="Titlebar">
+...
+      <mousebind button="Left" action="DoubleClick">
+        <action name="Execute">
+          <command>autosnap.sh</command>
+        </action>        
+      </mousebind>
+...
+    </context>
+```
