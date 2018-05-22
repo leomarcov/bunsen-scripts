@@ -36,6 +36,9 @@ $ ./bl-postinstall.sh -l
 [27] CONFIG: new bash prompt
 [28] Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)
 
+# Exec all actions:
+$ sudo ./bl-postinstall.sh -y
+
 # Exec all actions and answer yes to all:
 $ sudo ./bl-postinstall.sh -y
 
