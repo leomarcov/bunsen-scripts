@@ -4,7 +4,7 @@ Script that checks periodically apt pending updates and show a notification in t
 ![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
 
 ## Install
-  * Install the script:
+  * Download `update-notification.sh` script and install the script:
 ```bash
 sudo update-notification -I 
 ```
