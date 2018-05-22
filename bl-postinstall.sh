@@ -217,8 +217,8 @@ fi
 
 # conky
 if do_action "INSTALL AND CONFIG AS DEFAULT: new conky default"; then
-	cp -v "$current_dir"/postinstall-files/conkyrc  /usr/share/bunsen/skel/.conkyrc
-	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/postinstall-files/conkyrc {}
+	cp -v "$current_dir"/postinstall-files/.conkyrc  /usr/share/bunsen/skel/
+	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/postinstall-files/.conkyrc {}
 fi
 
 # tint2 config
