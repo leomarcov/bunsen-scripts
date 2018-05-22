@@ -42,9 +42,9 @@ $ sudo ./bl-postinstall.sh -y
 # Exec only actions 5,7,10,11,12,13,14 and 15:
 $ sudo ./bl-postinstall.sh -a 5,7,10-15
 ```
-  
-\  
-\  
+
+</br>
+</br>
 ## Autosnap Windows for Openbox
 [**`autosnap.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/autosnap-openbox): script for **autosnap windows** (half-maximice) in Openbox WM.  
 The script snap the active windows an choose automatically the corner to snap according the mouse position: if the mouse is in the zone of corner left snap to this quadrant, if is in the center left snap to half left screen, if is in the center maximize the windows, etc.  
@@ -53,13 +53,16 @@ It should work in **1 or 2 monitors** (in horizontal).
 ![peek-12-10-2017-20-43](https://user-images.githubusercontent.com/32820131/40352231-9d64c1fa-5dae-11e8-8137-890cadf2c293.gif)
 
    
-   
+</br>
+</br>
 ## Update Notification for tint 
 [**`updagte-notification.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/update-notification-tint): script that checks periodically APT pending updates and show a notification in tint2 bar using executor plugin (since tint2 0.12.4).  
 
 ![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
 
 
+</br>
+</br>
 ## Numix-Paper icon theme
 [**`numix-paper-icon-theme.zip`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/numix-paper-icon-theme): icon theme based on Numix and Paper themes.  
 The theme has been generated completely using symbolic links to Numix and Paper folders.
