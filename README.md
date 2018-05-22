@@ -77,5 +77,19 @@ The theme contains:
   
 ![numix-paper-icon-theme](https://user-images.githubusercontent.com/32820131/40285580-32b6e22c-5c9e-11e8-8567-01f56d1c12db.png)
 
+</br>
 
+## Brightness control
+**`brightness.sh`**: script for increase/decrease and set default brightness using `xrandr`.  
+```bash
+$ ./brightness.sh -h
+Inc/dec the brightness
+Usage: brightness.sh -inc|-dec|-h|-I|-U
+   -h	Show command help
+   -def	Set default brightness (0.6)
+   -inc	Increase the brightness
+   -dec	Decrease the brightness
+   -I	Install the script
+   -U	Uninstall the script
+```
 
