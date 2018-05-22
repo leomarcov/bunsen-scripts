@@ -4,8 +4,9 @@
 **`bl-postinstall.sh`**: my personal postinstall script, themes and configs for BunsenLabs Helium.  
 The script exec many predefined actios:
 
-```bash
-$ bash bl-postinstall.sh -l
+```
+# List all actions:
+$ ./bl-postinstall.sh -l
 [1] INSTALL: some useful packages
 [2] INSTALL AND CONFIG AS DEFAULT: rofi launcher
 [3] INSTALL: PlayOnLinux
@@ -34,7 +35,15 @@ $ bash bl-postinstall.sh -l
 [26] CONFIG: some useful aliases
 [27] CONFIG: new bash prompt
 [28] Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)
+
+# Exec all actions and answer yes to all:
+$ sudo ./bl-postinstall.sh -y
+
+# Exec only actions 5,7,10,11,12,13,14 and 15:
+$ sudo ./bl-postinstall.sh -a 5,7,10-15
+
 ```
+
 
 
 
