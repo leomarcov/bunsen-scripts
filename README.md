@@ -44,7 +44,6 @@ $ sudo ./bl-postinstall.sh -a 5,7,10-15
 ```
 
 </br>
-</br>
 
 ## Autosnap Windows for Openbox
 [**`autosnap.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/autosnap-openbox): script for **autosnap windows** (half-maximice) in Openbox WM.  
@@ -53,8 +52,6 @@ It should work in **1 or 2 monitors** (in horizontal).
 
 ![peek-12-10-2017-20-43](https://user-images.githubusercontent.com/32820131/40352231-9d64c1fa-5dae-11e8-8137-890cadf2c293.gif)
 
-   
-</br>
 </br>
 
 ## Update Notification for tint 
@@ -62,8 +59,6 @@ It should work in **1 or 2 monitors** (in horizontal).
 
 ![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
 
-
-</br>
 </br>
 
 ## Numix-Paper icon theme
