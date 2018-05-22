@@ -2,7 +2,7 @@
 #=== SCRIPT CONFIGS ============================================================
 bunsen_ver="Helium"
 openbox_default="GoHomeV2-leo"
-wallpaper_default="/usr/share/images/bunsen/wallpapers/anothers/bl-colorful-aptenody.png"
+wallpaper_default="bl-colorful-aptenodytes-forsteri-by-nixiepro.png"
 comment_auto="#BL-POSTINSTALL"
 vb_package="virtualbox-5.2"
 ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
@@ -41,18 +41,6 @@ function do_action() {
 	return 1
 }
 
-
-#=== CHECKS ===================================================================
-[ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
-if [ ! "$list"] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
-	echo "Seems you are not running BunsenLabs $bunsen_ver"
-	echo "Some actions may fail. Cross your fingers and press enter..."
-	read
-fi
-[ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
-dmesg | grep -i hypervisor &>/dev/null && virtualmachine="true"
-current_dir="$(dirname "$(readlink -f "$0")")"
-
 #=== PARAMS ====================================================================
 while getopts ":hla:y" o; do
 	case "$o" in
@@ -70,6 +58,18 @@ while getopts ":hla:y" o; do
 done
 
 
+#=== CHECKS ===================================================================
+[ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+if [ ! "$list"] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
+	echo "Seems you are not running BunsenLabs $bunsen_ver"
+	echo "Some packages may fail. Cross your fingers and press enter..."
+	read
+fi
+[ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
+dmesg | grep -i hypervisor &>/dev/null && virtualmachine="true"
+current_dir="$(dirname "$(readlink -f "$0")")"
+
+
 
 
 #=== PACKAGE ACTIONS ====================================================================
@@ -80,7 +80,7 @@ if do_action "INSTALL: some useful packages"; then
 fi
 
 # Rofi laucher
-if do_action "INSTALL AND CONFIG: rofi launcher"; then
+if do_action "INSTALL AND CONFIG AS DEFAULT: rofi launcher"; then
 	apt-get install -y rofi
 	# Set default theme (android_notification) and set rofi as Run program default por skel and current users:
 	[ ! -d "/usr/share/bunsen/skel/.config/rofi/" ] && mkdir -p "/usr/share/bunsen/skel/.config/rofi/"
@@ -146,25 +146,22 @@ if do_action "INSTALL: some cool scripts"; then
 fi
 
 # update-notification
-if do_action "INSTALL: script update-notification.sh for notify weekly for updates"; then
-	cp -v "$current_dir"/bin/update-notification.sh /usr/bin/
-	update-notification.sh -I  &>/dev/null    # Install update-notification
+if do_action "INSTALL: script update-notification.sh for notify weekly for updates in tint bar"; then
+	bash "$current_dir"/update-notification-tint/update-notification.sh -I 
 fi
 
-
-
 # wallpapers
-if do_action "INSTALL AND SET: some cool wallpapers and set default wallpaper"; then
+if do_action "INSTALL AND CONFIG AS DEFAULT: Aptenodytes Forsteri Wallpaper by Nixiepro"; then
 	if [ ! -d /usr/share/images/bunsen/wallpapers/anothers/ ]; then
 		mkdir -p /usr/share/images/bunsen/wallpapers/anothers/
-		cp -v "$current_dir"/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
+		cp -v "$current_dir"/postinstall-files/wallpapers/* /usr/share/images/bunsen/wallpapers/anothers/
 	fi
-	sed -i 's/^file *= *.*/file='$(echo "$wallpaper_default" | sed 's/\//\\\//g' )'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
-	ls /home/*/.config/nitrogen/bg-saved.cfg | xargs -I {} sed -i 's/^file *= *.*/file='$(echo "$wallpaper_default" | sed 's/\//\\\//g' )'/' {}
+	sed -i 's/^file *= *.*/file='$(echo "/usr/share/images/bunsen/wallpapers/anothers/$wallpaper_default" | sed 's/\//\\\//g' )'/' /usr/share/bunsen/skel/.config/nitrogen/bg-saved.cfg
+	ls /home/*/.config/nitrogen/bg-saved.cfg | xargs -I {} sed -i 's/^file *= *.*/file='$(echo "/usr/share/images/bunsen/wallpapers/anothers/$wallpaper_default" | sed 's/\//\\\//g' )'/' {}
 fi
 
 # Icons
-if do_action "INSTALL AND SET: Numix-Paper icon theme"; then
+if do_action "INSTALL AND CONFIG AS DEFAULT: Numix-Paper icon theme"; then
 	icon_default="Numix-Paper"
 	unzip  "$current_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip	-d /usr/share/icons/	
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name='$icon_default'/' /usr/share/bunsen/skel/.config/gtk-3.0/settings.ini
@@ -174,20 +171,20 @@ if do_action "INSTALL AND SET: Numix-Paper icon theme"; then
 fi
 
 # Fonts
-if do_action "INSTALL AND SET: some cool fonts"; then
+if do_action "INSTALL: some cool fonts"; then
 	[ ! -d /usr/share/fonts/extra ] && mkdir /usr/share/fonts/extra/
-	unzip "$current_dir"/files/fonts.zip -d /usr/share/fonts/extra/
+	unzip "$current_dir"/postinstall-files/fonts.zip -d /usr/share/fonts/extra/
 fi
 
 # Openbox themes
 if do_action "INSTALL AND SET: Openbox themeS"; then
-	unzip "$current_dir"/files/openbox_themes.zip -d /usr/share/themes/
-	cp -v "$current_dir"/config/rc.xml /usr/share/bunsen/skel/.config/openbox/
-	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/config/rc.xml {}	
+	unzip "$current_dir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
+	cp -v "$current_dir"/postinstall-files/rc.xml /usr/share/bunsen/skel/.config/openbox/
+	ls -d /home/*/.config/openbox/ | xargs -I {} cp -v "$current_dir"/postinstall-files/rc.xml {}	
 fi
 
 # GTK themes
-if do_action "INSTALL AND SET: Arc GTK theme"; then
+if do_action "INSTALL AND CONFIG AS DEFAULT: Arc GTK theme"; then
 	gtk_default="Arc"
 	apt-get -y install arc-theme
 	find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   # Change blue (#5294e2) acent color for grey
@@ -198,27 +195,27 @@ if do_action "INSTALL AND SET: Arc GTK theme"; then
 fi
 
 # Terminator theme
-if do_action "INSTALL AND SET: Terminator theme"; then
-	cp -v "$current_dir"/config/terminator.config  /usr/share/bunsen/skel/.config/terminator/config
-	ls /home/*/.config/terminator/config | xargs -I {} cp -v "$current_dir"/config/terminator.config {}
+if do_action "INSTALL AND CONFIG AS DEFAULT: Terminator theme"; then
+	cp -v "$current_dir"/postinstall-files/terminator.config  /usr/share/bunsen/skel/.config/terminator/config
+	ls /home/*/.config/terminator/config | xargs -I {} cp -v "$current_dir"/postinstall-files/terminator.config {}
 fi
 
 # conky
-if do_action "INSTALL AND SET: new conky default"; then
-	cp -v "$current_dir"/config/conkyrc  /usr/share/bunsen/skel/.conkyrc
-	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/config/.conkyrc {}
+if do_action "INSTALL AND CONFIG AS DEFAULT: new conky default"; then
+	cp -v "$current_dir"/postinstall-files/conkyrc  /usr/share/bunsen/skel/.conkyrc
+	ls /home/*/.conkyrc | xargs -I {} cp -v "$current_dir"/postinstall-files/.conkyrc {}
 fi
 
 # tint2 config
-if do_action "INSTALL AND SET: tin2 theme"; then
+if do_action "INSTALL AND CONFIG AS DEFAULT: tin2 theme"; then
 	[ ! -f /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen ] && cp -v /usr/share/bunsen/skel/.config/tint2/tint2rc /usr/share/bunsen/skel/.config/tint2/tint2rc_bunsen
-	cp -v "$current_dir"/config/*tint* /usr/share/bunsen/skel/.config/tint2/
+	cp -v "$current_dir"/postinstall-files/*tint* /usr/share/bunsen/skel/.config/tint2/
 	if [ "$laptop" ] && [ ! "$virtualmachine" ]; then
 		sed -i '/LAPTOP/s/^#//g' /usr/share/bunsen/skel/.config/tint2/tint2rc	# uncomment LAPTOP lines
 	fi
 	for u in /home/*; do
 		[ ! -f "$u/.config/tint2/tint2rc_bunsen" ] && cp -v "$u/.config/tint2/tint2rc" "$u/.config/tint2/tint2rc_bunsen"
-		cp -v "$current_dir"/config/*tint* "$u/.config/tint2/"
+		cp -v "$current_dir"/postinstall-files/*tint* "$u/.config/tint2/"
 	done
 fi
 
@@ -246,19 +243,19 @@ fi
 
 # Skip Grub menu
 if do_action "CONFIG: skip GRUB menu and enter Bunsen directly"; then
-	for i in $(cat "$current_dir"/config/grub_skip.conf  | cut -f1 -d=);do
+	for i in $(cat "$current_dir"/postinstall-files/grub_skip.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
-	cat "$current_dir"/config/grub_skip.conf >> /etc/default/grub
+	cat "$current_dir"/postinstall-files/grub_skip.conf >> /etc/default/grub
 	update-grub
 fi
 
 # Show boot msg
 if do_action "CONIFG: show messages during boot"; then
-	for i in $(cat "$current_dir"/config/grub_textboot.conf  | cut -f1 -d=);do
+	for i in $(cat "$current_dir"/postinstall-files/grub_textboot.conf  | cut -f1 -d=);do
 		sed -i "/\b$i=/Id" /etc/default/grub
 	done
-	cat "$current_dir"/config/grub_text.conf >> /etc/default/grub
+	cat "$current_dir"/postinstall-files/grub_text.conf >> /etc/default/grub
 	update-grub
 fi
 
@@ -274,15 +271,15 @@ fi
 # aliases
 if do_action "CONFIG: some useful aliases"; then
 	sed -i "/$comment_auto/Id" /usr/share/bunsen/skel/.bash_aliases
-	cat "$current_dir"/config/aliases >> /usr/share/bunsen/skel/.bash_aliases
+	cat "$current_dir"/postinstall-files/aliases >> /usr/share/bunsen/skel/.bash_aliases
 	ls -d /home/*/ | xargs -I {} cp -v /usr/share/bunsen/skel/.bash_aliases {}
 fi
 
 # prompt
 if do_action "CONFIG: new bash prompt"; then
-	cat "$current_dir"/config/bashrc >> /etc/skel/.bashrc
+	cat "$current_dir"/postinstall-files/bashrc >> /etc/skel/.bashrc
 	for f in $(ls /home/*/.bashrc); do
-		cat "$current_dir"/config/bashrc >> "$f"
+		cat "$current_dir"/postinstall-files/bashrc >> "$f"
 	done
 fi
 
