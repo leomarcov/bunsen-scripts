@@ -4,7 +4,7 @@
 **`bl-postinstall.sh`**: my personal postinstall script, themes and configs for BunsenLabs Helium.  
 The script exec many predefined actios:
 
-```
+```bash
 # List all actions:
 $ ./bl-postinstall.sh -l
 [1] INSTALL: some useful packages
