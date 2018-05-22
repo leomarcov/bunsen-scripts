@@ -161,7 +161,7 @@ fi
 # brightness
 if do_action "INSTALL: script brightness.sh for control brightness"; then
 	cp -v "$current_dir"/brightness-control/brightness.sh /usr/bin/
-	chmod +x /usr/bin/ps_mem.py
+	chmod +x /usr/bin/brightness.sh
 fi
 
 # wallpapers
