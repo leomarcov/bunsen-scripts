@@ -23,7 +23,7 @@ It should work in **1 or 2 monitors** (in horizontal).
     ...
     </context>
 ```
-  * To make the script simple `rc.xml` should be configured the key combinatios for each snap type, and the script will auto press this combinatios according the mouse position:
+  * To make the script simple `rc.xml` should be configured the key combinatios for each snap type, and the script will auto press this combinatios according the mouse position. I use `CTRL+Keypad numbers`:
   ```xml
  <keyboard>
     ...  
