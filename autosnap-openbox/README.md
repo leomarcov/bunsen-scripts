@@ -23,3 +23,91 @@ It should work in **1 or 2 monitors** (in horizontal).
     ...
     </context>
 ```
+  * To make the script simple `rc.xml` should be configured the key combinatios for each snap type, and the script will auto press this combinatios according the mouse position:
+  ```xml
+ <keyboard>
+    ...  
+    <keybind key="C-KP_Home">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="C-KP_Up">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>100%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="C-KP_Prior">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>        
+    <keybind key="C-A-Left">
+      <action name="GoToDesktop">
+        <to>left</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="C-KP_Begin">
+      <action name="ToggleMaximize"/>
+    </keybind>
+    <keybind key="C-KP_Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>100%</height>
+      </action>
+    </keybind>
+    <keybind key="C-KP_Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>100%</height>
+      </action>
+    </keybind>
+    <keybind key="C-KP_End">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>-0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="C-KP_Down">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>-0</y>
+        <width>100%</width>
+        <height>50%</height>
+      </action>
+    </keybind>    
+    <keybind key="C-KP_Next">7
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>-0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    ...
+</keyboard>
+```
