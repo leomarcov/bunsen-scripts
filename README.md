@@ -41,8 +41,16 @@ $ sudo ./bl-postinstall.sh -y
 
 # Exec only actions 5,7,10,11,12,13,14 and 15:
 $ sudo ./bl-postinstall.sh -a 5,7,10-15
-
 ```
+
+## Autosnap Windows for Openbox
+# Autosnap Windows for Openbox
+**`autosnap.sh`**: script for **autosnap windows** (half-maximice) in Openbox WM.  
+The script snap the active windows an choose automatically the corner to snap according the mouse position: if the mouse is in the zone of corner left snap to this quadrant, if is in the center left snap to half left screen, if is in the center maximize the windows, etc.  
+It should work in **1 or 2 monitors** (in horizontal).
+
+![peek-12-10-2017-20-43](https://user-images.githubusercontent.com/32820131/40352231-9d64c1fa-5dae-11e8-8137-890cadf2c293.gif)
+
 
 
 
