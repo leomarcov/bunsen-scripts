@@ -133,7 +133,7 @@ fi
 # VirtualBox Extension Pack
 if do_action "INSTALL: Extension Pack"; then
 	t=$(mktemp -d)
-	wget -P "$t" "$ep_url"  X
+	wget -P "$t" "$ep_url"  
 	yes | vboxmanage extpack install --replace "$t"/*extpack 
 	rm -rf "$t"
 fi
@@ -148,6 +148,24 @@ fi
 # update-notification
 if do_action "INSTALL: script update-notification.sh for notify weekly for updates in tint bar"; then
 	bash "$current_dir"/update-notification-tint/update-notification.sh -I 
+fi
+
+# autosnap
+if do_action "INSTALL: script autosnap.sh for autosnap windows when center click in title"; then
+	cp -v "$current_dir"/autosnap-openbox/autosnap.sh /usr/bin/
+	chmod +x /usr/bin/autosnap.sh
+fi
+
+# ps_mem
+if do_action "INSTALL: script ps_mem.py for show RAM usage por process"; then
+	wget -P /usr/bin "https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py"
+	chmod +x /usr/bin/ps_mem.py
+fi
+
+# brightness
+if do_action "INSTALL: script brightness.sh for control brightness"; then
+	cp -v "$current_dir"/brightness-control/brightness.sh /usr/bin/
+	chmod +x /usr/bin/ps_mem.py
 fi
 
 # wallpapers
