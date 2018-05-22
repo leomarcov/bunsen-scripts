@@ -53,8 +53,8 @@ conky.config = {
     minimum_width = 200, minimum_height = 0,-- width | height
     maximum_width = 200,
 
-    gap_x = 20,-- left | right
-    gap_y = 45,-- up | down
+gap_x 70	### left | right
+gap_y 50	### up | down
 
     alignment = 'top_right',
 --  End Window Settings
