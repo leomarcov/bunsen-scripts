@@ -1,2 +1,2 @@
 # Update Notification for tint 
-![seleccion_824](https://user-images.githubusercontent.com/32820131/40354791-ff30bcb2-5db4-11e8-84d9-bcdac7229611.png)
+![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
