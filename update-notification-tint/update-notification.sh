@@ -32,7 +32,7 @@ function update () {
 	aptitude update &> /dev/null
 	echo "Checking updates and saving in $updates_file..."
 	sudo bash -c 'aptitude search "~U" &> '"$updates_file"
-
+	[ ! -s "$updates_file" ] && rm "$updates_file" &> /dev/null
 	exit
 }
 
