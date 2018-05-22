@@ -239,7 +239,7 @@ fi
 ## Disable DM
 if do_action "CONFIG: disable graphical display manager and install text locker"; then
 	systemctl set-default multi-user.target
-	apt-get remove lightdm
+	apt-get -y remove lightdm
 
 	# Install physlock
 	apt-get install libpam0g-dev	
