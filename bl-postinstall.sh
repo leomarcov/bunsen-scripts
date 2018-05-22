@@ -60,13 +60,13 @@ done
 
 #=== CHECKS ===================================================================
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
-if [ ! "$list"] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
+if [ ! "$list" ] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
 	echo "Seems you are not running BunsenLabs $bunsen_ver"
 	echo "Some packages may fail. Cross your fingers and press enter..."
 	read
 fi
 [ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
-dmesg | grep -i hypervisor &>/dev/null && virtualmachine="true"
+cat /proc/cpuinfo | grep -i hypervisor &>/dev/null && virtualmachine="true"
 current_dir="$(dirname "$(readlink -f "$0")")"
 
 
