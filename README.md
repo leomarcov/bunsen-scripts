@@ -2,7 +2,8 @@
 
 ## BunsenLabs-Postinstall
 **`bl-postinstall.sh`**: my personal postinstall script, themes and configs for BunsenLabs Helium.  
-The script exec many predefined actios:
+Althoughs is a collection of my particular useful packages and configs may be interesting for you.  
+The script exec many predefined action:
 
 ```bash
 # List all actions:
