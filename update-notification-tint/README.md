@@ -10,6 +10,8 @@ sudo update-notification -I
 ```
   * Edit your tint2 config for add a new executor:
 ```
+panel_itmes = LTEBSC    # Add E in your config
+
 execp = new
 execp_command = update-notification.sh -m
 execp_lclick_command = x-terminal-emulator -b -e update-notification.sh -i
