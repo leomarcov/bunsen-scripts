@@ -125,8 +125,9 @@ if do_action "INSTALL AND ADD REPOSITORIES: VirtualBox"; then
 	
 	if apt-get install -y linux-headers-$(uname -r) "$vb_package"; then
 		# Add VirtualBox in OpenBox menu:
-		sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/'   /usr/share/bunsen/skel/.config/openbox/menu.xml
-		ls /home/*/.config/openbox/menu.xml | xargs -I {} sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/' {}
+		for f in /usr/share/bunsen/skel/.config/openbox/menu.xml  /home/*/.config/openbox/menu.xml ; do
+			! grep '<command>virtualbox<\/command>' "$f" &> /dev/null && sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/' "$f"
+		done
 	fi
 fi
 
