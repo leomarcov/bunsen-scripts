@@ -8,6 +8,7 @@ cat /proc/cpuinfo | grep -i hypervisor &>/dev/null && virtualmachine="true"
 
 for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
 	[ ! -f "$d/tint2rc_bunsen" ] && cp -v "$d/tint2rc" "$d/tint2rc_bunsen"
-	cp -v "$base_dir"/postinstall-files/*tint* "$d"
-	[ "$laptop" ] && [ ! "$virtualmachine" ] &&  sed -i '/LAPTOP/s/^#//g' "$d/tint2rc"	# uncomment LAPTOP lines
+	
+	[ "$laptop" ] && [ ! "$virtualmachine" ] && tint_laptop="_laptop"
+	cp -v "$base_dir"/postinstall-files/tint2rc${tint_laptop} "$d/tint2rc"
 done

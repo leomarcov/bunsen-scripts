@@ -1,6 +1,6 @@
 #!/bin/bash
-# ACTION: Install and config rofi launcher
-# INFO: Install rofi launcher and set as default to all user theme and runas
+# ACTION: Install rofi and config as default
+# INFO: Rofi is a simple text switcher and launcher
 # DEFAULT: y
 
 apt-get install -y rofi

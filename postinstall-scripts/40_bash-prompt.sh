@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Config new bash prompt (all users)
+# ACTION: Config new bash prompt for all users
 # DEFAULT: y
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"

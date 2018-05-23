@@ -10,19 +10,21 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>] [-y] [-d]
    \e[1m-l\e[0m\t\tOnly list actions 
    \e[1m-a <actions>\e[0m\tOnly do selected actions (e.g: -a 5,6,10-15)
    \e[1m-y\e[0m\t\tAuto-answer yes to all actions
-   \e[1m-y\e[0m\t\tAuto-answer default to all actions
+   \e[1m-d\e[0m\t\tAuto-answer default to all actions
    \e[1m-h\e[0m\t\tShow this help'
 	exit 0
 }
 
 
 #=== FUNCTION ==================================================================
-# NAME: do_action
-# DESCRIPTION: Show question to do an action and determine if do or not
-# EXIT CODE: 0 if should be do de action, 1 in other case
+# NAME: ask_action
+# DESCRIPTION: show question to do an action and determine if do it or not do
+# EXIT CODE: 
+#	0-> do the action
+#	1-> dont do de action
 #===============================================================================
 n=0
-function do_action() {
+function ask_action() {
 	action="$1"
 	info="$2"
 	default="${3,,}"
@@ -32,12 +34,13 @@ function do_action() {
 	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
 	[ "$list" ] && echo -e "[$n] $action" && return 1
 
-	$([ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
-	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m $q "
-	case "${yes,,}" in
-		allyes) 	q="y"			;;
-		default) 	q="$default"	;;
-		*)	 		read q			;;
+	[ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
+
+	echo -en "\n\n\e[33m${info}\n\e[39m\e[1m[$n] \e[4m${action}\e[0m $q "
+	case "$yes" in
+		allyes) 	q="y"; echo			;;
+		default) 	q="$default"; echo	;;
+		*)	 		read q				;;
 	esac
 	
 	[ "${q,,}" != "n" ] && return 0
@@ -47,11 +50,11 @@ function do_action() {
 
 
 #=== PARAMS ====================================================================
-while getopts ":hla:d" o; do
+while getopts ":hlyda:" o; do
 	case "$o" in
 	h)	help 			;;
 	l)	list="true"		;;
-	y)	yes="allyes"		;;
+	y)	yes="allyes"	;;
 	d)	yes="default"	;;
 	a)	for a in $(echo "$OPTARG" | tr "," " "); do
 			# Is a range
@@ -80,11 +83,12 @@ for script in "$scripts_dir"/[0-9]*; do
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"
 	default="$(echo "$head" | grep "#[[:blank:]]*DEFAULT:" | sed 's/#[[:blank:]]*DEFAULT:[[:blank:]]*//')"
 
-	if do_action "$action" "$info" "$default"; then
-		echo "---> exec $script"
+	if ask_action "$action" "$info" "$default"; then
+		"$script"		# EXEC SCRIPT
 	fi
 done
-if [ ! "$list" ] && [ ! "$actions" ] && do_action "Reboot" "" "y"; then 
+
+if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "n"; then 
 	reboot
 fi
-
+echo

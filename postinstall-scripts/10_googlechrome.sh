@@ -1,6 +1,5 @@
 #!/bin/bash
-# ACTION: Install Google Chrome 
-# INFO: Install Google chrome, config official repositories and set as default editor
+# ACTION: Install Google Chrome, add to repositories and set has default browser
 # DEFAULT: y
 
 # Install repositories

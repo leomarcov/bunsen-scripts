@@ -60,14 +60,13 @@ border_color =
 # Panel
 autohide = 0
 strut_policy = follow_size
-#autohide = 1					# LAPTOP
-#strut_policy = minimun			# LAPTOP
+#autohide = 1					
+#strut_policy = minimun			
 
 panel_monitor = 1
 panel_position = bottom center horizontal
 panel_size = 100% 38
-panel_items = LTESC
-#panel_items = LTEBSC			# LAPTOP
+panel_items = LTESC		
 panel_margin = 0 0
 panel_padding = 0 0 0
 panel_dock = 0

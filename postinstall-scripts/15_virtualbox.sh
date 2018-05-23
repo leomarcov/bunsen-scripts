@@ -1,6 +1,5 @@
 #!/bin/bash
-# ACTION: Install VirtualBox
-# INFO: Install Virtualbox 5.2, config official repositories and add VirtualBox to Openbox menu
+# ACTION: Install VirtualBox 5.2, add to repositories and insert to Openbox menu
 # DEFAULT: y
 
 vb_package="virtualbox-5.2"

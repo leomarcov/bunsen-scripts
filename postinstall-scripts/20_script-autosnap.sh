@@ -1,6 +1,6 @@
 #!/bin/bash
-# ACTION: Install script autosnap.sh
-# INFO: Script autosnap.sh autosnap windows (half-maximice) in Openbox WM.
+# ACTION: Install script autosnap.sh (need Openbox config for autosnap with center clic in titlebar)
+# INFO: Script autosnap.sh half-maximize windows in Openbox WM.
 # DEFAULT: y
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Set default wallpaper for all users
+# ACTION: Set Aptenodytes wallpaper as default for all users
 # INFO: Aptenodytes Forsteri Wallpaper by Nixiepro is a clear and beautiful Bunsen wallpaper.
 # DEFAULT: y
 

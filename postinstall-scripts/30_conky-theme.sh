@@ -5,5 +5,5 @@
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
 for f in  /usr/share/bunsen/skel/.conkyrc  /home/*/.conkyrc ; do
-	cp -v "$basename"/postinstall-files/.conkyrc "$f"
+	cp -v "$base_dir"/postinstall-files/.conkyrc "$f"
 done
