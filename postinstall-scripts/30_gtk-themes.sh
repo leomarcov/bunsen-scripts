@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Install Arc GTK theme
-# DESC: Arc GTK theme is a clear and cool GTK theme. 
+# INFO: Arc GTK theme is a clear and cool GTK theme. 
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
