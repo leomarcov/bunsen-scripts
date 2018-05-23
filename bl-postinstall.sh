@@ -71,7 +71,7 @@ current_dir="$(dirname "$(readlink -f "$0")")"
 
 
 #=== EXEC-ACTIONS ==============================================================
-base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+base_dir="$(dirname "$(readlink -f "$0")")"
 scripts_dir="$base_dir/postinstall-scripts/"
 n=0
 for s in "$base_dir"/[0-9]*; do
