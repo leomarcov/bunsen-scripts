@@ -1,13 +1,15 @@
 #!/bin/bash
-# ACTION: Install pack of fonts
-# DESC: Pack of common fonts: Droid Sans, Open Sans, Roboto, Microsoft fonts, Oswald, Overpass, Profont, and others.
+# ACTION: Install Arc GTK theme
+# DESC: Arc GTK theme is a clear and cool GTK theme. 
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
 gtk_default="Arc"
 apt-get -y install arc-theme
-find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   # Change blue (#5294e2) acent color for grey
+
+# Change accent color blue (#5294e2) for grey:
+find /usr/share/themes/Arc -type f -exec sed -i 's/#5294e2/#b3bcc6/g' {} \;   
 	
 for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/.gtkrc-2.0 ; do
 	sed -i 's/^gtk-theme-name *= *.*/gtk-theme-name="'"$gtk_default"'"/' "$f"		
