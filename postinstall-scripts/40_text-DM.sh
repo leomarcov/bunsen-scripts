@@ -23,5 +23,5 @@ cp "$current_dir"/postinstall-files/physlock.service /etc/systemd/system/
 systemctl enable physlock.service
 	
 # Config tty1 to autoexec startx
-sed -i "/#$comment_auto/Id" /etc/profile
+sed -i '/#bl-postinstall.sh/Id' /etc/profile
 echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_auto" >> /etc/profile
