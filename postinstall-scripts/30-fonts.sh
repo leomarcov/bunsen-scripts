@@ -4,3 +4,6 @@
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+
+[ ! -d /usr/share/fonts/extra ] && mkdir /usr/share/fonts/extra/
+unzip -o "$basedir"/postinstall-files/fonts.zip -d /usr/share/fonts/extra/
