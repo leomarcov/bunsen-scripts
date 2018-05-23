@@ -5,42 +5,54 @@
 Althoughs is a collection of my particular useful packages and configs may be interesting for you.  
 The script exec many predefined actions:
 ```bash
+./bl-postinstall.sh -h
+Install configs and themes after BunsenLabs  installation
+Usage: bl-postinstall.sh [-h] [-l] [-a <actions>] [-y] [-d]
+   -l		Only list actions 
+   -a <actions>	Only do selected actions (e.g: -a 5,6,10-15)
+   -y		Auto-answer yes to all actions
+   -d		Auto-answer default to all actions
+   -h		Show this help
+
 # List all actions:
 $ ./bl-postinstall.sh -l
-[1] INSTALL: some useful packages
-[2] INSTALL AND CONFIG AS DEFAULT: rofi launcher
-[3] INSTALL: PlayOnLinux
-[4] INSTALL AND ADD REPOSITORIES: Sublime-Text 3
-[5] INSTALL AND ADD REPOSITORIES: Google Chrome
-[6] INSTALL AND ADD REPOSITORIES: VirtualBox
-[7] INSTALL: Extension Pack
-[8] INSTALL: script update-notification.sh for notify weekly for updates in tint bar
-[9] INSTALL: script autosnap.sh for autosnap windows when center click in title
-[10] INSTALL: script ps_mem.py for show RAM usage por process
-[11] INSTALL: script brightness.sh for control brightness
-[12] INSTALL AND CONFIG AS DEFAULT: Aptenodytes Forsteri Wallpaper by Nixiepro
-[13] INSTALL AND CONFIG AS DEFAULT: Numix-Paper icon theme
-[14] INSTALL: some cool fonts
-[15] INSTALL AND SET AS DEFAULT: Openbox theme
-[16] INSTALL AND CONFIG AS DEFAULT: Arc GTK theme
-[17] INSTALL AND CONFIG AS DEFAULT: Terminator theme
-[18] INSTALL AND CONFIG AS DEFAULT: new conky default
-[19] INSTALL AND CONFIG AS DEFAULT: tin2 theme
-[20] CONFIG: disable graphical display manager and install text locker
-[21] CONFIG: enable CTRL+ALT+BACKSPACE for kill X server
-[22] CONFIG: disable some stupid services
-[23] CONFIG: skip GRUB menu and enter Bunsen directly
-[24] CONIFG: show messages during boot
-[25] CONFIG: bl-exit classic theme
-[26] CONFIG: some useful aliases
-[27] CONFIG: new bash prompt
-[28] Set default brightness when start openbox (edit value in /usr/bin/brightness.sh)
+[1] Install Google Chrome, add to repositories and set has default browser
+[2] Install some useful packages
+[3] Install playonlinux and some dependencies
+[4] Install rofi and config as default
+[5] Install Sublimet Text, add repositories and set as default editor 
+[6] Install VirtualBox 5.2, add to repositories and insert to Openbox menu
+[7] Install VirtualBox Extension Pack
+[8] Install script autosnap.sh (need Openbox config for autosnap with center clic in titlebar)
+[9] Install script brightness.sh
+[10] Install script ps_mem.py
+[11] Install script update-notification.sh
+[12] Config bl-exit window with the classic theme for all users
+[13] Install default Conky theme for all users
+[14] Install popular font pack
+[15] Install Arc GTK theme and set as default for all users
+[16] Install Numix-Paper icon theme and set as default for all users
+[17] Install GoHome Openbox theme and set as default for all users
+[18] Install Terminator themes for all users
+[19] Install tint2 bar theme for all users
+[20] Set Aptenodytes wallpaper as default for all users
+[21] Config new bash prompt for all users
+[22] Set default brightness when start Openbox
+[23] Config useful aliases for all users (root inclusive)
+[24] Disable some stupid services
+[25] Enable CTRL+ALT+BACKSPACE for kill X server
+[26] Config system for show messages during boot
+[27] Config GRUB for skip menu
+[28] Disable lightdm and config login in tty
 
 # Exec all actions:
 $ sudo ./bl-postinstall.sh -y
 
 # Exec all actions and answer yes to all:
 $ sudo ./bl-postinstall.sh -y
+
+# Exec all actions and answer default to all:
+$ sudo ./bl-postinstall.sh -d
 
 # Exec only actions 5,7,10,11,12,13,14 and 15:
 $ sudo ./bl-postinstall.sh -a 5,7,10-15
