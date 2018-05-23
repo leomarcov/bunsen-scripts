@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install script autosnap.sh
+# ACTION: Install script autosnap.sh autosnap windows (half-maximice) in Openbox WM.
 # DESC: Script autosnap.sh 
 # DEFAULT: y
 
