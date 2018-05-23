@@ -4,6 +4,7 @@
 # DEFAULT: y
 
 comment_mark="#bl-postinstall.sh"
+base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
 systemctl set-default multi-user.target
 apt-get -y remove lightdm
@@ -21,7 +22,7 @@ make -C "$t"/* install
 sed  -i 's/^LOCK_COMMAND *= *.*/LOCK_COMMAND=\(\/usr\/local\/bin\/physlock\)/' /usr/bin/bl-lock
 	
 # Config physlock for start after suspend
-cp "$current_dir"/postinstall-files/physlock.service /etc/systemd/system/
+cp "$base_dir"/postinstall-files/physlock.service /etc/systemd/system/
 systemctl enable physlock.service
 	
 # Config tty1 to autoexec startx

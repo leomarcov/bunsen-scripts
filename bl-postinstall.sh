@@ -1,11 +1,4 @@
 #!/bin/bash
-#=== SCRIPT CONFIGS ============================================================
-bunsen_ver="Helium"
-openbox_default="GoHomeV2-leo"
-wallpaper_default="bl-colorful-aptenodytes-forsteri-by-nixiepro.png"
-comment_auto="#BL-POSTINSTALL"
-vb_package="virtualbox-5.2"
-ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   #https://www.virtualbox.org/wiki/Downloads
 
 
 #=== FUNCTION ==================================================================
@@ -14,10 +7,11 @@ ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_E
 #===============================================================================
 function help() {
 	echo -e 'Install configs and themes after BunsenLabs '"$bunsen_ver"' installation
-Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
+Usage: '$(basename $0)' [-h] [-l] [-a <actions>] [-y] [-d]
    \e[1m-l\e[0m\t\tOnly list actions 
    \e[1m-a <actions>\e[0m\tOnly do selected actions (e.g: -a 5,6,10-15)
    \e[1m-y\e[0m\t\tAuto-answer yes to all actions
+   \e[1m-y\e[0m\t\tAuto-answer default to all actions
    \e[1m-h\e[0m\t\tShow this help'
 	exit 0
 }
@@ -30,23 +24,35 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>]
 #===============================================================================
 n=0
 function do_action() {
+	action="$1"
+	info="$2"
+	default="$3"
 	n=$((n+1))
-	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
-	q="$1"
-	[ "$list" ] && echo -e "[$n] $q" && return 1
 
-	echo -en "\n\e[1m[$n] \e[4m$q\e[0m (Y/n)? "
-	[ "$yes" ] && q="y" || read q 
+	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
+	[ "$list" ] && echo -e "[$n] $action" && return 1
+
+	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m (Y/n)? "
+
+	case "${yes,,}" in
+		all) 		q="y"			;;
+		default) 	q="$default"	;;
+		*)	 		read q			;;
+	esac
+
 	[ "${q,,}" != "n" ] && return 0
 	return 1
 }
 
+
+
 #=== PARAMS ====================================================================
-while getopts ":hla:y" o; do
+while getopts ":hla:d" o; do
 	case "$o" in
-	h)	help 		;;
-	l)	list="true"	;;
-	y)	yes="true"	;;
+	h)	help 			;;
+	l)	list="true"		;;
+	y)	yes="all"		;;
+	d)	yes="default"	;;
 	a)	for a in $(echo "$OPTARG" | tr "," " "); do
 			# Is a range
 			echo "$a" | grep -E "[0-9]"*-"[0-9]" &> /dev/null && actions="$actions $(eval echo {$(echo $a|sed "s/-/../")})"
@@ -59,30 +65,26 @@ done
 
 
 #=== CHECKS ===================================================================
+# Check root:
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
-if [ ! "$list" ] && ! cat /etc/*release 2>/dev/null| grep "CODENAME" | grep -i "$bunsen_ver" &> /dev/null; then
-	echo "Seems you are not running BunsenLabs $bunsen_ver"
-	echo "Some packages may fail. Cross your fingers and press enter..."
-	read
-fi
-[ -f /sys/module/battery/initstate ] || [ -d /proc/acpi/battery/BAT0 ] && laptop="true"
-cat /proc/cpuinfo | grep -i hypervisor &>/dev/null && virtualmachine="true"
-current_dir="$(dirname "$(readlink -f "$0")")"
 
 
 #=== EXEC-ACTIONS ==============================================================
 base_dir="$(dirname "$(readlink -f "$0")")"
 scripts_dir="$base_dir/postinstall-scripts/"
+
 n=0
-for s in "$base_dir"/[0-9]*; do
-	head="$(head -8 "$scripts_dir")"
+for script in "$scripts_dir"/[0-9]*; do
+	head="$(head -10 "$script")"
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"
 	default="$(echo "$head" | grep "#[[:blank:]]*DEFAULT:" | sed 's/#[[:blank:]]*DEFAULT:[[:blank:]]*//')"
+
 	[ "${default,,}" != "n" ] && default="y"
 
-	do_action "$action" "$info" "$default"
-
+	if do_action "$action" "$info" "$default"; then
+		echo "---> exec $script"
+	fi
 done
 if [ ! "$list" ] && [ ! "$actions" ] && do_action "Reboot" "" "y"; then 
 	reboot
