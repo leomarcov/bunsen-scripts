@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Install script brightness.sh
-# DESC: Script brightness.sh increase/decrease and set default brightness using xrandr.
+# INFO: Script brightness.sh increase/decrease and set default brightness using xrandr.
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
