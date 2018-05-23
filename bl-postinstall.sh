@@ -38,9 +38,9 @@ function ask_action() {
 
 	echo -en "\n\n\e[33m${info}\n\e[39m\e[1m[$n] \e[4m${action}\e[0m $q "
 	case "$yes" in
-		allyes) 	q="y"; echo			;;
-		default) 	q="$default"; echo	;;
-		*)	 		read q				;;
+		allyes) 	q="y"; echo	"$q"		;;
+		default) 	q="$default"; echo "$q"	;;
+		*)	 		read q					;;
 	esac
 	
 	[ "${q,,}" != "n" ] && return 0
