@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Disable lightdm and config text display manager
-# DESC: Boot and enter your password in text mode is cool. You can use tt1 login and physlock for enter your password when go back  from suspend and lock screen. 
+# INFO: Boot and enter your password in text mode is cool. You can use tt1 login and physlock for enter your password when go back  from suspend and lock screen. 
 # DEFAULT: y
 
 comment_mark="#bl-postinstall.sh"
