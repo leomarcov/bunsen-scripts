@@ -5,9 +5,12 @@
 
 vb_package="virtualbox-5.2"
 
-echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
+# Install repositories
+grep -R "download.virtualbox.org" /etc/apt/ &> /dev/null || echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+
+# Install packages
 apt-get update
 	
 if apt-get install -y linux-headers-$(uname -r) "$vb_package"; then
