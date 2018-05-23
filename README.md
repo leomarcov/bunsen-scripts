@@ -2,7 +2,7 @@
 
 ## BunsenLabs-Postinstall
 **`bl-postinstall.sh`**: my personal postinstall script, themes and configs for BunsenLabs Helium.  
-Althoughs is a collection of my particular useful packages and configs may be interesting for you.  
+Althoughs is a collection of my particular useful themes, scripts and configs may be interesting for someone.  
 The script exec many predefined actions:
 ```bash
 ./bl-postinstall.sh -h
