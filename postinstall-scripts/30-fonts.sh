@@ -1,6 +1,6 @@
 #!/bin/bash
-# ACTION: Install Numix-Paper icon theme and set as default for all users
-# DESC: Numix-Paper is a icon theme based on Numix and Paper icon themes.
+# ACTION: Install pack of fonts
+# DESC: Pack of common fonts: Droid Sans, Open Sans, Roboto, Microsoft fonts, Oswald, Overpass, Profont, and others.
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
