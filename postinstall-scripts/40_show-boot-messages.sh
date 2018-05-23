@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Config GRUB for show messages during boot
+# ACTION: Config system for show messages during boot
 # DESC: In boot process the system can show a stupid logo or messages about the booting process.
 # DEFAULT: y
 
