@@ -35,7 +35,7 @@ function do_action() {
 	$([ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
 	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m $q "
 	case "${yes,,}" in
-		yes) 		q="y"			;;
+		allyes) 	q="y"			;;
 		default) 	q="$default"	;;
 		*)	 		read q			;;
 	esac
@@ -51,7 +51,7 @@ while getopts ":hla:d" o; do
 	case "$o" in
 	h)	help 			;;
 	l)	list="true"		;;
-	y)	yes="yes"		;;
+	y)	yes="allyes"		;;
 	d)	yes="default"	;;
 	a)	for a in $(echo "$OPTARG" | tr "," " "); do
 			# Is a range
