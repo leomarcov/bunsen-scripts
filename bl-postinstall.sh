@@ -72,9 +72,9 @@ current_dir="$(dirname "$(readlink -f "$0")")"
 
 #=== EXEC-ACTIONS ==============================================================
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
-scripts_dir="$basedir/postinstall-scripts/"
+scripts_dir="$base_dir/postinstall-scripts/"
 n=0
-for s in "$basedir"/[0-9]*; do
+for s in "$base_dir"/[0-9]*; do
 	head="$(head -8 "$scripts_dir")"
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"

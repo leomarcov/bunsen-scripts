@@ -3,7 +3,7 @@
 # INFO: Numix-Paper is a icon theme based on Numix and Paper icon themes.
 # DEFAULT: y
 
-basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 icon_default="Numix-Paper"
 
 apt-get install -y numix-icon-theme paper-icon-theme bunsen-paper-icon-theme

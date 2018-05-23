@@ -3,7 +3,7 @@
 # INFO: Arc GTK theme is a clear and cool GTK theme. 
 # DEFAULT: y
 
-basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
 gtk_default="Arc"
 apt-get -y install arc-theme

@@ -3,9 +3,9 @@
 # INFO: GoHome modified is a clear and cool Openbox theme.
 # DEFAULT: y
 
-basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
-unzip -o "$basedir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
+unzip -o "$base_dir"/postinstall-files/openbox_themes.zip -d /usr/share/themes/
 for d in  /usr/share/bunsen/skel/.config/openbox/  /home/*/.config/openbox/ ; do
-	cp -v "$basedir/postinstall-files/rc.xml" "$d"
+	cp -v "$base_dir/postinstall-files/rc.xml" "$d"
 done
