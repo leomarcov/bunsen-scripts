@@ -1,6 +1,6 @@
 #!/bin/bash
-# ACTION: Install playonlinux
-# DESC: Install playonlinux, windbind and...
+# ACTION: Install playonlinux and some dependencies
+# DESC: PlayonLinux us graphical front-end for the Wine for run Windows apps
 # DEFAULT: y
 
 apt-get install -y winbind
