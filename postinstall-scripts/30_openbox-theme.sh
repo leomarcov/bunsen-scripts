@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Install and set for all users openbox theme
-# DESC: GoHome modified is a clear and cool Openbox theme.
+# INFO: GoHome modified is a clear and cool Openbox theme.
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
