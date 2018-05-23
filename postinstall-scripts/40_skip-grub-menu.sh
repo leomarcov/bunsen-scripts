@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Config GRUB for skip menu
-# DESC: If you are using only one OS in the computer you con skip GRUB menu for fast boot.
+# DESC: If you are using only one OS in the computer you con skip GRUB menu for faster boot.
 # DEFAULT: y
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
