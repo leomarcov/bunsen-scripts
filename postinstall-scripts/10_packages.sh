@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Install some useful packages
-# DESC: Useful packages: vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback rar haveged
+# INFO: Useful packages: vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback rar haveged
 # DEFAULT: y
   
 packages="vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback rar"
