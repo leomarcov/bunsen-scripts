@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 #=== FUNCTION ==================================================================
 # NAME: help
 # DESCRIPTION: Show command help
@@ -33,7 +32,8 @@ function do_action() {
 	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
 	[ "$list" ] && echo -e "[$n] $action" && return 1
 
-	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m $([ "${default,,}" = "y" ] && echo "(Y/n)? " || echo "(y/N))? ")"
+	$([ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
+	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m $q "
 	case "${yes,,}" in
 		yes) 		q="y"			;;
 		default) 	q="$default"	;;
