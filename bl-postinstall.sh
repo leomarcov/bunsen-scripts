@@ -26,20 +26,20 @@ n=0
 function do_action() {
 	action="$1"
 	info="$2"
-	default="$3"
+	default="${3,,}"
+	[ "$default" != "n" ] && default="y"
 	n=$((n+1))
 
 	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
 	[ "$list" ] && echo -e "[$n] $action" && return 1
 
-	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m (Y/n)? "
-
+	echo -en "\n\n${info}\n\e[1m[$n] \e[4m${action}\e[0m $([ "${default,,}" = "y" ] && echo "(Y/n)? " || echo "(y/N))? ")"
 	case "${yes,,}" in
-		all) 		q="y"			;;
+		yes) 		q="y"			;;
 		default) 	q="$default"	;;
 		*)	 		read q			;;
 	esac
-
+	
 	[ "${q,,}" != "n" ] && return 0
 	return 1
 }
@@ -51,7 +51,7 @@ while getopts ":hla:d" o; do
 	case "$o" in
 	h)	help 			;;
 	l)	list="true"		;;
-	y)	yes="all"		;;
+	y)	yes="yes"		;;
 	d)	yes="default"	;;
 	a)	for a in $(echo "$OPTARG" | tr "," " "); do
 			# Is a range
@@ -79,8 +79,6 @@ for script in "$scripts_dir"/[0-9]*; do
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"
 	default="$(echo "$head" | grep "#[[:blank:]]*DEFAULT:" | sed 's/#[[:blank:]]*DEFAULT:[[:blank:]]*//')"
-
-	[ "${default,,}" != "n" ] && default="y"
 
 	if do_action "$action" "$info" "$default"; then
 		echo "---> exec $script"
