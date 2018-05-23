@@ -5,8 +5,8 @@
 
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
-for i in $(cat "$basedir"/postinstall-files/grub_skip.conf  | cut -f1 -d=);do
+for i in $(cat "$basedir/postinstall-files/grub_skip.conf"  | cut -f1 -d=);do
 	sed -i "/\b$i=/Id" /etc/default/grub
 done
-cat "$basedir"/postinstall-files/grub_skip.conf >> /etc/default/grub
+cat "$basedir/postinstall-files/grub_skip.conf" >> /etc/default/grub
 update-grub
