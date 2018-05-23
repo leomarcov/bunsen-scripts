@@ -1,6 +1,6 @@
 #!/bin/bash
 # ACTION: Install sublimetext 
-# DESC: Install sublimetext, config official repositories and set as default editor
+# INFO: Install sublimetext, config official repositories and set as default editor
 # DEFAULT: y
 
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
