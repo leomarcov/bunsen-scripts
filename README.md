@@ -48,7 +48,7 @@ $ ./bl-postinstall.sh -l
 
 
 # Exec all actions:
-$ sudo ./bl-postinstall.sh -y
+$ sudo ./bl-postinstall.sh
 
 # Exec all actions and answer yes to all:
 $ sudo ./bl-postinstall.sh -y
