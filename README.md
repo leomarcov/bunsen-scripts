@@ -23,7 +23,7 @@ $ ./bl-postinstall.sh -l
 [5] Install Sublimet Text, add repositories and set as default editor 
 [6] Install VirtualBox 5.2, add to repositories and insert to Openbox menu
 [7] Install VirtualBox Extension Pack
-[8] Install script autosnap.sh (need Openbox config for autosnap with center clic in titlebar)
+[8] Install script autosnap.sh for autosnap windows with center click in titlebar
 [9] Install script brightness.sh
 [10] Install script ps_mem.py
 [11] Install script update-notification.sh
@@ -39,11 +39,13 @@ $ ./bl-postinstall.sh -l
 [21] Config new bash prompt
 [22] Set default brightness when start Openbox
 [23] Config useful aliases
-[24] Disable some stupid services
-[25] Enable CTRL+ALT+BACKSPACE for kill X server
-[26] Config system for show messages during boot
-[27] Config GRUB for skip menu
-[28] Disable lightdm and config login in tty
+[24] Config incognito browsers has default
+[25] Disable some stupid services
+[26] Enable CTRL+ALT+BACKSPACE for kill X server
+[27] Config system for show messages during boot
+[28] Config GRUB for skip menu
+[29] Disable lightdm and config login in tty
+
 
 # Exec all actions:
 $ sudo ./bl-postinstall.sh -y
