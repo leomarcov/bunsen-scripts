@@ -75,11 +75,13 @@ if ! cat /etc/*release | grep -i bunsenlabs &> /dev/null; then
 	read
 fi
 
+
 #=== EXEC-ACTIONS ==============================================================
 base_dir="$(dirname "$(readlink -f "$0")")"
 scripts_dir="$base_dir/postinstall-scripts/"
-
 n=0
+
+# For each script in ./postinstall-scripts
 for script in "$scripts_dir"/[0-9]*; do
 	head="$(head -10 "$script")"
 	# Get ACTION field:
