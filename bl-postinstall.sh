@@ -27,7 +27,7 @@ n=0
 function ask_action() {
 	action="$1"
 	info="$2"
-	default="${3,,}"
+	default="${3,,}"; default="${default:0:1}"; 
 	[ "$default" != "n" ] && default="y"
 	n=$((n+1))
 
@@ -38,11 +38,12 @@ function ask_action() {
 
 	echo -en "\n\e[33m${info}\n\e[39m\e[1m[$n] \e[4m${action}\e[0m $q "
 	case "$yes" in
-		allyes) 	q="y"; echo	"$q"		;;
-		default) 	q="$default"; echo "$q"	;;
-		*)	 		read q					;;
+		allyes) 	q="y"; echo	"$q"					;;
+		default) 	q="$default"; echo "$q"				;;
+		*)	 		read q; q="${q,,}"; q="${q:0:1}"	;;
 	esac
 	
+	[ "$q" != "n" ] && [ "$q" != "s" ] && q="$default"
 	[ "${q,,}" != "n" ] && return 0
 	return 1
 }
