@@ -3,7 +3,10 @@
 ## BunsenLabs-Postinstall
 **`bl-postinstall.sh`**: my personal postinstall scripts, themes and configs for BunsenLabs Helium.  
 Althoughs is a collection of my particular useful themes may be interesting for someone.  
-The script `bl-postinstall.sh` may exec all actions or only specific list:
+The script `bl-postinstall.sh` may exec all actions or only specific list.
+
+### Install
+Download the repository or clone it exec the script `bl-postinstall.sh`
 ```bash
 ./bl-postinstall.sh -h
 Install configs and themes after BunsenLabs  installation
@@ -59,6 +62,20 @@ $ sudo ./bl-postinstall.sh -d
 # Exec only actions 5,7,10,11,12,13,14 and 15:
 $ sudo ./bl-postinstall.sh -a 5,7,10-15
 ```
+### Customize
+The script can be easily customized. 
+  * For remove action simply delete the action script file from folder `./postinstall.scripts/`
+  * For add action simple add new action script in folder `./postinstall.scripts/` with this header:
+  ```
+  #!/bin/bash
+  # ACTION: Description of the action
+  # INFO: Optional aditional info
+  # DEFAULT: y
+  
+  commands to do
+  
+  ```
+
 
 </br>
 
