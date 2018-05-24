@@ -16,7 +16,7 @@ for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	# Set defaul theme: android:notification:
 	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$d/rofi/config"
 	
-	# Copy rc.xml config with shortkeys to rofi
+	# Copy rc.xml config with shortkeys for rofi
 	cp -v "$base_dir/postinstall-files/rc.xml" "$d/openbox/"
 	
 	# Set as runas in menu:
