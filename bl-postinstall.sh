@@ -66,8 +66,14 @@ while getopts ":hlyda:" o; do
 	esac
 done
 
-[ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 
+#=== CHECKS ===================================================================
+[ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
+if ! cat /etc/*release | grep -i bunsenlabs &> /dev/null; then
+	echo "Seems you are not running BunsenLabs distro"
+	echo "Some actions may fail. Cross your fingers and press enter..."
+	read
+fi
 
 #=== EXEC-ACTIONS ==============================================================
 base_dir="$(dirname "$(readlink -f "$0")")"
