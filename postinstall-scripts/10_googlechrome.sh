@@ -9,6 +9,7 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 # Install package
 apt-get update
 apt-get install -y google-chrome-stable
+apt-get remove chromium
 
 # Set as default
 update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
