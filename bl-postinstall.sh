@@ -86,8 +86,8 @@ for script in "$scripts_dir"/[0-9]*; do
 
 	if ask_action "$action" "$info" "$default"; then
 		"$script"		# EXEC SCRIPT
+		echo
 	fi
-	echo
 done
 
 if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "n"; then 
