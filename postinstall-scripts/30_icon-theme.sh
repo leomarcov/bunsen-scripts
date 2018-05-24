@@ -7,7 +7,7 @@ base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 icon_default="Numix-Paper"
 
 apt-get install -y numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
-unzip  -o "$basdir"/numix-paper-icon-theme/numix-paper-icon-theme.zip -d /usr/share/icons/	
+unzip  -o "$base_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip -d /usr/share/icons/	
 	
 for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/.gtkrc-2.0 ; do
 	sed -i 's/^gtk-icon-theme-name *= *.*/gtk-icon-theme-name="'"$icon_default"'"/' "$f"		
