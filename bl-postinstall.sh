@@ -80,6 +80,7 @@ n=0
 for script in "$scripts_dir"/[0-9]*; do
 	head="$(head -10 "$script")"
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
+	[ ! "action" ] && continue
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"
 	default="$(echo "$head" | grep "#[[:blank:]]*DEFAULT:" | sed 's/#[[:blank:]]*DEFAULT:[[:blank:]]*//')"
 
