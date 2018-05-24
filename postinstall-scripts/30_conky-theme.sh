@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install default Conky theme for all users
+# ACTION: Install default Conky theme
 # DEFAULT: y
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
