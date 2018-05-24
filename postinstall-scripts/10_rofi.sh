@@ -3,7 +3,7 @@
 # INFO: Rofi is a simple text switcher and launcher
 # DEFAULT: y
 
-if [ $(apt-cache search --names-only rofi | wc -l) -eq 0 ]; then
+if [ $(apt-cache pkgnames | grep "^rofi$" | wc -l) -eq 0 ]; then
 	echo "ERROR: cant find rofi in repositories"
 	exit 1
 fi
