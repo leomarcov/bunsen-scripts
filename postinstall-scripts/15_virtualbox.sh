@@ -3,9 +3,10 @@
 # DEFAULT: y
 
 vb_package="virtualbox-5.2"
+main_distro="$(cat /etc/apt/sources.list | grep ^deb | awk '{print $3}' | head -1)"
 
 # Install repositories
-grep -R "download.virtualbox.org" /etc/apt/ &> /dev/null || echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
+grep -R "download.virtualbox.org" /etc/apt/ &> /dev/null || echo "deb http://download.virtualbox.org/virtualbox/debian $main_distro contrib" > /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 
