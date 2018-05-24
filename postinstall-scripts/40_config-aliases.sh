@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Config useful aliases for all users (root inclusive)
+# ACTION: Config useful aliases
 # DEFAULT: y
 
 comment_mark="#bl-postinstall.sh"
