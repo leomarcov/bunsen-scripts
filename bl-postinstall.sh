@@ -36,7 +36,7 @@ function ask_action() {
 
 	[ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
 
-	echo -en "\n\n\e[33m${info}\n\e[39m\e[1m[$n] \e[4m${action}\e[0m $q "
+	echo -en "\n\e[33m${info}\n\e[39m\e[1m[$n] \e[4m${action}\e[0m $q "
 	case "$yes" in
 		allyes) 	q="y"; echo	"$q"		;;
 		default) 	q="$default"; echo "$q"	;;
@@ -87,6 +87,7 @@ for script in "$scripts_dir"/[0-9]*; do
 	if ask_action "$action" "$info" "$default"; then
 		"$script"		# EXEC SCRIPT
 	fi
+	echo
 done
 
 if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "n"; then 
