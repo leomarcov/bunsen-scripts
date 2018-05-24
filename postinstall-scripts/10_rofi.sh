@@ -3,6 +3,11 @@
 # INFO: Rofi is a simple text switcher and launcher
 # DEFAULT: y
 
+if [ $(apt-cache search --names-only rofi | wc -l) -eq 0 ]; then
+	echo "ERROR: cant find rofi in repositories"
+	exit 1
+fi
+
 apt-get install -y rofi
 	
 for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
