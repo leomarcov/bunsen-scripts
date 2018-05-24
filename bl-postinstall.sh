@@ -87,7 +87,7 @@ for script in "$scripts_dir"/*; do
 	head="$(head -10 "$script")"
 	# Get ACTION field:
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
-	[ ! "action" ] && continue
+	[ ! "$action" ] && continue
 	# Get INFO field:
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"
 	# Get DEFAULTfield:
