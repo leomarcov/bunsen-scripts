@@ -8,12 +8,16 @@ if [ $(apt-cache search --names-only rofi | wc -l) -eq 0 ]; then
 	exit 1
 fi
 
+base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 apt-get install -y rofi
 	
 for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	[ ! -d "$d/rofi/" ] && mkdir -p "$d/rofi/"
 	# Set defaul theme: android:notification:
 	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$d/rofi/config"
+	
+	# Copy rc.xml config with shortkeys to rofi
+	cp -v "$base_dir/postinstall-files/rc.xml" "$d/openbox/"
 	
 	# Set as runas in menu:
 	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show run<\/command>/' "$d/openbox/menu.xml"
