@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install Terminator themes for all users
+# ACTION: Install new Terminator themes
 # DEFAULT: y
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
