@@ -11,4 +11,6 @@ for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
 	
 	[ "$laptop" ] && [ ! "$virtualmachine" ] && tint_laptop="_laptop"
 	cp -v "$base_dir"/postinstall-files/tint2rc${tint_laptop} "$d/tint2rc"
+	
+	[ "${d:1:4}" = "home" ] && echo "$d/tint2rc" > "$d/tint2-sessionfile"
 done
