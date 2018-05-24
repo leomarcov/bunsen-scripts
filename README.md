@@ -27,18 +27,18 @@ $ ./bl-postinstall.sh -l
 [9] Install script brightness.sh
 [10] Install script ps_mem.py
 [11] Install script update-notification.sh
-[12] Config bl-exit window with the classic theme for all users
-[13] Install default Conky theme for all users
+[12] Config bl-exit window with the classic theme
+[13] Install new default Conky theme
 [14] Install popular font pack
-[15] Install Arc GTK theme and set as default for all users
-[16] Install Numix-Paper icon theme and set as default for all users
+[15] Install Arc GTK theme and set as default
+[16] Install Numix-Paper icon theme and set as default
 [17] Install GoHome Openbox theme and set as default for all users
-[18] Install Terminator themes for all users
-[19] Install tint2 bar theme for all users
-[20] Set Aptenodytes wallpaper as default for all users
-[21] Config new bash prompt for all users
+[18] Install new Terminator themes
+[19] Install new tint2 theme
+[20] Set Aptenodytes wallpaper as default
+[21] Config new bash prompt
 [22] Set default brightness when start Openbox
-[23] Config useful aliases for all users (root inclusive)
+[23] Config useful aliases
 [24] Disable some stupid services
 [25] Enable CTRL+ALT+BACKSPACE for kill X server
 [26] Config system for show messages during boot
