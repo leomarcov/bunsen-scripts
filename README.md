@@ -6,7 +6,7 @@ Althoughs is a collection of my particular useful themes may be interesting for 
 The script `bl-postinstall.sh` may exec all actions or only specific list.
 
 ### Install
-Download the repository or clone it exec the script `bl-postinstall.sh`
+Download the repository or clone it and exec the script `bl-postinstall.sh`
 ```bash
 ./bl-postinstall.sh -h
 Install configs and themes after BunsenLabs  installation
