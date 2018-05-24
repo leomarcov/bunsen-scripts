@@ -18,7 +18,7 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>] [-y] [-d]
 
 #=== FUNCTION ==================================================================
 # NAME: ask_action
-# DESCRIPTION: show question to do an action and determine if do it or not do
+# DESCRIPTION: ask for a action and determine if do it or not do
 # EXIT CODE: 
 #	0-> do the action
 #	1-> dont do de action
@@ -66,9 +66,6 @@ while getopts ":hlyda:" o; do
 	esac
 done
 
-
-#=== CHECKS ===================================================================
-# Check root:
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 
 
@@ -79,13 +76,16 @@ scripts_dir="$base_dir/postinstall-scripts/"
 n=0
 for script in "$scripts_dir"/[0-9]*; do
 	head="$(head -10 "$script")"
+	# Get ACTION field:
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
 	[ ! "action" ] && continue
+	# Get INFO field:
 	info="$(echo "$head" | grep "#[[:blank:]]*INFO:" | sed 's/#[[:blank:]]*INFO:[[:blank:]]*//')"
+	# Get DEFAULTfield:
 	default="$(echo "$head" | grep "#[[:blank:]]*DEFAULT:" | sed 's/#[[:blank:]]*DEFAULT:[[:blank:]]*//')"
 
 	if ask_action "$action" "$info" "$default"; then
-		"$script"		# EXEC SCRIPT
+		bash "$script"		# EXEC SCRIPT
 		echo
 	fi
 done
