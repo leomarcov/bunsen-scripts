@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install new tint2 bar theme
+# ACTION: Install new tint2 theme
 # DEFAULT: y
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
