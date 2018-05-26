@@ -35,7 +35,7 @@ function ask_action() {
 	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
 	
 	
-	[ "$list" ] && echo -e "[$n] $action $([ "$default" ] && echo "DEFAULT: $default")" && return 1
+	[ "$list" ] && echo -e "[$n] $action ($default)" && return 1
 
 	# Show action 
 	[ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
