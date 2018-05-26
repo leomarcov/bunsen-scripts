@@ -10,11 +10,9 @@ base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 cat /proc/cpuinfo | grep -i hypervisor &>/dev/null && virtualmachine="true"
 
 for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
-	[ ! -f "$d/tint2rc_bunsen" ] && cp -v "$d/tint2rc" "$d/tint2rc_bunsen"
 	cp -v "$base_dir/postinstall-files/*tint*" "$d"
+	[ "$laptop" ] && [ ! "$virtualmachine" ] && tint_version="_laptop"
 	
-	[ "$laptop" ] && [ ! "$virtualmachine" ] && tint_laptop="_laptop"
-	cp -v "$base_dir/postinstall-files/taskbar${tint_laptop}.tint" "$d/tint2rc"
-	
-	[ "${d:1:4}" = "home" ] && echo "$d/tint2rc" > "$d/tint2-sessionfile"
+	echo "/usr/share/bunsen/skel/.config/tint2/taskbar${tint_version}.tint" > "$d/tint2-sessionfile"
+	echo "/usr/share/bunsen/skel/.config/tint2/menu.tint" >> "$d/tint2-sessionfile"
 done
