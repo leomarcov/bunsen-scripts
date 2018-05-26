@@ -52,6 +52,17 @@ panel_window_name = launcher
 # EXECUTOR
 #---------------------------------------------
 execp = new
+execp_command = echo "Run..."
+execp_interval = 0
+execp_background_id = 2
+execp_font = Droid Sans 11
+execp_font_color = #FFFFFF 100
+execp_centered = 1
+execp_padding = 20 0 0
+execp_tooltip = 
+execp_lclick_command = rofi -show drun 
+
+execp = new
 execp_command = echo "Terminal"
 execp_interval = 0
 execp_background_id = 2
@@ -72,7 +83,6 @@ execp_centered = 1
 execp_padding = 20 0 0
 execp_tooltip = 
 execp_lclick_command = bl-file-manager 
-
 
 execp = new
 execp_command = echo "Web Browser"
@@ -97,7 +107,7 @@ execp_tooltip =
 execp_lclick_command = bl-text-editor
 
 execp = new
-execp_command = echo "OpenOffice"
+execp_command = echo "LibreOffice"
 execp_interval = 0
 execp_background_id = 2
 execp_font = Droid Sans 11
@@ -105,29 +115,11 @@ execp_font_color = #FFFFFF 100
 execp_centered = 1
 execp_padding = 20 0 0
 execp_tooltip = 
-execp_lclick_command = /opt/openoffice4/program/soffice /home/alumno/ofimatica.ods
+execp_lclick_command = libreoffice
 
-execp = new
-execp_command = echo "PacketTracer"
-execp_interval = 0
-execp_background_id = 2
-execp_font = Droid Sans 11
-execp_font_color = #FFFFFF 100
-execp_centered = 1
-execp_padding = 20 0 0
-execp_tooltip = 
-execp_lclick_command = /opt/pt/packettracer
 
-execp = new
-execp_command = echo "Programación"
-execp_interval = 0
-execp_background_id = 2
-execp_font = Droid Sans 11
-execp_font_color = #FFFFFF 100
-execp_centered = 1
-execp_padding = 20 0 0
-execp_tooltip = 
-execp_lclick_command = /opt/pseint/wxPSeInt /home/alumno/Descifra.psc
+
+
 
 
 separator = new
@@ -178,11 +170,3 @@ separator_size = 1
 separator_style = line
 separator_color = #FFFFFF 30
 separator_padding = 0
-
-separator = new
-separator_background_id = 1
-separator_size = 1
-separator_style = line
-separator_color = #FFFFFF 30
-separator_padding = 0
-
