@@ -20,5 +20,5 @@ for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	cp -v "$base_dir/postinstall-files/rc.xml" "$d/openbox/"
 	
 	# Set as runas in menu:
-	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show run<\/command>/' "$d/openbox/menu.xml"
+	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show drun<\/command>/' "$d/openbox/menu.xml"
 done
