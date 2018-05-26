@@ -10,7 +10,7 @@ base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 cat /proc/cpuinfo | grep -i hypervisor &>/dev/null && virtualmachine="true"
 
 for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
-	cp -v "$base_dir/postinstall-files/*tint*" "$d"
+	cp -v "$base_dir/postinstall-files/"*tint* "$d"
 	[ "$laptop" ] && [ ! "$virtualmachine" ] && tint_version="_laptop"
 	
 	# Set taskbar.tint and menu.tint as default tints
