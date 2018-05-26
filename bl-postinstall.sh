@@ -31,12 +31,16 @@ function ask_action() {
 	[ "$default" != "n" ] && default="y"
 	n=$((n+1))
 
+	# Skip action if not in -a
 	[ "$actions" ] && { echo "$actions" | grep -w "$n" &> /dev/null || return 1; } 
-	[ "$list" ] && echo -e "[$n] $action" && return 1
+	
+	
+	[ "$list" ] && echo -e "[$n] $action $([ "$default" ] && echo "DEFAULT: $default")" && return 1
 
+	# Show action 
 	[ "${default,,}" = "y" ] && q="(Y/n)?" || q="(y/N))?"
-
 	echo -en "\n\e[33m${info}\n\e[39m\e[1m[$n] \e[4m${action}\e[0m $q "
+	
 	case "$yes" in
 		allyes) 	q="y"; echo	"$q"					;;
 		default) 	q="$default"; echo "$q"				;;
