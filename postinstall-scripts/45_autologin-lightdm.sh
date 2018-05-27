@@ -13,4 +13,4 @@ fi
 echo "First user located: first_name"
 echo '[SeatDefaults]
 autologin-user='"$first_user"'
-autologin-user-timeout=0' | tee /etc/lightdm/lightdm.conf
+autologin-user-timeout=0' | tee -a /etc/lightdm/lightdm.conf
