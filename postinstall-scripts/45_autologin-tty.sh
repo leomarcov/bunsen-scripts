@@ -11,7 +11,8 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-[ ! -d etc/systemd/system/getty\@tty1.service.d ] && mkdir -p etc/systemd/system/getty\@tty1.service.d
-[Service]
+[ ! -d /etc/systemd/system/getty\@tty1.service.d ] && mkdir -p /etc/systemd/system/getty\@tty1.service.d
+echo '[Service]
 ExecStart=
-ExecStart=-/sbin/agetty -a '$first_user' %I $TERM'
+ExecStart=-/sbin/agetty -a '$first_user' --noclear %I $TERM' > /etc/systemd/system/getty\@tty1.service.d/autologin.conf
+systemctl enable getty@tty1.service
