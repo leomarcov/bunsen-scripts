@@ -4,5 +4,5 @@
 # DEFAULT: y
   
 apt-get install -y vim vlc ttf-mscorefonts-installer fonts-freefont-ttf fonts-droid-fallback rar
-apt-get install -y haveged  # Avoid delay first login in Helium
+# apt-get install -y haveged  # Avoid delay first login in Helium
   
