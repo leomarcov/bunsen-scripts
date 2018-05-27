@@ -5,12 +5,12 @@
 
 first_uid="$(grep "FIRST_UID=" /etc/adduser.conf | awk -F= '{print $2}')"
 first_user="$(id -u "$first_uid" --name)"
-
 if [ $? -ne 0 ]; then
 	echo "Cant find the first user"
 	exit 1
 fi
 
+echo "First user located: first_name"
 [ ! -d /etc/systemd/system/getty\@tty1.service.d ] && mkdir -p /etc/systemd/system/getty\@tty1.service.d
 echo '[Service]
 ExecStart=
