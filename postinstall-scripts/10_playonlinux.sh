@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install playonlinux and some dependencies
+# ACTION: Install playonlinux and MS Office dependencies
 # INFO: PlayonLinux is graphical front-end for the Wine for run Windows apps
 # DEFAULT: n
 
