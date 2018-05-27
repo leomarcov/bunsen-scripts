@@ -4,7 +4,8 @@
 # DEFAULT: n
 
 # Add i386
-sudo dpkg --add-architecture i386 && sudo apt-get update
+dpkg --add-architecture i386
+apt-get update
 
 # Install some wine goodies (fonts-wine may wine about dep conflicts, exclude it if it does)
 apt-get install -y wine wine32 wine64 libwine libwine:i386 fonts-wine
