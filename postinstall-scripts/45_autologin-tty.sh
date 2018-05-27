@@ -14,5 +14,5 @@ fi
 [ ! -d /etc/systemd/system/getty\@tty1.service.d ] && mkdir -p /etc/systemd/system/getty\@tty1.service.d
 echo '[Service]
 ExecStart=
-ExecStart=-/sbin/agetty -a '$first_user' --noclear %I $TERM' > /etc/systemd/system/getty\@tty1.service.d/autologin.conf
+ExecStart=-/sbin/agetty -a '$first_user' --noclear %I $TERM' | tee /etc/systemd/system/getty\@tty1.service.d/autologin.conf
 systemctl enable getty@tty1.service
