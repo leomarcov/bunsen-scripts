@@ -1,7 +1,7 @@
 #!/bin/bash
 # ACTION: Config first user account for autologin on tty1
 # INFO: If you login on tty this option causes no need to login on tt1 for the first user on the system
-# DEFAULT: y
+# DEFAULT: n
 
 first_uid="$(grep "FIRST_UID=" /etc/adduser.conf | awk -F= '{print $2}')"
 first_user="$(id -u "$first_uid" --name)"
