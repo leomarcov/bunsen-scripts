@@ -47,7 +47,7 @@ function ask_action() {
 		*)	 		read q; q="${q,,}"; q="${q:0:1}"	;;
 	esac
 	
-	[ "$q" != "n" ] && [ "$q" != "s" ] && q="$default"
+	[ "$q" != "n" ] && [ "$q" != "y" ] && q="$default"
 	[ "${q,,}" != "n" ] && return 0
 	return 1
 }
