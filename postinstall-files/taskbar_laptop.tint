@@ -37,6 +37,7 @@ border_color =
 rounded = 0
 border_width = 1
 background_color = #ffffff 80
+background_color_hover = #ffffff 100
 border_color = #BBBBBB 100
 
 # ID 6 - task
