@@ -7,6 +7,12 @@ base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 icon_default="Numix-Paper"
 
 apt-get install -y numix-icon-theme paper-icon-theme bunsen-paper-icon-theme
+
+if [ ! -d /usr/share/icons/Numix/ ]; then
+	echo "$(basename $0) ERROR: Numix theme is not installed"
+	exit 1
+fi
+
 unzip  -o "$base_dir"/numix-paper-icon-theme/numix-paper-icon-theme.zip -d /usr/share/icons/	
 	
 for f in  /usr/share/bunsen/skel/.gtkrc-2.0  /home/*/.gtkrc-2.0 ; do
