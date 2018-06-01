@@ -10,8 +10,8 @@ apt-get update
 # Install some wine goodies (fonts-wine may wine about dep conflicts, exclude it if it does)
 apt-get install -y wine wine32 wine64 libwine libwine:i386 fonts-wine
 apt-get install -y wine-bin:i386 
-apt-get install winbind
+apt-get install -y winbind
 apt-get install -y playonlinux
 
 # Install print libs for printing from Office
-sudo apt install libcups2:i386
+apt-get install -y libcups2:i386
