@@ -19,35 +19,35 @@ Usage: bl-postinstall.sh [-h] [-l] [-a <actions>] [-y] [-d]
 
 # List all actions:
 $ ./bl-postinstall.sh -l
-[1] Install Google Chrome, add to repositories and set has default browser
-[2] Install some useful packages
-[3] Install playonlinux and some dependencies
-[4] Install rofi and config as default
-[5] Install Sublimet Text, add repositories and set as default editor 
-[6] Install VirtualBox 5.2, add to repositories and insert to Openbox menu
-[7] Install VirtualBox Extension Pack
-[8] Install script autosnap.sh for autosnap windows with center click in titlebar
-[9] Install script brightness.sh
-[10] Install script ps_mem.py
-[11] Install script update-notification.sh
-[12] Config bl-exit window with the classic theme
-[13] Install new default Conky theme
-[14] Install popular font pack
-[15] Install Arc GTK theme and set as default
-[16] Install Numix-Paper icon theme and set as default
-[17] Install GoHome Openbox theme and set as default for all users
-[18] Install new Terminator themes
-[19] Install new tint2 theme
-[20] Set Aptenodytes wallpaper as default
-[21] Config new bash prompt
-[22] Set default brightness when start Openbox
-[23] Config useful aliases
-[24] Config incognito browsers has default
-[25] Disable some stupid services
-[26] Enable CTRL+ALT+BACKSPACE for kill X server
-[27] Config system for show messages during boot
-[28] Config GRUB for skip menu
-[29] Disable lightdm and config login in tty
+[1] Install Google Chrome, add to repositories and set has default browser (y)
+[2] Install some useful packages (y)
+[3] Install playonlinux and MS Office dependencies (n)
+[4] Install rofi and config as default (y)
+[5] Install Sublime Text, add repositories and set as default editor  (y)
+[6] Install VirtualBox 5.2, add to repositories and insert to Openbox menu (y)
+[7] Install VirtualBox Extension Pack (y)
+[8] Install script autosnap.sh for autosnap windows with center click in titlebar (y)
+[9] Install script ps_mem.py (y)
+[10] Install script update-notification.sh (y)
+[11] Config bl-exit window with the classic theme (y)
+[12] Install new default Conky theme (y)
+[13] Install pack of popular fonts (y)
+[14] Install Arc GTK theme and set as default (y)
+[15] Install Numix-Paper icon theme and set as default (y)
+[16] Install clear xfce4-notify theme (y)
+[17] Install GoHome Openbox theme and set as default for all users (y)
+[18] Install new Terminator themes (y)
+[19] Install new tint2 theme (y)
+[20] Copy wallpapers pack and set Aptenodytes wallpaper as default (y)
+[21] Config new bash prompt (y)
+[22] Config useful aliases (y)
+[23] Disable some stupid services (y)
+[24] Enable CTRL+ALT+BACKSPACE for kill X server (y)
+[25] Config system for show messages during boot (y)
+[26] Config GRUB for skip menu (y)
+[27] Disable lightdm and config login using tty (y)
+[28] Config first user account for autologin on lightdm (n)
+[29] Config first user account for autologin on tty1 (n)
 
 
 # Exec all actions:
