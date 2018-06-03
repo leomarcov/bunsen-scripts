@@ -25,9 +25,9 @@ function help() {
 	echo -e 'Inc/dec the brightness
 Usage: '$(basename $0)' -inc|-dec|-h|-I|-U
    \e[1m-h\e[0m\tShow command help
-   \e[1m-def\e[0m\tSet brightness to '"$default"%'
-   \e[1m-inc\e[0m\tIncrease the brightness in '"%bl_step"'%"
-   \e[1m-dec\e[0m\tDecrease the brightness in '"%bl_step"'%"
+   \e[1m-def\e[0m\tSet brightness to '$bl_default'% (may be config in '$0')
+   \e[1m-inc\e[0m\tIncrease the brightness in '$bl_step'% (may be config in '$0')
+   \e[1m-dec\e[0m\tDecrease the brightness in '$bl_step'% (may be config in '$0')
 '
 	exit 0
 }
