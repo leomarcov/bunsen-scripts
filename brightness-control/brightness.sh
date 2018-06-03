@@ -11,11 +11,11 @@
 #===================================================================================
 
 # CONFIG
-step=5									# Percent steps of inc/dec
-video_id="eDP-1"						# Video ID
-install_path="/usr/bin/brightness.sh"	# Installation dir
-gamma="0.7:0.7:0.7"
-default="0.6"
+bl_step=5					# Percent steps of inc/dec
+bl_min=5					# Minium percent brightness
+bl_default="30"					# Default percent
+bl_dir="/sys/class/backlight/intel_backlight/"	# Dir for control backlight
+install_path="/usr/bin/brightness.sh"		# Installation dir
 
 #=== FUNCTION ==================================================================
 # NAME: help
@@ -25,43 +25,49 @@ function help() {
 	echo -e 'Inc/dec the brightness
 Usage: '$(basename $0)' -inc|-dec|-h|-I|-U
    \e[1m-h\e[0m\tShow command help
-   \e[1m-def\e[0m\tSet default brightness ('"$default"')
-   \e[1m-inc\e[0m\tIncrease the brightness
-   \e[1m-dec\e[0m\tDecrease the brightness
+   \e[1m-def\e[0m\tSet brightness to '"$default"%'
+   \e[1m-inc\e[0m\tIncrease the brightness in '"%bl_step"'%"
+   \e[1m-dec\e[0m\tDecrease the brightness in '"%bl_step"'%"
 '
 	exit 0
 }
 
 function set_brightness() {
-	xrandr --output "$video_id" --brightness "$1" --gamma "$2"
-	exit
+	[ "$1" -eq "$1" ] &> /dev/null || return
+	bl_max="$(cat "$bl_dir/max_brightness")"
+	bl_min="$(($bl_max*$bl_min/100))"
+	
+	if [ "$bl_next" -ge "$bl_max" ]; then
+		bl_next="$bl_max"
+	elif [ "$bl_next" -lt "$bl_min" ]; then
+		bl_next="$bl_min"
+	fi
+	
+	echo "$bl_next" > "$bl_dir/brightness"
 }
 
 function change_brightness() {
-	b=($(xrandr --verbose | awk  '/Brightness/ { print $2; }' | tr "." " "))
-	b=$((${b[0]}*100+${b[1]}))
+	bl_current="$(cat "$bl_dir/brightness")"
+	bl_max="$(cat "$bl_dir/max_brightness")"
 
-	n=0
-	[ "$1" = "-dec" ] && n=-$step
-	[ "$1" = "-inc" ] && n=+$step
-
-	b=$(($n+$b))
-
-	if [ "$b" -ge 100 ]; then
-		b="1.0"
-	elif [ "$b" -lt 20 ]; then
-		b="0.20"
-	else
-		b="0.${b}"
-	fi
-
-	set_brightness "$b" "$gamma"
-	exit
+	case "$1" in
+	"-def") 
+		bl_next="$(($bl_max*$bl_default/100))"
+		;;
+	"-inc"|"-dec")
+		bl_step="$(($bl_max*$bl_step/100))"
+		[ "$1" = "-dec" ] && bl_step="-$bl_step"
+		bl_next="$(($bl_step+$bl_current))"
+	esac
+	set_brightness "$bl_next"
 }
 
 
-[ "$1" = "-dec" ] || [ "$1" = "-inc" ] && change_brightness "$1"
-[ "$#" -eq 0 ] && exit 
-[ "$1" = "-def" ] && set_brightness "$default" "$gamma"
+if [ ! -d "$bl_dir" ]; then
+	echo "$bl_dir dont exist"
+	echo "Please contig bl_dir in $0 file"
+	exit 1
+fi
 
-help
+[ "$1" != "-dec" ] && [ "$1" != "-inc" ] && [ "$1" != "-def" ] && help
+change_brightness "$1"
