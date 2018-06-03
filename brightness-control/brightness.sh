@@ -11,8 +11,8 @@
 #===================================================================================
 
 # CONFIG
-bl_step=5										# Percent steps of inc/dec
-bl_min=5										# Minium percent brightness
+bl_step=3										# Percent steps of inc/dec
+bl_min=3										# Minium percent brightness
 bl_default="30"									# Default percent
 bl_dir="/sys/class/backlight/intel_backlight/"	# Dir for control backlight
 install_path="/usr/bin/brightness.sh"			# Installation dir
