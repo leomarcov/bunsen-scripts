@@ -11,11 +11,11 @@
 #===================================================================================
 
 # CONFIG
-bl_step=5					# Percent steps of inc/dec
-bl_min=5					# Minium percent brightness
-bl_default="30"					# Default percent
+bl_step=5										# Percent steps of inc/dec
+bl_min=5										# Minium percent brightness
+bl_default="30"									# Default percent
 bl_dir="/sys/class/backlight/intel_backlight/"	# Dir for control backlight
-install_path="/usr/bin/brightness.sh"		# Installation dir
+install_path="/usr/bin/brightness.sh"			# Installation dir
 
 #=== FUNCTION ==================================================================
 # NAME: help
@@ -28,9 +28,27 @@ Usage: '$(basename $0)' -inc|-dec|-h|-I|-U
    \e[1m-def\e[0m\tSet brightness to '$bl_default'% (may be config in '$0')
    \e[1m-inc\e[0m\tIncrease the brightness in '$bl_step'% (may be config in '$0')
    \e[1m-dec\e[0m\tDecrease the brightness in '$bl_step'% (may be config in '$0')
+   \e[1m-I\e[0m\tInstall the script 
 '
 	exit 0
 }
+
+
+
+function install() {
+	[ "$(id -u)" -ne 0 ] && echo "Install must be run as root" && exit 1
+
+	[ "$install_path" = "$(readlink -f $0)" ] || sudo cp -v "$0" "$install_path"
+	chmod +x "$install_path"
+
+	addgroup video 2> /dev/null
+
+	echo 'ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="'$(basename "$bl_dir")'", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="'$(basename "$bl_dir")'", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"' | tee /etc/udev/rules.d/backlight.rules
+
+	echo "Add useres to video group for give brightness change permisions"
+}
+
 
 function set_brightness() {
 	[ "$1" -eq "$1" ] &> /dev/null || return
@@ -69,5 +87,10 @@ if [ ! -d "$bl_dir" ]; then
 	exit 1
 fi
 
-[ "$1" != "-dec" ] && [ "$1" != "-inc" ] && [ "$1" != "-def" ] && help
-change_brightness "$1"
+case "$1" in
+	-I)	install ;;
+	-dec|-inc|-def) change_brightness "$1" ;;
+	*) help ;;
+esac
+
+
