@@ -18,7 +18,7 @@ password_pbkdf2 admin '"$pbkdf2_pass   $comment_mark" | tee -a /etc/grub.d/40_cu
 
 # Config others users for select entry
 for f in /etc/grub.d/*; do 
-	sed -i 's/\bmenuentry\b/menuentry --unrestricted /g' "$i" 
+	sed -i 's/\bmenuentry\b/menuentry --unrestricted /g' "$f" 
 	#sed -i '/echo[[:blank:]]*"[[:blank:]]*submenu/ s/submenu/submenu --unrestricted/g' $f
 done
 
