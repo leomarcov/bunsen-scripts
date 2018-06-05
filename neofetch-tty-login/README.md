@@ -1,5 +1,5 @@
 # Neofetch TTY login message
-Show login message in tty using neofetch
+TTY login message is boring. This script show cool info message at login based on neofetch.
 
 ![image](https://user-images.githubusercontent.com/32820131/40976478-92efc988-68ce-11e8-98ec-f5313a773000.png)
 
