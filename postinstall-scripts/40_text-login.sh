@@ -32,9 +32,12 @@ echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/prof
 # Show neofetch info in login
 which neofetch &>/dev/null || apt-get install neofetch
 if which neofetch &>/dev/null; then
-	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -p "/etc/systemd/system/getty@.service.d/"
-	[ ! -d "/usr/share/neofetch/" ] && mkdir -p "/usr/share/neofetch/"
-	cp "$base_dir/postinstall-files/neofetch_config" /usr/share/neofetch/config"
+	cp -v /etc/issue /etc/issue.old
+	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -vp "/etc/systemd/system/getty@.service.d/"
+	[ ! -d "/usr/share/neofetch/" ] && mkdir -vp "/usr/share/neofetch/"
+	cp -v "$base_dir/postinstall-files/neofetch_config" /usr/share/neofetch/config"
+	cp -v "$base_dir/postinstall-files/issue.sh" /usr/bin/"
+	chmod -v a+x /usr/share/issue.sh
 	echo '[Service]
-ExecStartPre=-/bin/bash -c '\''neofetch --config /usr/share/neofetch/config > /etc/issue'\' > "/etc/systemd/system/getty@.service.d/override.conf"
+ExecStartPre=-/bin/bash -c '/usr/bin/issue.sh' | tee "/etc/systemd/system/getty@.service.d/override.conf"
 fi
