@@ -1,5 +1,5 @@
 # Brightness control
-**`brightness.sh`**: script for increase/decrease and set default brightness using `xrandr`.  
+**`brightness.sh`**: script for increase/decrease in small steps.
 ```bash
 $ ./brightness.sh -h
 Inc/dec the brightness
