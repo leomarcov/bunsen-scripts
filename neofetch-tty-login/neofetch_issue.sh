@@ -23,3 +23,5 @@ for u in $(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | tac);
 	echo -en "$u\e[0m  " >> /etc/issue
 done
 echo >> /etc/issue 
+echo >> /etc/issue 
+
