@@ -1,4 +1,16 @@
 #!/bin/bash
+#===================================================================================
+# NEOFETCH TTY LOGIN THEME
+# FILE: neofetch-tty-login.sh
+#
+# DESCRIPTION: Generate a /etc/issue file based on neofetch and other system info
+#
+# AUTHOR: Leonardo Marco
+# VERSION: 1.0
+# CREATED: 2018.06.05
+#===================================================================================
+
+
 clear > /etc/issue
 echo -e "\e[90m\l\e[0m">> /etc/issue
 neofetch --config /usr/share/neofetch/config_tty >> /etc/issue
