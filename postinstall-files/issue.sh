@@ -16,8 +16,8 @@ sed -i "/Local IP/ s/:.*/: $ip/" /etc/issue
 # Show users:
 echo -en "\e[1mUsers\e[0m: " >> /etc/issue
 for u in $(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd); do 
-	# Bold if sudo user:
-	grep -Po '^sudo.+:\K.*$' /etc/group | grep -w "$u" &>/dev/null && echo -en "\e[1m" >> /etc/issue	
+	# Underline if sudo user:
+	grep -Po '^sudo.+:\K.*$' /etc/group | grep -w "$u" &>/dev/null && echo -en "\e[4m" >> /etc/issue	
 	# Red if lock user:
 	[ "$(passwd -S $u | cut -f2 -d" ")" = "L" ] && echo -en "\e[91m" >> /etc/issue
 
