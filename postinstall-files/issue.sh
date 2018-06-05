@@ -15,12 +15,11 @@ sed -i "/Local IP/ s/$/($iface)/" /etc/issue
 # Show users:
 echo -en "\e[1mUsers\e[0m: " >> /etc/issue
 for u in $(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | tac); do 
-	# Bold if sudo user:
-	grep -Po '^sudo.+:\K.*$' /etc/group | grep -w "$u" &>/dev/null && echo -en "\e[1m" >> /etc/issue	
 	# Red if lock user:
 	[ "$(passwd -S $u | cut -f2 -d" ")" = "L" ] && echo -en "\e[91m" >> /etc/issue
-
+	# Mark sudo users:
+	grep -Po '^sudo.+:\K.*$' /etc/group | grep -w "$u" &>/dev/null && u="${u}*"
+	
 	echo -en "$u\e[0m  " >> /etc/issue
 done
-echo >> /etc/issue 
 echo >> /etc/issue 
