@@ -1,7 +1,7 @@
 #!/bin/bash
 #===================================================================================
 # BUNSENLABS POSTINSTALL SCRIPT
-# FILE: update_notification.sh
+# FILE: bl-postinstall.sh
 #
 # DESCRIPTION: Exec postinstall scripts in postinstall-scripts directory
 #
