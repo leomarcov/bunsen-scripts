@@ -3,7 +3,7 @@
 # BRIGHTNESS INC/DEC
 # FILE: brightness.sh
 #
-# DESCRIPTION: Inc/dec the brightness  in small steps
+# DESCRIPTION: Inc/dec the brightness in small steps
 #
 # AUTHOR: Leonardo Marco
 # VERSION: 1.0
