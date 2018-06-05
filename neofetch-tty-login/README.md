@@ -6,6 +6,7 @@ TTY login message is boring. This script show cool info message at login based o
 
 ## Install
 ```bash
+apt-get install neofetch
 cp -v /etc/issue /etc/issue.old
 [ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -vp "/etc/systemd/system/getty@.service.d/"
 [ ! -d "/usr/share/neofetch/" ] && mkdir -vp "/usr/share/neofetch/"
