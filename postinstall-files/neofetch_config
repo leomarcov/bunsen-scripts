@@ -36,9 +36,9 @@ print_info() {
     # info "Battery" battery:q!
     # info "Font" font
     # info "Song" song
-    # info "Local IP" local_ip
+    info "Local IP" local_ip
     # info "Public IP" public_ip
-    info "Users" users
+    # info "Users" users
     # info "Birthday" birthday
 
     info line_break
