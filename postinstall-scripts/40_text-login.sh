@@ -29,15 +29,15 @@ systemctl enable physlock.service
 sed -i "/$comment_mark/Id" /etc/profile
 echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/profile
 
-# Show neofetch info in login
+# Show neofetch info at login
 which neofetch &>/dev/null || apt-get install neofetch
 if which neofetch &>/dev/null; then
 	cp -v /etc/issue /etc/issue.old
 	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -vp "/etc/systemd/system/getty@.service.d/"
 	[ ! -d "/usr/share/neofetch/" ] && mkdir -vp "/usr/share/neofetch/"
-	cp -v "$base_dir/postinstall-files/neofetch_config" /usr/share/neofetch/config_tty
-	cp -v "$base_dir/postinstall-files/issue.sh" /usr/bin/
-	chmod -v a+x /usr/bin/issue.sh
+	cp -v "$base_dir/neofetch-tty-login/config_tty" /usr/share/neofetch/
+	cp -v "$base_dir/neofetch-tty-login/neofetch-issue.sh" /usr/bin/
+	chmod -v a+x /usr/bin/neofetch-issue.sh
 	echo '[Service]
-ExecStartPre=-/bin/bash -c "/usr/bin/issue.sh"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
+ExecStartPre=-/bin/bash -c "/usr/bin/neofetch-issue.sh"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
 fi
