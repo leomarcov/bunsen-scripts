@@ -39,5 +39,5 @@ if which neofetch &>/dev/null; then
 	cp -v "$base_dir/postinstall-files/issue.sh" /usr/bin/"
 	chmod -v a+x /usr/share/issue.sh
 	echo '[Service]
-ExecStartPre=-/bin/bash -c '/usr/bin/issue.sh' | tee "/etc/systemd/system/getty@.service.d/override.conf"
+ExecStartPre=-/bin/bash -c "/usr/bin/issue.sh"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
 fi
