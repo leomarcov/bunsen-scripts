@@ -1,4 +1,14 @@
 #!/bin/bash
+#===================================================================================
+# BUNSENLABS POSTINSTALL SCRIPT
+# FILE: update_notification.sh
+#
+# DESCRIPTION: Exec postinstall scripts in postinstall-scripts directory
+#
+# AUTHOR: Leonardo Marco
+# VERSION: 1.0
+# CREATED: 5.10.2018
+#===================================================================================
 
 #=== FUNCTION ==================================================================
 # NAME: help
