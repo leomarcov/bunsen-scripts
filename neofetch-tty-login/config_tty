@@ -14,29 +14,30 @@ print_info() {
     #info underline
 
     info "OS" distro
-    info "Model" model
     info "Kernel" kernel
-    info "Uptime" uptime
-    info "Packages" packages
-    info "Shell" shell
-    info "Resolution" resolution
-    info "DE" de
-    info "WM" wm
-    info "WM Theme" wm_theme
-    info "Theme" theme
-    info "Icons" icons
-    info "Terminal" term
-    info "Terminal Font" term_font
+    # info "Resolution" resolution
+    # info "DE" de
+    # info "WM" wm
+    # info "WM Theme" wm_theme
+    # info "Theme" theme
+    # info "Icons" icons
+    # info "Terminal" term
+    # info "Terminal Font" term_font
+    info "Model" model
     info "CPU" cpu
     info "GPU" gpu
     info "Memory" memory
+    info "Disk" disk
 
+    info "Packages" packages
+    info "Shell" shell
+
+    info "Uptime" uptime
+    info "Local IP" local_ip
     # info "CPU Usage" cpu_usage
-     info "Disk" disk
     # info "Battery" battery:q!
     # info "Font" font
     # info "Song" song
-    info "Local IP" local_ip
     # info "Public IP" public_ip
     # info "Users" users
     # info "Birthday" birthday
