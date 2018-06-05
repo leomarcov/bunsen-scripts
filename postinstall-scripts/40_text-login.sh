@@ -28,3 +28,11 @@ systemctl enable physlock.service
 # Config tty1 to autoexec startx
 sed -i "/$comment_mark/Id" /etc/profile
 echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/profile
+
+# Show neofetch info in login
+which neofetch &>/dev/null || apt-get install neofetch
+if which neofetch &>/dev/null; then
+	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -p "/etc/systemd/system/getty@.service.d/"
+	echo '[Service]
+ExecStartPre=-/bin/bash -c '\''neofetch --cpu_temp C --ascii_distro linux --gap 10 --config /usr/share/neofetch/config > /etc/issue'\' > "/etc/systemd/system/getty@.service.d/override.conf"
+fi
