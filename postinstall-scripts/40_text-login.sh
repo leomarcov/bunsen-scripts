@@ -33,6 +33,8 @@ echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/prof
 which neofetch &>/dev/null || apt-get install neofetch
 if which neofetch &>/dev/null; then
 	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -p "/etc/systemd/system/getty@.service.d/"
+	[ ! -d "/usr/share/neofetch/" ] && mkdir -p "/usr/share/neofetch/"
+	cp "$base_dir/postinstall-files/neofetch_config" /usr/share/neofetch/config"
 	echo '[Service]
 ExecStartPre=-/bin/bash -c '\''neofetch --config /usr/share/neofetch/config > /etc/issue'\' > "/etc/systemd/system/getty@.service.d/override.conf"
 fi
