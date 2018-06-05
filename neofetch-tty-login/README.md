@@ -1,5 +1,6 @@
 # Neofetch TTY login message
-Shows a message in tty using neofetch
+Show login message in tty using neofetch
+
 
 
 ## Install
