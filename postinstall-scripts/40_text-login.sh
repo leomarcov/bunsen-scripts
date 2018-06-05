@@ -35,8 +35,8 @@ if which neofetch &>/dev/null; then
 	cp -v /etc/issue /etc/issue.old
 	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -vp "/etc/systemd/system/getty@.service.d/"
 	[ ! -d "/usr/share/neofetch/" ] && mkdir -vp "/usr/share/neofetch/"
-	cp -v "$base_dir/postinstall-files/neofetch_config" /usr/share/neofetch/config_tty"
-	cp -v "$base_dir/postinstall-files/issue.sh" /usr/bin/"
+	cp -v "$base_dir/postinstall-files/neofetch_config" /usr/share/neofetch/config_tty
+	cp -v "$base_dir/postinstall-files/issue.sh" /usr/bin/
 	chmod -v a+x /usr/share/issue.sh
 	echo '[Service]
 ExecStartPre=-/bin/bash -c "/usr/bin/issue.sh"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
