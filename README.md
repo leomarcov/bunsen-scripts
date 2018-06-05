@@ -117,7 +117,7 @@ The theme contains:
 </br>
 
 ## Brightness control
-[**`brightness.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/brightness-control): script for increase/decrease and set default brightness using `xrandr`.  
+[**`brightness.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/brightness-control): script for increase/decrease in small steps.  
 ```bash
 $ ./brightness.sh -h
 Inc/dec the brightness
