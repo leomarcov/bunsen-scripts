@@ -109,6 +109,13 @@ The theme contains:
 
 </br>
 
+## Neofetch TTY login message
+[**`neofetch-tty-login`**](https://github.com/leomarcov/BunsenLabs-Postinstall/edit/master/neofetch-tty-login/README.md): TTY login message is boring. This script show cool info message at login based on neofetch info.
+![image](https://user-images.githubusercontent.com/32820131/40976478-92efc988-68ce-11e8-98ec-f5313a773000.png)
+
+
+</br>
+
 ## Brightness control
 [**`brightness.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/brightness-control): script for increase/decrease and set default brightness using `xrandr`.  
 ```bash
@@ -116,10 +123,7 @@ $ ./brightness.sh -h
 Inc/dec the brightness
 Usage: brightness.sh -inc|-dec|-h|-I|-U
    -h	Show command help
-   -def	Set default brightness (0.6)
-   -inc	Increase the brightness
-   -dec	Decrease the brightness
-   -I	Install the script
-   -U	Uninstall the script
-```
-
+   -def	Set brightness to 30% (may be config in /usr/bin/brightness.sh)
+   -inc	Increase the brightness in 5% (may be config in /usr/bin/brightness.sh)
+   -dec	Decrease the brightness in 5% (may be config in /usr/bin/brightness.sh)
+   -I	Install the script 
