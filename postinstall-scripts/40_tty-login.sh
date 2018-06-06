@@ -32,6 +32,7 @@ echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/prof
 # Show neofetch info at login
 which neofetch &>/dev/null || apt-get install neofetch
 if which neofetch &>/dev/null; then
+	# Copy script and config files:
 	cp -v /etc/issue /etc/issue.old
 	[ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -vp "/etc/systemd/system/getty@.service.d/"
 	[ ! -d "/usr/share/neofetch/" ] && mkdir -vp "/usr/share/neofetch/"
