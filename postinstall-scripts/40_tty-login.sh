@@ -38,6 +38,8 @@ if which neofetch &>/dev/null; then
 	cp -v "$base_dir/neofetch-tty-login/config_tty" /usr/share/neofetch/
 	cp -v "$base_dir/neofetch-tty-login/neofetch_issue.sh" /usr/bin/
 	chmod -v a+x /usr/bin/neofetch_issue.sh
+	
+	# Config getty to run neofetch_issue.sh every time tty start:
 	echo '[Service]
 ExecStartPre=-/bin/bash -c "/usr/bin/neofetch_issue.sh"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
 fi
