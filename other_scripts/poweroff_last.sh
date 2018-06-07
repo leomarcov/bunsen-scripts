@@ -25,7 +25,10 @@ function try_poweroff() {
 
 
 function install() {
-	last -s -0min &> /dev/null || { echo "Ummm... seems last comand no support -s parameter. Neewer last command version is needed."; exit 1; }
+	if ! last -s -0min &> /dev/null; then
+		echo "Ummm... seems last comand no support -s parameter. Neewer last command version is needed."
+		exit 1
+	fi
 
 	mins="$1"
 	[ "$(id -u)" -ne 0 ] && echo "Install must be run as root" && exit 1
