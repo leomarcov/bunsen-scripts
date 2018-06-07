@@ -3,6 +3,8 @@
 # INFO: Rofi is a simple text switcher and launcher
 # DEFAULT: y
 
+comment_mark="#bl-postinstall.sh"
+
 if [ $(apt-cache pkgnames | grep "^rofi$" | wc -l) -eq 0 ]; then
 	echo "ERROR: cant find rofi in repositories"
 	exit 1
@@ -21,4 +23,9 @@ for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	
 	# Set as runas in menu:
 	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show drun<\/command>/' "$d/openbox/menu.xml"
+
+	# Config super key as runas
+	sed -i '/xcape.*Super_L.*space/s/^/#/g' "$d/openbox/autostart"  
+	echo 'xcape -e "Super_L=Control_L|Tab"  '"$comment_mark" | tee -a  "$d/openbox/autostart"
+
 done
