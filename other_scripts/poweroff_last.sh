@@ -9,37 +9,39 @@ install_path="/usr/bin/poweroff_last.sh"     # Installation dir
 
 
 function try_poweroff() {
-  mins="$1"
+	mins="$1"
   
-  # Exit if someone is logged
-  [ "$(who | wc -l)" -gt 0 ] && exit 
+	# Exit if someone is logged
+	[ "$(who | wc -l)" -gt 0 ] && exit 
 
-  # Exit if someone was logged 20min ago
-  [ $(last -s -${mins}min | grep -Ev 'reboot|wtmp|^$' | wc -l) -gt 0 ] && exit
+	# Exit if someone was logged 20min ago
+	[ $(last -s -${mins}min | grep -Ev 'reboot|wtmp|^$' | wc -l) -gt 0 ] && exit
 
-  # Poweroff the machine
-  shutdown -h now
+	# Poweroff the machine
+	shutdown -h now
 
-  exit
+	exit
 }
 
 
 function install() {
-  mins="$1"
-  [ "$(id -u)" -ne 0 ] && echo "Install must be run as root" && exit 1
-  [ "$install_path" = "$(readlink -f $0)" ] || sudo cp -v "$0" "$install_path"
-  chmod +x "$install_path"
+	last -s -0min &> /dev/null || { echo "Ummm... seems last comand no support -s parameter. Neewer last command version is needed."; exit 1; }
 
-  (crontab -l 2>/dev/null; echo "*/$mins * * * *   $install_path $mins   #$(basename $0)") | crontab - 
+	mins="$1"
+	[ "$(id -u)" -ne 0 ] && echo "Install must be run as root" && exit 1
+	[ "$install_path" = "$(readlink -f $0)" ] || sudo cp -v "$0" "$install_path"
+	chmod +x "$install_path"
 
-  exit 
+	(crontab -l 2>/dev/null; echo "*/$mins * * * *   $install_path $mins   #$(basename $0)") | crontab - 
+
+	exit 
 }
 
 function uninstall() {
-  rm -v "$install_path"
-  crontab -l | grep -v "#$(basename $0)" | crontab -
+	rm -v "$install_path"
+	crontab -l | grep -v "#$(basename $0)" | crontab -
 
-  exit 
+	exit 
 }
 
 
@@ -57,5 +59,5 @@ Usage: '$(basename $0)' mins | -I mins
 # ACTIONS
 [ "$1" = "-U" ] && uninstall
 [ "$1" = "-I" ] && [ "$2" -eq "$2" ] &>/dev/null && install "$2"
-[ "$1" -eq "$1" ] && try_poweroff "$1"
+[ "$1" -eq "$1" ] &>/dev/null && try_poweroff "$1"
 help
