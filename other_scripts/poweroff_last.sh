@@ -18,7 +18,7 @@ function try_poweroff() {
 	[ $(last -s -${mins}min | grep -Ev 'reboot|wtmp|^$' | wc -l) -gt 0 ] && exit
 
 	# Poweroff the machine
-	/sbin/shutdown -h now
+	/sbin/shutdown -h +1
 
 	exit
 }
