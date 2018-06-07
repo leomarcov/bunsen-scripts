@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install script poweroff_last.sh for automatize poweroff if no users logged in 20 minutes
+# ACTION: Install script poweroff_last.sh for automatize shutdown if no users logged in 20 minutes
 # DEFAULT: y
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
