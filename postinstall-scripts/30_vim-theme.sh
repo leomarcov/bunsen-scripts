@@ -4,6 +4,6 @@
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
-for d in  /usr/share/bunsen/skel/  /home/*/ ; do
+for d in  /usr/share/bunsen/skel/  /home/*/ /root/; do
 	cp -v "$base_dir"/postinstall-files/vimrc "$d/.vimrc"
 done
