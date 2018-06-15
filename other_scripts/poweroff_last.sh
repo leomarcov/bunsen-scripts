@@ -10,6 +10,11 @@ install_path="/usr/bin/poweroff_last.sh"     # Installation dir
 
 
 function try_poweroff() {
+	if ! last -s -0min &> /dev/null; then
+		echo "Ummm... seems last comand no support -s parameter. Neewer last command version is needed."
+		exit 1
+	fi
+	
 	mins="$1"
   
 	# Exit if someone is logged
