@@ -1,6 +1,7 @@
 #!/bin/bash
 #===================================================================================
 # Shutdown machine if userr logged now and in last minutes in first parameter
+# REQUIERD: last command with -s parameter
 # AUTHOR: Leonardo Marco
 # CREATED: 2018.06.07
 #===================================================================================
@@ -14,7 +15,7 @@ function try_poweroff() {
 	# Exit if someone is logged
 	[ "$(who | wc -l)" -gt 0 ] && exit 
 
-	# Exit if someone was logged 20min ago
+	# Exit if someone was logged in past $mins minutes
 	[ $(last -s -${mins}min | grep -Ev 'reboot|wtmp|^$' | wc -l) -gt 0 ] && exit
 
 	# Poweroff the machine
