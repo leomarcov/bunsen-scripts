@@ -5,5 +5,8 @@
 atom_url="https://atom.io/download/deb"
 t=$(mktemp -d)
 wget -P "$t" "$atom_url"  
-[ $? -eq 0 ] | dpkg -i "$t/*"
+if [ $? -eq 0 ]; then
+  apt-get install gvfs-bin
+  dpkg -i "$t/*"
+fi 
 rm -rf "$t"
