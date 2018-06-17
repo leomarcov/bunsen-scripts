@@ -1,6 +1,6 @@
 #!/bin/bash
 #===================================================================================
-# Shutdown machine if userr logged now and in last minutes in first parameter
+# Shutdown machine if user logged now and in last minutes in first parameter
 # REQUIERD: last command with -s parameter
 # AUTHOR: Leonardo Marco
 # CREATED: 2018.06.07
