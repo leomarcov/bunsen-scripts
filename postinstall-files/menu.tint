@@ -85,17 +85,6 @@ execp_tooltip =
 execp_lclick_command = x-terminal-emulator 
 
 execp = new
-execp_command = echo "File Manager"
-execp_interval = 0
-execp_background_id = 2
-execp_font = Droid Sans 11
-execp_font_color = #FFFFFF 80
-execp_centered = 1
-execp_padding = 20 0 0
-execp_tooltip = 
-execp_lclick_command = bl-file-manager 
-
-execp = new
 execp_command = echo "Web Browser"
 execp_interval = 0
 execp_background_id = 2
@@ -105,6 +94,17 @@ execp_centered = 1
 execp_padding = 20 0 0
 execp_tooltip = 
 execp_lclick_command = x-www-browser
+
+execp = new
+execp_command = echo "File Manager"
+execp_interval = 0
+execp_background_id = 2
+execp_font = Droid Sans 11
+execp_font_color = #FFFFFF 80
+execp_centered = 1
+execp_padding = 20 0 0
+execp_tooltip = 
+execp_lclick_command = bl-file-manager 
 
 execp = new
 execp_command = echo "SublimeText"
