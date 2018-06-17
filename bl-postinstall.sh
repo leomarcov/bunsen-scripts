@@ -97,7 +97,7 @@ scripts_dir="$base_dir/postinstall-scripts/"
 n=0
 
 # For each script in ./postinstall-scripts
-for script in "$scripts_dir"/*; do
+for script in "$scripts_dir"/[0-9]*; do
 	head="$(head -10 "$script")"
 	# Get ACTION field:
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
