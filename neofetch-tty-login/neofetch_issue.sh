@@ -14,7 +14,7 @@ issue="$(clear)"
 issue="${issue}\e[90m\l\e[0m"
 issue="${issue}\n$(neofetch --config /usr/share/neofetch/config_tty)"
 
-issue="$(echo -e "$issue" | sed -z 's/\n\n\n/ /g'   /etc/issue)" 	# Sometimes neofetch add extra \n
+issue="$(echo -e "$issue" | sed -z 's/\n\n\n/ /g')" 	# Sometimes neofetch add extra \n
 
 # Pending updates
 updates=$(wc -l /var/cache/update-notification 2>/dev/null | cut -f1 -d" ")
