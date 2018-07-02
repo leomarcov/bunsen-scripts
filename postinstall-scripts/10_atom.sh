@@ -7,6 +7,6 @@ t=$(mktemp -d)
 wget -P "$t" "$atom_url"  
 if [ $? -eq 0 ]; then
   apt-get install gvfs-bin
-  dpkg -i "$t/*"
+  dpkg -i "$t/"*
 fi 
 rm -rf "$t"
