@@ -34,7 +34,7 @@ for u in $(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | tac);
 	
 	issue="${issue}$u\e[0m  " 
 done
-issue="${issue}\n\n"
+issue="${issue}\n"
 
 echo -e "$issue" > /etc/issue
 
