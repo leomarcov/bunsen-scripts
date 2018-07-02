@@ -27,7 +27,7 @@ systemctl enable physlock.service
 	
 # Config tty1 to autoexec startx
 sed -i "/$comment_mark/Id" /etc/profile
-echo '[ $(tty) = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/profile
+echo '[ "$(tty)" = "/dev/tty1" ] && startx && exit   '"$comment_mark" >> /etc/profile
 
 # Show neofetch info at login
 which neofetch &>/dev/null || apt-get install neofetch
