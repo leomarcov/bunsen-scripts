@@ -10,8 +10,8 @@
 
 # CHECKS
 read -p "Install directory (/usr/share/icons/): " install_dir
-[ ! "$install_dir" ] && install_dir="/usr/share/icons/Numix-Paper"
-eval install_dir="$install_dir/Numix-Paper/"
+[ ! "$install_dir" ] && install_dir="/usr/share/icons"
+install_dir="$install_dir/Numix-Paper/"
 
 numix_dir="$(dirname "$install_dir")/Numix"
 paper_dir="$(dirname "$install_dir")/Paper"
