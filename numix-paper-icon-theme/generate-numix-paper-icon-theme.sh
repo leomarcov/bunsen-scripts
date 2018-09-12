@@ -52,7 +52,7 @@ if [ -d "$paper_dir" ]; then
 	# Change terminator icon for terminal 
 	for f in $(find . -name "terminator.*"); do
 		ln -svf "$(basename $(echo "$f"  | sed 's/terminator/terminal/g'))" "$f" 
-	done
+	done	
 fi
 
 if [ -d "$paperbunsen_dir" ]; then
@@ -72,4 +72,10 @@ for link in $(find ../Numix/ -mindepth 2 -type l); do
 	[ ! -f "$linked_path" ] && continue
 
 	ln -vsf "../../$linked_path" $(echo "$link" | sed 's/..\/Numix\///g')
+done
+
+# Add clipman icon linked to clipboard icon
+for f in $(find ../Numix/ -name "*clipman*"); do
+	src="$(echo "$f"  | sed 's/..\/Numix\///g' | sed 's/status/panel/g' | sed 's/clipman/clipboard/g')"
+	[ -r "$src" ] && ln -vs  "../../$src" $(echo "$f"  | sed 's/..\/Numix\///g')
 done
