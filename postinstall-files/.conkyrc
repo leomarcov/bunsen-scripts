@@ -191,17 +191,17 @@ CPU Average:${alignr}${cpu cpu0}%
 
 S H O R T C U T    K E Y S
 ${hr}
-Ctrl + Tab${alignr}Launcher
+Win${alignr}Launcher
 Alt + Tab${alignr}Window switch
-Super${alignr}Main Menu
-Super + t${alignr}Terminal
-Super + f${alignr}File Manager
-Super + e${alignr}Editor
-Super + m${alignr}Media Player
-Super + w${alignr}Web Browser
-Super + h${alignr}Task Manager
-Super + l${alignr}Lock Screen
-Super + v${alignr}Volume Control
-Super + x${alignr}Logout
+Win + t${alignr}Terminal
+Win + f${alignr}File Manager
+Win + e${alignr}Editor
+Win + m${alignr}Media Player
+Win + w${alignr}Web Browser
+Win + h${alignr}Task Manager
+Win + l${alignr}Lock Screen
+Win + v${alignr}Volume Control
+Win + x${alignr}Logout
+Ctrl + Alt + Bckspace${alignr}Kill X
 PrtSc${alignr}Screenshot
 ]];
