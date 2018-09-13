@@ -200,8 +200,7 @@ Win + m${alignr}Media Player
 Win + w${alignr}Web Browser
 Win + h${alignr}Task Manager
 Win + l${alignr}Lock Screen
-Win + v${alignr}Volume Control
 Win + x${alignr}Logout
-Ctrl + Alt + Bckspace${alignr}Kill X
-PrtSc${alignr}Screenshot
+Ctrl + Alt + Backspace${alignr}Kill X
+PrtScr${alignr}Screenshot
 ]];
