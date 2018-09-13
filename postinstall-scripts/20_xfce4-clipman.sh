@@ -7,5 +7,5 @@ apt-get install xfce4-clipman
 apt-get remove clipit
 
 for f in /usr/share/bunsen/skel/.config/openbox/autostart  /home/*/.config/openbox/autostart; do
-    echo sed -i 's/clipit/xfce4-clipman/g' "$f"
+    sed -i 's/clipit/xfce4-clipman/g' "$f"
 done
