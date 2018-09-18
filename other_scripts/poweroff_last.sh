@@ -23,7 +23,8 @@ function try_poweroff() {
 	# Exit if someone was logged in past $mins minutes
 	[ $(last -s -${mins}min | grep -Ev 'reboot|wtmp|^$' | wc -l) -gt 0 ] && exit
 	# Exit if system boot not was almost in $mins
-	[ "$(($(cat /proc/uptime | awk '{printf "%0.f", $1}')/60))" -le "$mins" ] && exit
+	[ "$(($(cat /proc/uptime | awk '{printf "%0.f", $1}')/60))" -gt "$mins" ]
+	[ $? -ne 0 ] && exit
 
 	# Poweroff the machine
 	/sbin/shutdown -h +1
