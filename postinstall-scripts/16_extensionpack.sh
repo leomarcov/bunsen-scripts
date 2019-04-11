@@ -3,7 +3,7 @@
 # DEFAULT: y
 
 # Get last EP URL from: https://www.virtualbox.org/wiki/Downloads
-ep_url="https://download.virtualbox.org/virtualbox/5.2.12/Oracle_VM_VirtualBox_Extension_Pack-5.2.12.vbox-extpack"   
+ep_url="https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack"   
 
 if ! which vboxmanage &> /dev/null; then
   echo "$(basename $0): VirtualBox is not installed"
