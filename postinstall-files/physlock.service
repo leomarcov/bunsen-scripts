@@ -1,12 +1,12 @@
-  [Unit]
-  Description=physlock
-  Before=sleep.target
+[Unit]
+Description=physlock
+Before=sleep.target
 
-  [Service]
-  User=root
-  Type=forking
-  Environment=DISPLAY=:0
-  ExecStart=/usr/bin/physlock -d
+[Service]
+User=root
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/physlock -d
 
-  [Install]
-  WantedBy=sleep.target
+[Install]
+WantedBy=sleep.target
