@@ -44,3 +44,8 @@ if which neofetch &>/dev/null; then
 	echo '[Service]
 ExecStartPre=-/bin/bash -c "/usr/bin/neofetch_issue.sh"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
 fi
+
+# Solve tty error
+for f in /etc/skel/.bash_logout /home/*/.bash_logout; do
+	sed -i 's/clear_console/clear/g' "$f"
+done
