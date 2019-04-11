@@ -4,7 +4,7 @@
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 	
-for f in  /usr/share/bunsen/skel/.config/xfce4/xfconf/xfce-perchannel-xml/  /home/*//usr/share/bunsen/skel/.config/xfce4/xfconf/xfce-perchannel-xml/ ; do
+for d in  /usr/share/bunsen/skel/.config/xfce4/xfconf/xfce-perchannel-xml/  /home/*/.config/xfce4/xfconf/xfce-perchannel-xml/ ; do
 	cp -v "$base_dir/postinstall-files/thunar.xml" "$d"
 done
 
