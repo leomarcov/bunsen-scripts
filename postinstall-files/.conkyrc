@@ -193,7 +193,7 @@ S H O R T C U T    K E Y S
 ${hr}
 Win${alignr}Launcher
 Alt + Tab${alignr}Window switch
-Ctl + Kp_Num${alignr}Half maximize window
+Ctl + Kp_Num${alignr}Half win maximize
 Win + t${alignr}Terminal
 Win + f${alignr}File Manager
 Win + w${alignr}Web Browser
