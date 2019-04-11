@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # ACTION: Replace clipit for xfce4-clipman (allow screenshot to clipboard)
 # DEFAULT: y
