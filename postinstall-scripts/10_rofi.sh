@@ -5,13 +5,14 @@
 
 comment_mark="#bl-postinstall.sh"
 
-if [ $(apt-cache pkgnames | grep "^rofi$" | wc -l) -eq 0 ]; then
-	echo "ERROR: cant find rofi in repositories"
-	exit 1
-fi
+#if [ $(apt-cache pkgnames | grep "^rofi$" | wc -l) -eq 0 ]; then
+#	echo "ERROR: cant find rofi in repositories"
+#	exit 1
+#fi
 
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
-apt-get install -y rofi
+dpkg -i $base_dir/postinstall-files/rofi"*.deb
+apt-get install -f
 	
 for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	[ ! -d "$d/rofi/" ] && mkdir -p "$d/rofi/"
