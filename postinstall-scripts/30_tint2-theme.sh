@@ -14,6 +14,6 @@ for d in /usr/share/bunsen/skel/.config/tint2/  /home/*/.config/tint2/; do
 	[ "$laptop" ] && [ ! "$virtualmachine" ] && tint_version="_laptop"
 	
 	# Set taskbar.tint and menu.tint as default tints
-	echo "/usr/share/bunsen/skel/.config/tint2/taskbar${tint_version}.tint" > "$d/tint2-sessionfile"
-	echo "/usr/share/bunsen/skel/.config/tint2/menu.tint" >> "$d/tint2-sessionfile"
+	echo "$d/taskbar${tint_version}.tint" > "$d/tint2-sessionfile"
+	echo "$d/menu.tint" >> "$d/tint2-sessionfile"
 done
