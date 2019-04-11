@@ -7,7 +7,7 @@ comment_mark="#bl-postinstall.sh"
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
 
 systemctl set-default multi-user.target
-apt-get -y remove lightdm
+#apt-get -y remove lightdm
 
 # Install physlock
 apt-get install libpam0g-dev	
