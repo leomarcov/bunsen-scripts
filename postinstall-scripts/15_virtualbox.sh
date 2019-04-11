@@ -2,7 +2,7 @@
 # ACTION: Install VirtualBox 5.2, add to repositories and insert to Openbox menu
 # DEFAULT: y
 
-vb_package="virtualbox-5.2"
+vb_package="virtualbox-6.0"
 main_distro="$(cat /etc/apt/sources.list | grep ^deb | awk '{print $3}' | head -1)"
 
 # Install repositories
