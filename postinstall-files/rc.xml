@@ -193,7 +193,7 @@
 
     <keybind key="C-Tab"> 						<!-- #BL-POSTINSTALL-rofi -->
       <action name="Execute">					<!-- #BL-POSTINSTALL-rofi -->
-        <command>rofi -show drun</command>		<!-- #BL-POSTINSTALL-rofi -->
+        <command>rofi -show drun -show-icons -theme android_notification2</command>		<!-- #BL-POSTINSTALL-rofi -->
       </action>									<!-- #BL-POSTINSTALL-rofi -->
     </keybind>									<!-- #BL-POSTINSTALL-rofi -->									<!-- #BL-POSTINSTALL-rofi -->
 
@@ -430,7 +430,7 @@
           <enabled>true</enabled>
           <name>Run Program</name>
         </startupnotify>
-        <command>rofi -show drun</command>   <!-- #BL-POSTINSTALL-rofi -->
+        <command>rofi -show drun -show-icons -theme android_notification2</command>   <!-- #BL-POSTINSTALL-rofi -->
       </action>
     </keybind>
     <keybind key="A-F3">
