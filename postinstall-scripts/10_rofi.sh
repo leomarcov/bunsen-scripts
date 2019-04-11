@@ -10,20 +10,20 @@ comment_mark="#bl-postinstall.sh"
 #	exit 1
 #fi
 
+# Install compiled package rofi with icons
 base_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
-dpkg -i $base_dir/postinstall-files/rofi"*.deb
+dpkg -i "$base_dir/postinstall-files/rofi/"*.deb
 apt-get install -f
-	
+
+# Copy theme
+cp -v "$base_dir/postinstall-files/rofi/android_notification2.rasi" "/usr/share/rofi/themes/"
+
 for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
-	[ ! -d "$d/rofi/" ] && mkdir -p "$d/rofi/"
-	# Set defaul theme: android:notification:
-	echo '#include "/usr/share/rofi/themes/android_notification.theme"' > "$d/rofi/config"
-	
 	# Copy rc.xml config with shortkeys for rofi
 	cp -v "$base_dir/postinstall-files/rc.xml" "$d/openbox/"
 	
 	# Set as runas in menu:
-	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show drun<\/command>/' "$d/openbox/menu.xml"
+	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rrofi -show drun -show-icons -theme android_notification2<\/command>/' "$d/openbox/menu.xml"
 
 	# Config super key as runas
 	sed -i '/xcape.*Super_L.*space/s/^/#/g' "$d/openbox/autostart"  
