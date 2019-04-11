@@ -23,7 +23,7 @@ for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	cp -v "$base_dir/postinstall-files/rc.xml" "$d/openbox/"
 	
 	# Set as runas in menu:
-	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show drun -show-icons -theme android_notification2<\/command>/' "$d/openbox/menu.xml"
+	sed -zi 's/<command>[[:blank:]]*\n[[:blank:]]*gmrun[[:blank:]]*\n[[:blank:]]*<\/command>/<command>rofi -show drun -theme android_notification2<\/command>/' "$d/openbox/menu.xml"
 
 	# Config super key as runas
 	sed -i '/xcape.*Super_L.*space/s/^/#/g' "$d/openbox/autostart"  
