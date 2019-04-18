@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Config bl-exit window with the classic theme
+# ACTION: Config theme bl-exit with the classic theme
 
 # Check root
 [ "$(id -u)" -ne 0 ] && { echo "Must run as root" 1>&2; exit 1; }
