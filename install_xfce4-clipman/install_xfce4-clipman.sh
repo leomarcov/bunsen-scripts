@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Replace clipit for xfce4-clipman (allow screenshot to clipboard)
+# ACTION: Install xfce4-clipman (allow screenshot to clipboard) and replace for clipit
 # DEFAULT: y
 
 # Check root
