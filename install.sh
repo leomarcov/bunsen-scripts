@@ -93,11 +93,11 @@ fi
 
 #=== EXEC-ACTIONS ==============================================================
 base_dir="$(dirname "$(readlink -f "$0")")"
-scripts_dir="$base_dir/postinstall-scripts/"
 n=0
 
 # For each script in ./postinstall-scripts
-for script in "$scripts_dir"/[0-9]*; do
+IFS=$'\n\t'
+for script in $(find "$base_dir" -type f -name "*.sh"); do
 	head="$(head -10 "$script")"
 	# Get ACTION field:
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"

@@ -1,19 +1,20 @@
 #!/bin/bash
-# ACTION: Install script autosnap.sh for autosnap windows with center click in titlebar
-# INFO: Script autosnap.sh half-maximize windows in Openbox WM.
+# ACTION: Install script autosnap for autosnap windows with center click in titlebar
+# INFO: Script autosnap half-maximize windows in Openbox WM.
 # DEFAULT: y
 
 # Check root
 [ "$(id -u)" -ne 0 ] && { echo "Must run as root" 1>&2; exit 1; }
 
 base_dir="$(dirname "$(readlink -f "$0")")"
+comment_mark="#BL-POSTINSTALL-autosnap"
 
 cp -v "$base_dir/autosnap" /usr/bin/
-chmod +x /usr/bin/autosnap.sh
+chmod +x /usr/bin/autosnap
 
 for f in /usr/share/bunsen/skel/.config/openbox/rc.xml  /home/*/.config/openbox/rc.xml; do
 	# Delete all previous lines added
-	sed -i "/BL-POSTINSTALL-autosnap/d" "$f"
+	sed -i "/${comment_mark}/d" "$f"
 
 	# Add keybinds por each autosnap command
 	(sed '/<keyboard>/q' "$f"

@@ -16,5 +16,5 @@ done
 # Add lines
 cat "$base_dir/postinstall-files/grub_textboot.conf" >> /etc/default/grub
 
-# Grub update
+# Update grub
 update-grub
