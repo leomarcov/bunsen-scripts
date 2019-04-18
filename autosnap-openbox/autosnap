@@ -1,8 +1,8 @@
 #!/bin/bash
 #===================================================================================
 # AUTOSNAP
-# FILE: autosnap.sh
-# USAGE: autosnap.sh
+# FILE: autosnap
+# USAGE: autosnap
 # DESCRIPTION: Snap current windows according the mouse position
 # REQUIREMENTS: xdotool, xrandr
 # AUTHOR: Leonardo Marco

@@ -1,7 +1,7 @@
 #!/bin/bash
 #===================================================================================
 # UPDATE NOTIFICATION
-# FILE: update_notification.sh
+# FILE: update_notification
 #
 # DESCRIPTION: Checks apt updates and show it to user in tint2 taskbar
 #
