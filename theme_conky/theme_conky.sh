@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install new default Conky theme
+# ACTION: Install theme Conky with new theme
 # DEFAULT: y
 
 # Check root
