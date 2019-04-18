@@ -112,7 +112,7 @@ for script in $(find "$base_dir" -type f -name "*.sh"); do
 	fi
 done
 
-if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "n"; then 
+if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "y"; then 
 	reboot
 fi
 echo
