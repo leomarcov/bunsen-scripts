@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Enable CTRL+ALT+BACKSPACE for kill X server
+# ACTION: Config CTRL+ALT+BACKSPACE shortcut for kill X server
 # DEFAULT: y
 
 # Check root
