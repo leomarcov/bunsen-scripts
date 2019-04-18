@@ -97,7 +97,7 @@ n=0
 
 # For each script in ./postinstall-scripts
 IFS=$'\n\t'
-for script in $(find "$base_dir" -type f -name "*.sh"); do
+for script in $(ls "$base_dir/*/*.sh"); do
 	head="$(head -10 "$script")"
 	# Get ACTION field:
 	action="$(echo "$head" | grep "#[[:blank:]]*ACTION:" | sed 's/#[[:blank:]]*ACTION:[[:blank:]]*//')"
