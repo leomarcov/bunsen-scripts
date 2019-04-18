@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Protect GRUB with password for prevent users edit entries
+# ACTION: Config GRUB with password for prevent users edit entries
 # DEFAULT: y
 
 # Check root
