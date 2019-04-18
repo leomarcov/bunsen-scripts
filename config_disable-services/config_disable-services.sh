@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Disable some stupid services
+# ACTION: Config some stupid services for not start during boot
 # INFO: For most users stupid services are: NetworkManager-wait-online.service, ModemManager.service, pppd-dns.service
 # DEFAULT: y
 
