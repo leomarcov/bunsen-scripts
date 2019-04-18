@@ -6,3 +6,8 @@
 
 sed  -i "s/^theme *= *.*/theme = classic/" /etc/bl-exit/bl-exitrc	
 sed -i "s/^rcfile *= *.*/rcfile = none/" /etc/bl-exit/bl-exitrc
+
+for f in  /usr/share/bunsen/skel/.config/openbox/rc.xml  /home/*/.config/openbox/rc.xml ; do
+    # Enable bl-exit window decoration
+    sed -i '/<application name="bl-exit">/,/<\/application>/d' "$f"
+done
