@@ -17,15 +17,13 @@ for f in /usr/share/bunsen/skel/.config/openbox/rc.xml  /home/*/.config/openbox/
 	sed -i "/${comment_mark}/d" "$f"
 
 	# Add keybinds por each autosnap command
-	(sed '/<keyboard>/q' "$f"
-	 cat "$base_dir/keybinds_rc.xml"
-	 sed -n -e '/<keyboard>/,$p' "$f" | tail +2 ) > "$f"
+	rc="$(sed '/<keyboard>/q' "$f"; cat "$base_dir/keybinds_rc.xml"; sed -n -e '/<keyboard>/,$p' "$f" | tail +2 ) > "$f")"
+	echo "$rc" > "$f"
 
 	# Delete current mousebind center click
-	sed -i "/<item label=\"Run Program\">/,/<\/item>/d" "$d/openbox/menu.xml"
+	sed -i "/<item label=\"Run Program\">/,/<\/item>/d" "$f"
 
 	# Add mousebind center click
-	(sed '/<context name="Titlebar">/q' "$f"
-	 cat "$base_dir/mousebind_rc.xml"
-	 sed -n -e '/<keyboard>/,$p' "$f" | tail +2 ) > "$f"	
+	rc="$(sed '/<context name="Titlebar">/q' "$f"; cat "$base_dir/mousebind_rc.xml"; sed -n -e '/<keyboard>/,$p' "$f" | tail +2 ) > "$f")"
+	echo "$rc" > "$f"
 done
