@@ -112,7 +112,7 @@ for script in $(ls "$base_dir"/*/*.sh); do
 	fi
 done
 
-if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "y"; then 
+if [ ! "$list" ] && [ ! "$actions" ] && ask_action "Reboot" "" "n"; then 
 	reboot
 fi
 echo
