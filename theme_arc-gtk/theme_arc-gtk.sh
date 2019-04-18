@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install theme Arc GTK theme and set as default
+# ACTION: Install theme Arc GTK and set as default
 # INFO: Arc GTK theme is a clear and cool GTK theme. 
 # DEFAULT: y
 
