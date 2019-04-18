@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install GoHome Openbox theme and set as default for all users
+# ACTION: Install theme GoHome for Openbox and set as default for all users
 # INFO: GoHome modified is a clear and cool Openbox theme.
 # DEFAULT: y
 
