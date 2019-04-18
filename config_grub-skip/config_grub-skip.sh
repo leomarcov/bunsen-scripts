@@ -14,7 +14,7 @@ for i in $(cat "$base_dir/grub.conf"  | cut -f1 -d=);do
 done
 
 # Add lines
-cat "$base_dir/postinstall-files/grub.conf" >> /etc/default/grub
+cat "$base_dir/grub.conf" >> /etc/default/grub
 
 # Update grub
 update-grub
