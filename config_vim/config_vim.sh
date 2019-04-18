@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install vim config
+# ACTION: Config vim with custom configs
 # DEFAULT: y
 
 # Check root
