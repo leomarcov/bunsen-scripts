@@ -13,6 +13,6 @@ unzip -o "$base_dir"/openbox_theme.zip -d /usr/share/themes/
 
 # Config theme as default for all users
 for f in  /usr/share/bunsen/skel/.config/openbox/rc.xml  /home/*/.config/openbox/rc.xml ; do
-	rc="$(sed '/<theme>/q' "$f"; cat "$base_dir/rc.xml"; sed -n -e '/<\/theme>/,$p' "$f")"
+	rc="$(sed '/<theme>/q' "$f"; cat "$base_dir/theme_rc.xml"; sed -n -e '/<\/theme>/,$p' "$f")"
 	echo "$rc" > "$f"
 done
