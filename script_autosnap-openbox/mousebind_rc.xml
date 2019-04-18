@@ -2,3 +2,5 @@
           <command>autosnap</command>                                     <!-- #BL-POSTINSTALL-autosnap -->
         </action>                                                         <!-- #BL-POSTINSTALL-autosnap -->
       </mousebind>                                                        <!-- #BL-POSTINSTALL-autosnap -->
+
+
