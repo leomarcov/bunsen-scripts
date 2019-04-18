@@ -19,8 +19,8 @@ apt-get install -f
 # Config rofi theme and run mode for all users
 for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	# Copy theme
-	[ ! -d "$d/.config/rofi/" ] && mkdir -p "$d/.config/rofi/"
-	cp -v "$base_dir/android_notification2.rasi" "$d/.config/rofi/config.rasi"
+	[ ! -d "$d/rofi/" ] && mkdir -p "$d/rofi/"
+	cp -v "$base_dir/android_notification2.rasi" "$d/rofi/config.rasi"
 
 	# rc.xml config
 	sed -i "/${comment_mark}/d" "$d/openbox/rc.xml"		# Delete lines added previously
