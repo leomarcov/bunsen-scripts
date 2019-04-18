@@ -6,7 +6,7 @@
 # CREATED: 2018.06.07
 #===================================================================================
 
-install_path="/usr/bin/autopoweroff.sh"     # Installation dir
+install_path="/usr/bin/autopoweroff"     # Installation dir
 
 
 function try_poweroff() {
