@@ -109,7 +109,6 @@ for script in $(find "$base_dir" -type f -name "*.sh"); do
 
 	if ask_action "$action" "$info" "$default"; then
 		bash "$script"		# EXEC SCRIPT
-		echo
 	fi
 done
 
