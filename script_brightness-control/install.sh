@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install script brightness.sh
+# ACTION: Install script brightness
 # INFO: Script brightness.sh increase/decrease and set default brightness.
 # DEFAULT: y
 
