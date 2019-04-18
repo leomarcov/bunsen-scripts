@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Disable lightdm and config login using tty
+# ACTION: Config text mode login using tty instead of lightdm display manager
 # INFO: Login in text mode is cool and nerd. You can use tt1 login and physlock for enter your password when go back from suspend and lock screen. 
 # DEFAULT: y
 
