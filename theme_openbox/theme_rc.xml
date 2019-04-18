@@ -1,4 +1,3 @@
-  <theme>
     <name>GoHomeV2-leo</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
@@ -67,4 +66,3 @@
         <slant>normal</slant>
         <!-- 'italic' or 'normal' -->
     </font>
-  </theme>
