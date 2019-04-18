@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install script update-notification.sh
+# ACTION: Install script update-notification
 # INFO: Script update-notification.sh checks periodically APT updates and show in tint2 bar
 # DEFAULT: y
 
