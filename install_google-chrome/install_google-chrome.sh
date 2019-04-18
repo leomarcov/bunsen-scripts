@@ -8,9 +8,9 @@
 # Install repositories and update
 if ! grep -R "dl.google.com/linux/chrome/deb/" /etc/apt/ &> /dev/null; then
 	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
 	apt-get update
 fi
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
 
 
 # Install package
