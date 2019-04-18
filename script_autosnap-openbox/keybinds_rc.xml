@@ -97,3 +97,4 @@
     <keybind key="C-A-Up">						      <!-- #BL-POSTINSTALL-autosnap -->
       <action name="ToggleAlwaysOnTop"/>		<!-- #BL-POSTINSTALL-autosnap -->
     </keybind>									            <!-- #BL-POSTINSTALL-autosnap -->
+
