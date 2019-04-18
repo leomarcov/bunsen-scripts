@@ -8,13 +8,13 @@
 
 base_dir="$(dirname "$(readlink -f "$0")")"
 
-# Delete previous lines
-for i in $(cat "$base_dir/grub_textboot.conf"  | cut -f1 -d=); do
+# Delete existing lines
+for i in $(cat "$base_dir/grub.conf"  | cut -f1 -d=); do
 	sed -i "/\b$i=/Id" /etc/default/grub
 done
 
 # Add lines
-cat "$base_dir/postinstall-files/grub_textboot.conf" >> /etc/default/grub
+cat "$base_dir/postinstall-files/grub.conf" >> /etc/default/grub
 
 # Update grub
 update-grub

@@ -16,6 +16,7 @@ fi
 
 # Config admin user and password
 pbkdf2_pass="$(echo -e "$pass\n$pass"| grub-mkpasswd-pbkdf2  | grep "grub.pbkdf2.*" -o)"
+sed -i "/${comment_mark}/Id" /etc/grub.d/40_custom
 echo 'set superusers="admin"    '"$comment_mark"'
 password_pbkdf2 admin '"$pbkdf2_pass   $comment_mark" | tee -a /etc/grub.d/40_custom 
 

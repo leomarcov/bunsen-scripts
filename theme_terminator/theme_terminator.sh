@@ -7,6 +7,6 @@
 
 base_dir="$(dirname "$(readlink -f "$0")")"
 
-for f in /usr/share/bunsen/skel/.config/terminator/config  /home/*/.config/terminator/config; do
-	cp -v "$base_dir"/terminator.config "$f"
+for d in /usr/share/bunsen/skel/.config/terminator/  /home/*/.config/terminator/; do
+	cp -v "$base_dir"/config "$d/"
 done
