@@ -115,7 +115,7 @@ The theme contains:
 </br>
 
 ## Neofetch TTY login message
-[**`neofetch-tty-login`**](https://github.com/leomarcov/BunsenLabs-Postinstall/edit/master/neofetch-tty-login-neofetch/README.md): TTY login message is boring. This script show cool info message at login based on neofetch info.
+[**`neofetch-tty-login`**](https://github.com/leomarcov/bunsenlabs-postinstall/tree/master/config_tty-login-neofetch): TTY login message is boring. This script show cool info message at login based on neofetch info.
 ![image](https://user-images.githubusercontent.com/32820131/40976478-92efc988-68ce-11e8-98ec-f5313a773000.png)
 
 
