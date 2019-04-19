@@ -1,12 +1,12 @@
 ![seleccion_827](https://user-images.githubusercontent.com/32820131/40361602-3476698e-5dca-11e8-9aa4-2d91e4e734eb.png)
 
 ## BunsenLabs-Postinstall
-**`bl-postinstall.sh`**: my personal postinstall scripts, themes and configs for BunsenLabs Helium.  
+My personal postinstall scripts, themes and configs for BunsenLabs Helium.  
 Althoughs is a collection of my particular useful configs may be interesting for someone.  
-The script `bl-postinstall.sh` may exec all actions or only specific list.
+The script `install.sh` may exec all actions or only specific list.
 
 ### Install
-Download the repository or clone it and exec the script `bl-postinstall.sh`
+Download the repository or clone it and exec the script `install.sh`
 ```bash
 ./bl-postinstall.sh -h
 Install configs and themes after BunsenLabs  installation
