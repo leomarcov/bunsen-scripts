@@ -3,6 +3,9 @@
 # INFO: If you login on tty this option causes no need to enter user/password. The system start using the first user account automatically.
 # DEFAULT: n
 
+# Check root
+[ "$(id -u)" -ne 0 ] && { echo "Must run as root" 1>&2; exit 1; }
+
 first_uid="$(grep "FIRST_UID=" /etc/adduser.conf | awk -F= '{print $2}')"
 first_user="$(id -u "$first_uid" --name)"
 if [ $? -ne 0 ]; then
