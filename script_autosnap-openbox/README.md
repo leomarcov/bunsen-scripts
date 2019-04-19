@@ -1,5 +1,5 @@
 # Autosnap Windows for Openbox
-**`autosnap.sh`**: script for **autosnap windows** (half-maximice) in Openbox WM.  
+**`autosnap`**: script for **autosnap windows** (half-maximice) in Openbox WM.  
 The script snap the active windows an choose automatically the corner to snap according the mouse position: if the mouse is in the zone of corner left snap to this quadrant, if is in the center left snap to half left screen, if is in the center maximize the windows, etc.  
 It should work in **1 or 2 monitors** (in horizontal).
 
