@@ -23,7 +23,7 @@ apt-get install -y linux-headers-$(uname -r) "$vb_package" || exit 1
 
 # Add VirtualBox in OpenBox menu:
 for f in /usr/share/bunsen/skel/.config/openbox/menu.xml  /home/*/.config/openbox/menu.xml ; do
-	! grep '<command>virtualbox<\/command>' "$f" &> /dev/null && sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/' "$f"
+	! grep -q '<command>virtualbox<\/command>' "$f" && sed -i '0,/<separator\/>/s//<item label="VirtualBox"><action name="Execute"><command>virtualbox<\/command><\/action><\/item> <separator\/>/' "$f"
 done
 
 
