@@ -1,4 +1,4 @@
-      <mousebind button="Middle" action="Click">                          <!-- #BL-POSTINSTALL-autosnap -->
+      <mousebind button="Left" action="DoubleClick">                      <!-- #BL-POSTINSTALL-autosnap -->
         <action name="Execute">                                           <!-- #BL-POSTINSTALL-autosnap -->
           <command>autosnap</command>                                     <!-- #BL-POSTINSTALL-autosnap -->
         </action>                                                         <!-- #BL-POSTINSTALL-autosnap -->
@@ -11,9 +11,6 @@
       <mousebind button="Left" action="Drag">
         <action name="Move"/>
       </mousebind>
-      <mousebind button="Left" action="DoubleClick">
-        <action name="ToggleMaximize"/>
-      </mousebind>
 
       <mousebind button="Middle" action="Press">
         <action name="Lower"/>
@@ -22,6 +19,10 @@
       </mousebind>
 
 <!-- #BL-POSTINSTALL-autosnap
+      <mousebind button="Left" action="DoubleClick">
+        <action name="ToggleMaximize"/>
+      </mousebind>
+
     <mousebind button="Up" action="Click">
       <action name="if">
         <shaded>no</shaded>
