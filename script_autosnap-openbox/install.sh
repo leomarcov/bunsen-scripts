@@ -20,10 +20,10 @@ for f in /usr/share/bunsen/skel/.config/openbox/rc.xml  /home/*/.config/openbox/
 	rc="$(sed '/<keyboard>/q' "$f"; cat "$base_dir/keybinds_rc.xml"; sed -n -e '/<keyboard>/,$p' "$f" | tail +2 )"
 	echo "$rc" > "$f"
 
-	# Delete current mousebind center click
-	sed -i "/<item label=\"Run Program\">/,/<\/item>/d" "$f"
+	# Delete current context titlebar
+	sed -i '/<context name="Titlebar">/,/<\/context>/{//!d}' "$f"
 
-	# Add mousebind center click
-	rc="$(sed '/<context name="Titlebar">/q' "$f"; cat "$base_dir/mousebind_rc.xml"; sed -n -e '/<context name="Titlebar">/,$p' "$f" | tail +2)"
+	# Add context titlebar
+	rc="$(sed '/<context name="Titlebar">/q' "$f"; cat "$base_dir/titlebar_rc.xml"; sed -n -e '/<context name="Titlebar">/,$p' "$f" | tail +2)"
 	echo "$rc" > "$f"
 done
