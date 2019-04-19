@@ -1,6 +1,0 @@
-      <mousebind button="Middle" action="Click">                          <!-- #BL-POSTINSTALL-autosnap -->
-        <action name="Execute">                                           <!-- #BL-POSTINSTALL-autosnap -->
-          <command>autosnap</command>                                     <!-- #BL-POSTINSTALL-autosnap -->
-        </action>                                                         <!-- #BL-POSTINSTALL-autosnap -->
-      </mousebind>                                                        <!-- #BL-POSTINSTALL-autosnap -->
-
