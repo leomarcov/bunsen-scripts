@@ -70,7 +70,7 @@ $ sudo ./install.sh -a 5,7,10-15
 ```
 
 ### Customize
-The script can be easily customized. Each action script are place in a folder and are automatillacy recognized by `install.sh`.
+The script can be easily customized. Each action script are placed in a folder and are automatillacy recognized by `install.sh`.
   * For remove action simply delete the action folder.
   * For add action simple add new folder and place the script and dependences. The script must have this header:
   ```
