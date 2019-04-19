@@ -22,14 +22,14 @@ for d in /usr/share/bunsen/skel/.config/  /home/*/.config/; do
 	[ ! -d "$d/rofi/" ] && mkdir -p "$d/rofi/"
 	cp -v "$base_dir/android_notification2.rasi" "$d/rofi/config.rasi"
 
-	# rc.xml config
+	# Edit rc.xml config
 	sed -i "/${comment_mark}/d" "$d/openbox/rc.xml"		# Delete lines added previously
-	sed -i "s/<command>gmrun<\/command>/<command>${rofi_command}<\/command>    <\!-- ${comment_mark}-->/g" "$d/openbox/rc.xml"	# Change alt+f2 shortkey for rofi
+	sed -i "s/<command>gmrun<\/command>/<command>${rofi_command}<\/command>/g" "$d/openbox/rc.xml"	# Change alt+f2 shortkey for rofi
 	sed -i "/<keyboard>/a<keybind key=\"C-Tab\"><action name=\"Execute\"><command>${rofi_command}<\/command><\/action><\/keybind>     <\!-- #${comment_mark} -->" "$d/openbox/rc.xml"	# Add ctrl+tab shortkey
 	
 	# Set as runas in menu:
 	sed -i "/<item label=\"Run Program\">/,/<\/item>/d" "$d/openbox/menu.xml"	# Delte current Run program entry
-	sed -i "/<menu id=\"root-menu\"/a<item label=\"Run Program\"><action name=\"Execute\"><command>${rofi_command}<\/command><\/action><\/item>    <\!-- #${comment_mark} -->" "$d/openbox/rc.xml"	# Add Run Program entry
+	sed -i "/<menu id=\"root-menu\"/a<item label=\"Run Program\"><action name=\"Execute\"><command>${rofi_command}<\/command><\/action><\/item>    <\!-- #${comment_mark} -->" "$d/openbox/menu.xml"	# Add Run Program entry
 
 	# Config super key as runas
 	sed -i '/xcape.*Super_L.*space/s/^/#/g' "$d/openbox/autostart"  
