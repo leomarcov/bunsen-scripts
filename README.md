@@ -8,7 +8,7 @@ The script `install.sh` may exec all actions or only specific list.
 ### Install
 Download the repository or clone it and exec the script `install.sh`
 ```bash
-./bl-postinstall.sh -h
+./install.sh -h
 Install configs and themes after BunsenLabs  installation
 Usage: bl-postinstall.sh [-h] [-l] [-a <actions>] [-y] [-d]
    -l		Only list actions 
@@ -19,53 +19,60 @@ Usage: bl-postinstall.sh [-h] [-l] [-a <actions>] [-y] [-d]
 
 # List all actions:
 $ ./bl-postinstall.sh -l
-[1] Install Google Chrome, add to repositories and set has default browser (y)
-[2] Install some useful packages (y)
-[3] Install playonlinux and MS Office dependencies (n)
-[4] Install rofi and config as default (y)
-[5] Install Sublime Text, add repositories and set as default editor  (y)
-[6] Install VirtualBox 5.2, add to repositories and insert to Openbox menu (y)
-[7] Install VirtualBox Extension Pack (y)
-[8] Install script autosnap.sh for autosnap windows with center click in titlebar (y)
-[9] Install script ps_mem.py (y)
-[10] Install script update-notification.sh (y)
-[11] Config bl-exit window with the classic theme (y)
-[12] Install new default Conky theme (y)
-[13] Install pack of popular fonts (y)
-[14] Install Arc GTK theme and set as default (y)
-[15] Install Numix-Paper icon theme and set as default (y)
-[16] Install clear xfce4-notify theme (y)
-[17] Install GoHome Openbox theme and set as default for all users (y)
-[18] Install new Terminator themes (y)
-[19] Install new tint2 theme (y)
-[20] Copy wallpapers pack and set Aptenodytes wallpaper as default (y)
-[21] Config new bash prompt (y)
-[22] Config useful aliases (y)
-[23] Disable some stupid services (y)
-[24] Enable CTRL+ALT+BACKSPACE for kill X server (y)
-[25] Config system for show messages during boot (y)
-[26] Config GRUB for skip menu (y)
-[27] Disable lightdm and config login using tty (y)
-[28] Config first user account for autologin on lightdm (n)
-[29] Config first user account for autologin on tty1 (n)
-
+[1] Config first user account for autologin on lightdm (n)
+[2] Config first user account for autologin on tty1 (n)
+[3] Config useful aliases (y)
+[4] Config new bash prompt (y)
+[5] Config system for show messages during boot (y)
+[6] Config some stupid services for not start during boot (y)
+[7] Config GRUB with password for prevent users edit entries (y)
+[8] Config GRUB for skip menu (y)
+[9] Config CTRL+ALT+BACKSPACE shortcut for kill X server (y)
+[10] Config Thunar for show toolbar and double-click for active items (y)
+[11] Config text mode login using tty instead of lightdm display manager (y)
+[12] Config vim with custom configs (y)
+[13] Install Atom text editor (y)
+[14] Install Google Chrome, add to repositories and set has default browser (y)
+[15] Install playonlinux and MS Office dependencies (n)
+[16] Install script ps_mem.py (y)
+[17] Install rofi and config as default (y)
+[18] Install some useful packages (y)
+[19] Install Sublime Text, add repositories and set as default editor  (y)
+[20] Install VirtualBox 6.0 and Extension Pack, add to repositories and insert to Openbox menu (y)
+[21] Install xfce4-clipman (allow screenshot to clipboard) and replace for clipit (y)
+[22] Remove bunsen-welcome autostart script  (y)
+[23] Install script poweroff_last for automatize shutdown if no users logged in 20 minutes (y)
+[24] Install script autosnap for autosnap windows with center click in titlebar (y)
+[25] Install script brightness (y)
+[26] Install script update-notification (y)
+[27] Install theme Arc GTK and set as default (y)
+[28] Config theme bl-exit with the classic theme (y)
+[29] Install theme Conky with new theme (y)
+[30] Install pack of popular fonts (y)
+[31] Install clear xfce4-notify theme (y)
+[32] Install icon theme Numix-Paper and set as default (y)
+[33] Install theme GoHome for Openbox and set as default for all users (y)
+[34] Install new Terminator themes (y)
+[35] Install new tint2 theme (y)
+[36] Copy wallpapers pack and set Aptenodytes wallpaper as default (y)
 
 # Exec all actions:
-$ sudo ./bl-postinstall.sh
+$ sudo ./install.sh
 
 # Exec all actions and answer yes to all:
-$ sudo ./bl-postinstall.sh -y
+$ sudo ./install.sh -y
 
 # Exec all actions and answer default to all:
-$ sudo ./bl-postinstall.sh -d
+$ sudo ./install.sh -d
 
 # Exec only actions 5,7,10,11,12,13,14 and 15:
-$ sudo ./bl-postinstall.sh -a 5,7,10-15
+$ sudo ./install.sh -a 5,7,10-15
 ```
+
 ### Customize
-The script can be easily customized. 
-  * For remove action simply delete the action script file from folder `./postinstall.scripts/`
-  * For add action simple add new action script in folder `./postinstall.scripts/` with this header:
+The script can be easily customized. Each action script are place in a folder and are automatillacy recognized by `install.sh`.
+  * For remove action simply delete the action folder.
+  * For add action simple add new folder and place the script and dependences. The script must have this header:
   ```
   #!/bin/bash
   # ACTION: Description of the action
@@ -75,12 +82,10 @@ The script can be easily customized.
   commands to do
   
   ```
-
-
 </br>
 
 ## Autosnap Windows for Openbox
-[**`autosnap.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/autosnap-openbox): script for **autosnap windows** (half-maximice) in Openbox WM.  
+[**`autosnap`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/autosnap-openbox): script for **autosnap windows** (half-maximice) in Openbox WM.  
 The script snap the active windows an choose automatically the corner to snap according the mouse position: if the mouse is in the zone of corner left snap to this quadrant, if is in the center left snap to half left screen, if is in the center maximize the windows, etc.  
 It should work in **1 or 2 monitors** (in horizontal).
 
@@ -89,7 +94,7 @@ It should work in **1 or 2 monitors** (in horizontal).
 </br>
 
 ## Update Notification for tint 
-[**`updagte-notification.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/update-notification-tint): script that checks periodically APT pending updates and show a notification in tint2 bar using executor plugin (since tint2 0.12.4).  
+[**`updagte-notification`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/update-notification-tint): script that checks periodically APT pending updates and show a notification in tint2 bar using executor plugin (since tint2 0.12.4).  
 
 ![seleccion_825](https://user-images.githubusercontent.com/32820131/40354912-55396e4c-5db5-11e8-9b22-aaeedc7e91e3.png)
 
@@ -117,7 +122,7 @@ The theme contains:
 </br>
 
 ## Brightness control
-[**`brightness.sh`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/brightness-control): script for increase/decrease in small steps.  
+[**`brightness`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/brightness-control): script for increase/decrease in small steps.  
 ```bash
 $ ./brightness.sh -h
 Inc/dec the brightness
