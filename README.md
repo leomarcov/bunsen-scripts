@@ -122,7 +122,7 @@ The theme contains:
 </br>
 
 ## Brightness control
-[**`brightness`**](https://github.com/leomarcov/BunsenLabs-Postinstall/tree/master/brightness-control): script for increase/decrease in small steps.  
+[**`brightness`**](https://github.com/leomarcov/bunsenlabs-postinstall/tree/master/script_brightness-control): script for increase/decrease in small steps.  
 ```bash
 $ ./brightness.sh -h
 Inc/dec the brightness
