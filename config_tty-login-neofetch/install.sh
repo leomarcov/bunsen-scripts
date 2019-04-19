@@ -9,6 +9,7 @@
 comment_mark="#bl-postinstall.sh"
 base_dir="$(dirname "$(readlink -f "$0")")"
 
+# Config runlevel 3
 systemctl set-default multi-user.target
 #apt-get -y remove lightdm
 
