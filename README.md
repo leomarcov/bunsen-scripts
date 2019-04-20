@@ -7,7 +7,7 @@ The script `install.sh` may exec all actions or only specific list.
 
 ### Install
 Download the repository or clone it and exec the script `install.sh`
-```bash
+```
 ./install.sh -h
 Install configs and themes after BunsenLabs  installation
 Usage: bl-postinstall.sh [-h] [-l] [-a <actions>] [-y] [-d]
