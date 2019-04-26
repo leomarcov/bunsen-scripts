@@ -141,19 +141,19 @@ systray_name_filter =
  
 #-------------------------------------
 # Launcher
-launcher_padding = 0 0 0
-launcher_background_id = 4
-launcher_icon_background_id = 4
-launcher_icon_size = 0
+launcher_padding = 10 0 20
+launcher_background_id = 2
+launcher_icon_background_id = 1
+launcher_icon_size = 28
 launcher_icon_asb = 100 0 0
 launcher_icon_theme_override = 0
-startup_notifications = 0
+startup_notifications = 1
 launcher_tooltip = 1
 
-#launcher_item_app = /usr/share/applications/bl-www-browser.desktop
+#launcher_item_app = /usr/share/applications/rofi.desktop
+#launcher_item_app = /usr/share/applications/google-chrome.desktop
 #launcher_item_app = /usr/share/applications/bl-file-manager.desktop
-#launcher_item_app = /usr/share/applications/bl-text-editor.desktop
-#launcher_item_app = /usr/share/applications/bl-terminal-emulator.desktop
+#launcher_item_app = /usr/share/applications/poweroff.desktop
 
 
 
