@@ -25,7 +25,7 @@ cron_when="weekly"	# weekly | monthly | daily | hourly
 function update () {
 	# CHECK INTERNET CONNECTION
 	echo "Checking Internet connection..."
-	nc -z 8.8.8.8 53 || exit 1
+	ping -c 1 8.8.8.8 &>/dev/null || exit 1
 
 	# REPOSITORY UPDATE-NOTIFICATION
 	echo "Updating package repositoriy..."
