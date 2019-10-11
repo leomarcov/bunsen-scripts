@@ -12,7 +12,6 @@ if ! grep -R "brave-browser" /etc/apt/ &> /dev/null; then
 	apt-get update
 fi
 
-
 # Install package
 apt-get install -y brave-browser
 
