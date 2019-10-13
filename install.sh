@@ -2,9 +2,7 @@
 #===================================================================================
 # BUNSENLABS POSTINSTALL SCRIPT
 # FILE: bl-postinstall.sh
-#
 # DESCRIPTION: Exec postinstall scripts in postinstall-scripts directory
-#
 # AUTHOR: Leonardo Marco
 # VERSION: 1.0
 # CREATED: 2018.05.10
