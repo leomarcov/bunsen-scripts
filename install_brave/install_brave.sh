@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install Google Chrome, add to repositories and set has default browser
+# ACTION: Install Brave browser, add to repositories and set has default browser
 # DEFAULT: y
 
 # Check root
