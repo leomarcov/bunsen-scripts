@@ -93,7 +93,7 @@ fi
 base_dir="$(dirname "$(readlink -f "$0")")"
 n=0
 
-# For each script in ./postinstall-scripts
+# For each .sh file
 IFS=$'\n\t'
 for script in $(ls "$base_dir"/*/*.sh); do
 	head="$(head -10 "$script")"
