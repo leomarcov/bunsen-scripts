@@ -1,24 +1,25 @@
 ![seleccion_827](https://user-images.githubusercontent.com/32820131/40361602-3476698e-5dca-11e8-9aa4-2d91e4e734eb.png)
 
-## BunsenLabs-Postinstall
+# Bunsen config scripts
 My personal postinstall scripts, themes and configs for BunsenLabs Helium.  
 Althoughs is a collection of my particular useful configs may be interesting for someone.  
 The script `install.sh` may exec all actions or only specific list.
 
-### Install
-Download the repository or clone it and exec the script `install.sh`
+## Install
+Download or clone the repository and exec script `install`
 ```
-./install.sh -h
-Install configs and themes after BunsenLabs  installation
-Usage: bl-postinstall.sh [-h] [-l] [-a <actions>] [-y] [-d]
+$ ./install -h
+Install configs and themes scripts in BunsenLabs 
+Usage: install [-h] [-l] [-a <actions>] [-y] [-d]
    -l		Only list actions 
    -a <actions>	Only do selected actions (e.g: -a 5,6,10-15)
    -y		Auto-answer yes to all actions
    -d		Auto-answer default to all actions
    -h		Show this help
 
+
 # List all actions:
-$ ./bl-postinstall.sh -l
+$ ./install -l
 [1] Config first user account for autologin on lightdm (n)
 [2] Config first user account for autologin on tty1 (n)
 [3] Config useful aliases (y)
@@ -29,9 +30,9 @@ $ ./bl-postinstall.sh -l
 [8] Config GRUB for skip menu (y)
 [9] Config CTRL+ALT+BACKSPACE shortcut for kill X server (y)
 [10] Config Thunar for show toolbar and double-click for active items (y)
-[11] Config text mode login using tty instead of lightdm display manager (y)
-[12] Config vim with custom configs (y)
-[13] Install Atom text editor (y)
+[11] Config vim with custom configs (y)
+[12] Install Atom text editor (y)
+[13] Install Brave browser, add to repositories and set has default browser (y)
 [14] Install Google Chrome, add to repositories and set has default browser (y)
 [15] Install playonlinux and MS Office dependencies (n)
 [16] Install script ps_mem.py (y)
@@ -42,37 +43,39 @@ $ ./bl-postinstall.sh -l
 [21] Install xfce4-clipman (allow screenshot to clipboard) and replace for clipit (y)
 [22] Remove bunsen-welcome autostart script  (y)
 [23] Install script poweroff_last for automatize shutdown if no users logged in 20 minutes (y)
-[24] Install script autosnap for autosnap windows with center click in titlebar (y)
+[24] Install script autosnap for autosnap windows with double click in titlebar (y)
 [25] Install script brightness (y)
-[26] Install script update-notification (y)
-[27] Install theme Arc GTK and set as default (y)
-[28] Config theme bl-exit with the classic theme (y)
-[29] Install theme Conky with new theme (y)
-[30] Install pack of popular fonts (y)
-[31] Install clear xfce4-notify theme (y)
-[32] Install icon theme Numix-Paper and set as default (y)
-[33] Install theme GoHome for Openbox and set as default for all users (y)
-[34] Install new Terminator themes (y)
-[35] Install new tint2 theme (y)
-[36] Copy wallpapers pack and set Aptenodytes wallpaper as default (y)
+[26] Config text mode login using tty instead of lightdm display manager (y)
+[27] Install script update-notification (y)
+[28] Install theme Arc GTK and set as default (y)
+[29] Config theme bl-exit with the classic theme (y)
+[30] Install theme Conky with new theme (y)
+[31] Install pack of popular fonts (y)
+[32] Install clear xfce4-notify theme (y)
+[33] Install icon theme Numix-Paper and set as default (y)
+[34] Install theme GoHome for Openbox and set as default for all users (y)
+[35] Install new Terminator themes (y)
+[36] Install new tint2 theme (y)
+[37] Copy wallpapers pack and set Aptenodytes wallpaper as default (y)
+
 
 # Exec all actions interactively:
-$ sudo ./install.sh
+$ sudo ./install
 
 # Exec all actions and answer yes to all:
-$ sudo ./install.sh -y
+$ sudo ./install -y
 
 # Exec all actions and answer default to all:
-$ sudo ./install.sh -d
+$ sudo ./install -d
 
 # Exec only actions 5,7,10,11,12,13,14 and 15:
-$ sudo ./install.sh -a 5,7,10-15
+$ sudo ./install -a 5,7,10-15
 ```
 
 ### Customize
-The script can be easily customized. Each action script `.sh` are placed in a folder and are automatillacy recognized by `install.sh`.
-  * For remove action simply delete the action folder.
-  * For add action simple add new folder and place the install script `.sh` and dependences. The script must have this header:
+The script can be easily customized. Each action script `.sh` placed in a subdirectory are automatillacy recognized by `install`.
+  * For remove action simply delete the action directory.
+  * For add action simply add new folder and place the install script `.sh` and dependences. The script must have this header:
   ```
   #!/bin/bash
   # ACTION: Description of the action
@@ -83,6 +86,7 @@ The script can be easily customized. Each action script `.sh` are placed in a fo
   
   ```
 </br>
+
 
 ## Autosnap Windows for Openbox
 [**`autosnap`**](https://github.com/leomarcov/bunsenlabs-postinstall/tree/master/script_autosnap-openbox): script for **autosnap windows** (half-maximice) in Openbox WM.  
