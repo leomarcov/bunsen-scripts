@@ -1,19 +1,19 @@
 #!/bin/bash
 #===================================================================================
 # BUNSENLABS POSTINSTALL SCRIPT
-# FILE: bl-postinstall.sh
-# DESCRIPTION: Exec postinstall scripts in postinstall-scripts directory
+# FILE: install
+# DESCRIPTION: find and exec .sh scripts from bunsen-scripts project
 # AUTHOR: Leonardo Marco
 # VERSION: 1.0
 # CREATED: 2018.05.10
 #===================================================================================
 
-#=== FUNCTION ==================================================================
+#=== FUNCTION ======================================================================
 # NAME: help
 # DESCRIPTION: Show command help
-#===============================================================================
+#===================================================================================
 function help() {
-	echo -e 'Install configs and themes after BunsenLabs '"$bunsen_ver"' installation
+	echo -e 'Install configs and themes scripts in BunsenLabs '"$bunsen_ver"'
 Usage: '$(basename $0)' [-h] [-l] [-a <actions>] [-y] [-d]
    \e[1m-l\e[0m\t\tOnly list actions 
    \e[1m-a <actions>\e[0m\tOnly do selected actions (e.g: -a 5,6,10-15)
@@ -24,13 +24,13 @@ Usage: '$(basename $0)' [-h] [-l] [-a <actions>] [-y] [-d]
 }
 
 
-#=== FUNCTION ==================================================================
+#=== FUNCTION ======================================================================
 # NAME: ask_action
 # DESCRIPTION: ask for a action and determine if do it or not do
 # EXIT CODE: 
 #	0-> do the action
 #	1-> dont do de action
-#===============================================================================
+#===================================================================================
 n=0
 function ask_action() {
 	action="$1"
@@ -62,7 +62,7 @@ function ask_action() {
 
 
 
-#=== PARAMS ====================================================================
+#=== PARAMS ========================================================================
 while getopts ":hlyda:" o; do
 	case "$o" in
 	h)	help 			;;
@@ -80,7 +80,7 @@ while getopts ":hlyda:" o; do
 done
 
 
-#=== CHECKS ===================================================================
+#=== CHECKS =======================================================================
 [ ! "$list" ] && [ "$(id -u)" -ne 0 ] && echo "Administrative privileges needed" && exit 1
 if ! cat /etc/*release | grep -i bunsenlabs &> /dev/null; then
 	echo "Seems you are not running BunsenLabs distro"
@@ -89,7 +89,7 @@ if ! cat /etc/*release | grep -i bunsenlabs &> /dev/null; then
 fi
 
 
-#=== EXEC-ACTIONS ==============================================================
+#=== EXEC-ACTIONS ==================================================================
 base_dir="$(dirname "$(readlink -f "$0")")"
 n=0
 
