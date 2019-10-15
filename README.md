@@ -2,8 +2,8 @@
 
 # Bunsen config scripts
 My personal postinstall scripts, themes and configs for BunsenLabs Helium.  
-Althoughs is a collection of my particular useful configs may be interesting for someone.  
-The script `install.sh` may exec all actions or only specific list.
+Althoughs is a collection of my particular configs may be interesting for someone.  
+The script `install` may exec all actions or only specific list.
 
 ## Install
 Download or clone the repository and exec script `install`
