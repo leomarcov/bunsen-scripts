@@ -17,6 +17,6 @@ apt-get install -y brave-browser
 
 # Set as default
 update-alternatives --install /usr/bin/x-www-browser brave-browser /usr/bin/brave-browser 90
-update-alternatives --install /usr/bin/gnome-www-browser /usr/bin/brave-browser 90
+update-alternatives --install /usr/bin/gnome-www-browser brave-browser /usr/bin/brave-browser 90
 update-alternatives --set x-www-browser /usr/bin/brave-browser
 update-alternatives --set gnome-www-browser /usr/bin/brave-browser
