@@ -45,7 +45,7 @@ ExecStartPre=-/bin/bash -c "/usr/bin/neofetch_issue.sh"' | tee "/etc/systemd/sys
 fi
 
 # Remove light-locker
-apt-get remove light-locker
+apt-get -y remove light-locker
 
 # Solve tty error
 for f in /etc/skel/.bash_logout /home/*/.bash_logout; do
