@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACTION: Install VirtualBox 6.0 and Extension Pack, add to repositories and insert to Openbox menu
+# ACTION: Install VirtualBox 6.1 and Extension Pack, add to repositories and insert to Openbox menu
 # DEFAULT: y
 
 # Check root
